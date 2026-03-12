@@ -47,6 +47,7 @@ a:hover { color:var(--accent-2); }
 nav { position:fixed; top:0; left:0; right:0; z-index:900; backdrop-filter:blur(20px) saturate(1.6); -webkit-backdrop-filter:blur(20px) saturate(1.6); background:color-mix(in srgb,var(--bg) 80%,transparent); border-bottom:1px solid var(--border); transition:background .4s var(--ease); }
 .nav-inner { max-width:var(--max-w); margin:0 auto; padding:0 var(--gap); display:flex; align-items:center; justify-content:space-between; height:56px; }
 .nav-logo { font-family:var(--font-display); font-weight:700; font-size:1.1rem; color:var(--text); letter-spacing:-0.02em; }
+.nav-logo .accent { color:var(--accent); }
 .nav-right { display:flex; align-items:center; gap:28px; }
 .nav-links { display:flex; gap:28px; }
 .nav-links a { font-size:0.82rem; font-weight:500; color:var(--text-2); letter-spacing:0.04em; text-transform:uppercase; transition:color .2s; position:relative; cursor:pointer; }
@@ -78,7 +79,8 @@ section { padding:100px 0; }
 .hero-contacts a { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; border-radius:var(--radius-sm); font-size:0.82rem; font-weight:500; border:1px solid var(--border); color:var(--text-2); background:var(--bg-2); transition:all .25s var(--ease); cursor:pointer; }
 .hero-contacts a:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); box-shadow:var(--shadow-lg); }
 .hero-stats { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-.stat-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:28px 24px; }
+.stat-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:28px 24px; display:block; text-decoration:none; transition:border-color .25s var(--ease),transform .25s var(--ease); }
+.stat-card:hover { border-color:var(--accent); transform:translateY(-2px); }
 .stat-num { font-family:var(--font-display); font-size:2.4rem; font-weight:800; color:var(--accent); letter-spacing:-0.03em; line-height:1; }
 .stat-label { font-size:0.82rem; color:var(--text-2); margin-top:6px; font-weight:500; }
 
@@ -97,6 +99,8 @@ section { padding:100px 0; }
 .exp-item:last-child { border-bottom:none; }
 .exp-date { font-family:var(--font-mono); font-size:0.78rem; color:var(--text-3); padding-top:4px; letter-spacing:0.02em; }
 .exp-company { font-family:var(--font-display); font-size:1.3rem; font-weight:700; letter-spacing:-0.02em; margin-bottom:4px; }
+.exp-company a { color:inherit; }
+.exp-company a:hover { color:var(--accent); }
 .exp-role { font-size:0.88rem; color:var(--accent); font-weight:500; margin-bottom:12px; }
 .exp-desc { font-size:0.88rem; color:var(--text-2); line-height:1.7; max-width:640px; }
 
@@ -105,14 +109,16 @@ section { padding:100px 0; }
 .company-section:last-child { margin-bottom:0; }
 .company-divider { display:flex; align-items:center; gap:14px; margin-bottom:28px; }
 .company-divider h3 { font-family:var(--font-display); font-size:1.3rem; font-weight:700; letter-spacing:-0.02em; white-space:nowrap; }
+.company-divider h3 a { color:inherit; }
+.company-divider h3 a:hover { color:var(--accent); }
 .company-divider::after { content:''; flex:1; height:1px; background:var(--border); }
 .projects-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
 
-/* GALLERY CARD (shared by projects, renders, code) */
+/* GALLERY CARD */
 .gallery-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
 .gallery-card.full-width { grid-column:1 / -1; }
 .gallery-viewport { position:relative; overflow:hidden; background:var(--img-placeholder); touch-action:pan-y; }
-.gallery-viewport img { width:100%; height:100%; object-fit:cover; transition:opacity .25s var(--ease); display:block; }
+.gallery-viewport img { width:100%; height:100%; object-fit:cover; transition:opacity .25s var(--ease); display:block; cursor:zoom-in; }
 .gallery-viewport.h240 { height:240px; }
 .gallery-viewport.h320 { height:320px; }
 .gallery-viewport.h480 { height:480px; }
@@ -121,16 +127,15 @@ section { padding:100px 0; }
 .gallery-nav button:hover { background:var(--accent); border-color:var(--accent); }
 .img-counter { position:absolute; top:12px; right:12px; padding:4px 10px; border-radius:100px; font-size:0.7rem; font-weight:600; background:rgba(0,0,0,0.55); color:#fff; backdrop-filter:blur(8px); }
 .gallery-body { padding:24px; }
-.gallery-caption { padding:20px 24px; display:flex; align-items:center; justify-content:space-between; }
-.caption-text { font-size:0.88rem; font-weight:500; }
-.caption-text span { color:var(--text-3); font-size:0.76rem; margin-left:12px; }
+.img-placeholder-box { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; gap:8px; color:var(--text-3); font-size:0.76rem; }
 
 .project-meta { display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
 .project-type { font-family:var(--font-mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent); font-weight:500; }
 .project-year { font-size:0.72rem; color:var(--text-3); }
 .project-company-tag { margin-left:auto; padding:3px 10px; border-radius:100px; font-size:0.68rem; font-weight:600; background:var(--tag-bg); border:1px solid var(--tag-border); color:var(--accent); }
-.project-name { font-family:var(--font-display); font-size:1.15rem; font-weight:700; letter-spacing:-0.02em; margin-bottom:8px; }
+.project-name { font-family:var(--font-display); font-size:1.15rem; font-weight:700; letter-spacing:-0.02em; margin-bottom:6px; }
 .project-desc { font-size:0.82rem; color:var(--text-2); line-height:1.65; }
+.project-role-label { font-size:0.68rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-3); margin:10px 0 4px; }
 .project-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; }
 .project-tags .tag { font-size:0.68rem; padding:3px 10px; }
 
@@ -157,6 +162,13 @@ footer p { font-size:0.8rem; color:var(--text-3); }
 footer .links { display:flex; justify-content:center; gap:20px; margin-bottom:14px; }
 footer .links a { color:var(--text-2); font-size:0.82rem; font-weight:500; cursor:pointer; }
 footer .links a:hover { color:var(--accent); }
+
+/* LIGHTBOX */
+#lightbox { display:none; position:fixed; inset:0; z-index:2000; background:rgba(0,0,0,0.92); align-items:center; justify-content:center; cursor:zoom-out; }
+#lightbox.active { display:flex; }
+#lightbox img { max-width:92vw; max-height:92vh; object-fit:contain; border-radius:var(--radius); cursor:default; }
+#lightbox-close { position:absolute; top:16px; right:16px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; width:40px; height:40px; border-radius:50%; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+#lightbox-close:hover { background:rgba(255,255,255,0.2); }
 
 /* ANIMATIONS */
 .fade-in { opacity:0; transform:translateY(30px); transition:opacity .7s var(--ease),transform .7s var(--ease); }
@@ -187,9 +199,15 @@ footer .links a:hover { color:var(--accent); }
 </head>
 <body>
 
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+  <button id="lightbox-close" onclick="event.stopPropagation();closeLightbox()">×</button>
+  <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+</div>
+
 <nav>
   <div class="nav-inner">
-    <div class="nav-logo">Miguel Pinheiro</div>
+    <div class="nav-logo">Miguel Pinheiro <span class="accent">— BIM Specialist</span></div>
     <div class="nav-right">
       <div class="nav-links">
         <a href="#about">About</a>
@@ -221,8 +239,8 @@ footer .links a:hover { color:var(--accent); }
         </div>
       </div>
       <div class="hero-stats fade-in fade-in-delay-2">
-        <div class="stat-card"><div class="stat-num">15+</div><div class="stat-label">Projects Delivered</div></div>
-        <div class="stat-card"><div class="stat-num">40+</div><div class="stat-label">Custom Scripts Built</div></div>
+        <a class="stat-card" href="#projects"><div class="stat-num">15+</div><div class="stat-label">Projects Delivered</div></a>
+        <a class="stat-card" href="#other"><div class="stat-num">40+</div><div class="stat-label">Custom Scripts Built</div></a>
       </div>
     </div>
   </div>
@@ -269,11 +287,46 @@ footer .links a:hover { color:var(--accent); }
     <div class="section-label fade-in">Career</div>
     <h2 class="section-title fade-in">Professional Experience</h2>
     <div class="exp-list">
-      <div class="exp-item fade-in"><div class="exp-date">2022 — Present</div><div><div class="exp-company">NIRAS A/S</div><div class="exp-role">BIM Specialist → BIM Coordinator → BIM Manager</div><div class="exp-desc">Leading BIM coordination and model development for large-scale infrastructure projects across Denmark, Norway and Nigeria. Responsibilities span Revit model refinement, 3D reinforcement, CDE management, process automation via Python/Dynamo/VMs, drawing standards development, and team mentoring. Developed a full pyRevit extension (40+ tools) deployed company-wide, plus standalone Python automation workflows for Revizto export and Revit cloud model management. Acted as BIM Manager during manager paternity leave.</div></div></div>
-      <div class="exp-item fade-in"><div class="exp-date">2021 — 2022</div><div><div class="exp-company">Gabriel A.S. Couto S.A.</div><div class="exp-role">BIM Coordinator (Founded BIM Department)</div><div class="exp-desc">First member and founder of the BIM department at one of Portugal's largest general contractors. Created company templates for Structural, MEP disciplines. Developed BIM procedures, reinforcement modeling workflows, and trained colleagues. Led BIM coordination for multiple projects including social housing, educational and commercial buildings.</div></div></div>
-      <div class="exp-item fade-in"><div class="exp-date">2021</div><div><div class="exp-company">Garcia, Garcia S.A.</div><div class="exp-role">Master Thesis Internship</div><div class="exp-desc">Developed thesis on "Automatic Estimation of Quantities of Reinforced Concrete using BIM" — comparing traditional QTO workflows with BIM-driven approaches using Revit for rebar modeling and automated quantity extraction.</div></div></div>
-      <div class="exp-item fade-in"><div class="exp-date">2020</div><div><div class="exp-company">Construções Capela Braga</div><div class="exp-role">Director of Construction Assistant (Intern)</div><div class="exp-desc">Internship at a Portuguese general contractor covering quantity measurements, cost estimation, sub-contractor coordination, and daily on-site monitoring for the Centro de Arte Alberto Carneiro project.</div></div></div>
-      <div class="exp-item fade-in"><div class="exp-date">2015 — 2021</div><div><div class="exp-company">FEUP — University of Porto</div><div class="exp-role">MSc Civil Engineering</div><div class="exp-desc">Master's degree in Civil Engineering. Exchange semester at Lund University, Sweden. Active in extracurriculars: Assertive Communication, Sustain'Be 2019, PTBIM 2020.</div></div></div>
+      <div class="exp-item fade-in">
+        <div class="exp-date">2022 — Present</div>
+        <div>
+          <div class="exp-company"><a href="https://www.niras.com/" target="_blank">NIRAS A/S</a></div>
+          <div class="exp-role">BIM Specialist → BIM Coordinator → BIM Manager</div>
+          <div class="exp-desc">Leading BIM coordination and model development for large-scale infrastructure projects across Denmark, Norway and Nigeria. Responsibilities span Revit model refinement, 3D reinforcement, CDE management, process automation via Python/Dynamo/VMs, drawing standards development, and team mentoring. Developed a full pyRevit extension (40+ tools) deployed company-wide, plus standalone Python automation workflows for Revizto export and Revit cloud model management. Acted as BIM Manager during manager paternity leave.</div>
+        </div>
+      </div>
+      <div class="exp-item fade-in">
+        <div class="exp-date">2021 — 2022</div>
+        <div>
+          <div class="exp-company"><a href="https://www.gabrielcouto.pt/" target="_blank">Gabriel A.S. Couto S.A.</a></div>
+          <div class="exp-role">BIM Coordinator (Founded BIM Department)</div>
+          <div class="exp-desc">First member and founder of the BIM department at one of Portugal's largest general contractors. Created company templates for Structural, MEP disciplines. Developed BIM procedures, reinforcement modeling workflows, and trained colleagues. Led BIM coordination for multiple projects including social housing, educational and commercial buildings.</div>
+        </div>
+      </div>
+      <div class="exp-item fade-in">
+        <div class="exp-date">2021</div>
+        <div>
+          <div class="exp-company"><a href="https://www.garcia.pt/en/" target="_blank">Garcia, Garcia S.A.</a></div>
+          <div class="exp-role">Master Thesis Internship</div>
+          <div class="exp-desc">Developed thesis on "Automatic Estimation of Quantities of Reinforced Concrete using BIM" — comparing traditional QTO workflows with BIM-driven approaches using Revit for rebar modeling and automated quantity extraction.</div>
+        </div>
+      </div>
+      <div class="exp-item fade-in">
+        <div class="exp-date">2020</div>
+        <div>
+          <div class="exp-company"><a href="https://www.capelabraga.com.pt/?lang=en" target="_blank">Construções Capela Braga</a></div>
+          <div class="exp-role">Director of Construction Assistant (Intern)</div>
+          <div class="exp-desc">Internship at a Portuguese general contractor covering quantity measurements, cost estimation, sub-contractor coordination, and daily on-site monitoring for the Centro de Arte Alberto Carneiro project.</div>
+        </div>
+      </div>
+      <div class="exp-item fade-in">
+        <div class="exp-date">2015 — 2021</div>
+        <div>
+          <div class="exp-company"><a href="https://www.up.pt/portal/en/feud/" target="_blank">FEUP — University of Porto</a></div>
+          <div class="exp-role">MSc Civil Engineering</div>
+          <div class="exp-desc">Master's degree in Civil Engineering. Exchange semester at Lund University, Sweden. Active in extracurriculars: Assertive Communication, Sustain'Be 2019, PTBIM 2020.</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -286,32 +339,91 @@ footer .links a:hover { color:var(--accent); }
 
     <!-- NIRAS -->
     <div class="company-section">
-      <div class="company-divider fade-in"><h3>NIRAS A/S</h3></div>
+      <div class="company-divider fade-in"><h3><a href="https://www.niras.com/" target="_blank">NIRAS A/S</a></h3></div>
       <div class="projects-grid">
 
         <div class="gallery-card full-width fade-in" data-images="images/nordhavn_1.svg,images/nordhavn_2.svg,images/nordhavn_3.svg">
           <div class="gallery-viewport h320"><img src="images/nordhavn_1.svg" alt="Nordhavnstunnel"><span class="img-counter">1 / 3</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
-          <div class="gallery-body"><div class="project-meta"><span class="project-type">Infrastructure</span><span class="project-year">2022–Present</span><span class="project-company-tag">NIRAS</span></div><div class="project-name">Nordhavnstunnel — Copenhagen</div><div class="project-desc">1.4 km cut & cover tunnel for the Danish Road Directorate, designed by NIRAS for BESIX-MTH JV. Managed Revit models, multi-discipline coordination via Revizto, drawing production, QA, and developed Python-based automation for exports using virtual machines.</div><div class="project-tags"><span class="tag">BIM Coordinator</span><span class="tag">Revit</span><span class="tag">Revizto</span><span class="tag">Python Automation</span></div></div>
+          <div class="gallery-body">
+            <div class="project-meta"><span class="project-type">Infrastructure</span><span class="project-year">2022–Present</span><span class="project-company-tag">NIRAS</span></div>
+            <div class="project-name">Nordhavnstunnel — Copenhagen</div>
+            <div class="project-desc">1.4 km cut & cover tunnel for the Danish Road Directorate. Client: BESIX-MTH JV.</div>
+            <div class="project-role-label">Role / Tasks</div>
+            <ul class="code-bullets" style="margin-top:4px;">
+              <li>BIM Coordinator — Revit model management across disciplines</li>
+              <li>Multi-discipline coordination via Revizto</li>
+              <li>Drawing production and QA</li>
+              <li>Python-based export automation (IFC, NWC) via virtual machines</li>
+            </ul>
+            <div class="project-tags"><span class="tag">BIM Coordinator</span><span class="tag">Revit</span><span class="tag">Revizto</span><span class="tag">Python Automation</span></div>
+          </div>
         </div>
 
         <div class="gallery-card fade-in" data-images="images/valby_1.svg,images/valby_2.svg,images/valby_3.svg">
           <div class="gallery-viewport h240"><img src="images/valby_1.svg" alt="Valby"><span class="img-counter">1 / 3</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
-          <div class="gallery-body"><div class="project-meta"><span class="project-type">Infrastructure</span><span class="project-year">2022–Present</span><span class="project-company-tag">NIRAS</span></div><div class="project-name">Valby Skybrudstunnel</div><div class="project-desc">Cloudburst tunnel for HOFOR — 3D reinforcement modeling, BIM coordination, drawing production, QA and process automation. Acted as BIM Manager during manager leave.</div><div class="project-tags"><span class="tag">BIM Manager</span><span class="tag">3D Rebar</span><span class="tag">Dynamo</span></div></div>
+          <div class="gallery-body">
+            <div class="project-meta"><span class="project-type">Infrastructure</span><span class="project-year">2022–Present</span><span class="project-company-tag">NIRAS</span></div>
+            <div class="project-name">Valby Skybrudstunnel — Copenhagen</div>
+            <div class="project-desc">Cloudburst tunnel for HOFOR.</div>
+            <div class="project-role-label">Role / Tasks</div>
+            <ul class="code-bullets" style="margin-top:4px;">
+              <li>3D reinforcement modeling (Dynamo)</li>
+              <li>BIM coordination and drawing production</li>
+              <li>QA and process automation</li>
+              <li>Acting BIM Manager during manager leave</li>
+            </ul>
+            <div class="project-tags"><span class="tag">BIM Manager</span><span class="tag">3D Rebar</span><span class="tag">Dynamo</span></div>
+          </div>
         </div>
 
         <div class="gallery-card fade-in" data-images="images/kalvebod_1.svg,images/kalvebod_2.svg,images/kalvebod_3.svg">
           <div class="gallery-viewport h240"><img src="images/kalvebod_1.svg" alt="Kalvebod"><span class="img-counter">1 / 3</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
-          <div class="gallery-body"><div class="project-meta"><span class="project-type">Infrastructure</span><span class="project-year">2017–Present</span><span class="project-company-tag">NIRAS</span></div><div class="project-name">Kalvebod Brygge Cloudburst Tunnel</div><div class="project-desc">Large-scale cloudburst tunnel in central Copenhagen for HOFOR. 1250m tunnel passing under dense urban areas. Model development, rebar, drawings, Revizto coordination, QA, and BIM management.</div><div class="project-tags"><span class="tag">BIM Specialist</span><span class="tag">Reinforcement</span><span class="tag">Revizto</span></div></div>
+          <div class="gallery-body">
+            <div class="project-meta"><span class="project-type">Infrastructure</span><span class="project-year">2017–Present</span><span class="project-company-tag">NIRAS</span></div>
+            <div class="project-name">Kalvebod Brygge — Copenhagen</div>
+            <div class="project-desc">1250m cloudburst tunnel through dense urban areas for HOFOR.</div>
+            <div class="project-role-label">Role / Tasks</div>
+            <ul class="code-bullets" style="margin-top:4px;">
+              <li>Model development and 3D reinforcement</li>
+              <li>Drawing production and QA</li>
+              <li>Revizto coordination</li>
+              <li>BIM management</li>
+            </ul>
+            <div class="project-tags"><span class="tag">BIM Specialist</span><span class="tag">Reinforcement</span><span class="tag">Revizto</span></div>
+          </div>
         </div>
 
         <div class="gallery-card fade-in" data-images="images/snake_1.svg,images/snake_2.svg,images/snake_3.svg">
           <div class="gallery-viewport h240"><img src="images/snake_1.svg" alt="Snake Island"><span class="img-counter">1 / 3</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
-          <div class="gallery-body"><div class="project-meta"><span class="project-type">Port / Logistics</span><span class="project-year">2022–Present</span><span class="project-company-tag">NIRAS</span></div><div class="project-name">Snake Island CT — Nigeria</div><div class="project-desc">T7S smart port terminal development with MSC and Nigerdock. CDE setup in ACC, Revit template preparation, model/drawing coordination and workflow optimization.</div><div class="project-tags"><span class="tag">BIM Advisor</span><span class="tag">ACC</span><span class="tag">Templates</span></div></div>
+          <div class="gallery-body">
+            <div class="project-meta"><span class="project-type">Port / Logistics</span><span class="project-year">2022–Present</span><span class="project-company-tag">NIRAS</span></div>
+            <div class="project-name">Snake Island CT — Nigeria</div>
+            <div class="project-desc">T7S smart port terminal with MSC and Nigerdock.</div>
+            <div class="project-role-label">Role / Tasks</div>
+            <ul class="code-bullets" style="margin-top:4px;">
+              <li>CDE setup in ACC</li>
+              <li>Revit template preparation</li>
+              <li>Model and drawing coordination</li>
+              <li>Workflow optimization</li>
+            </ul>
+            <div class="project-tags"><span class="tag">BIM Advisor</span><span class="tag">ACC</span><span class="tag">Templates</span></div>
+          </div>
         </div>
 
         <div class="gallery-card fade-in" data-images="images/ktt_1.svg,images/ktt_2.svg,images/ktt_3.svg">
           <div class="gallery-viewport h240"><img src="images/ktt_1.svg" alt="KTT Nord"><span class="img-counter">1 / 3</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
-          <div class="gallery-body"><div class="project-meta"><span class="project-type">Railway</span><span class="project-year">2023–Present</span><span class="project-company-tag">NIRAS</span></div><div class="project-name">KTT Nord — Trondheim, Norway</div><div class="project-desc">Railway project for Bane NOR. Ensured BIM model integrity per BPE, controlled delivery deadlines, and coordinated multiple disciplines in Trimble Connect.</div><div class="project-tags"><span class="tag">BIM Coordinator</span><span class="tag">Trimble Connect</span></div></div>
+          <div class="gallery-body">
+            <div class="project-meta"><span class="project-type">Railway</span><span class="project-year">2023–Present</span><span class="project-company-tag">NIRAS</span></div>
+            <div class="project-name">KTT Nord — Trondheim, Norway</div>
+            <div class="project-desc">Railway project for Bane NOR.</div>
+            <div class="project-role-label">Role / Tasks</div>
+            <ul class="code-bullets" style="margin-top:4px;">
+              <li>BIM model integrity per BPE standards</li>
+              <li>Delivery schedule control</li>
+              <li>Multi-discipline coordination in Trimble Connect</li>
+            </ul>
+            <div class="project-tags"><span class="tag">BIM Coordinator</span><span class="tag">Trimble Connect</span></div>
+          </div>
         </div>
 
       </div>
@@ -319,7 +431,7 @@ footer .links a:hover { color:var(--accent); }
 
     <!-- Gabriel Couto -->
     <div class="company-section">
-      <div class="company-divider fade-in"><h3>Gabriel A.S. Couto S.A.</h3></div>
+      <div class="company-divider fade-in"><h3><a href="https://www.gabrielcouto.pt/" target="_blank">Gabriel A.S. Couto S.A.</a></h3></div>
       <div class="projects-grid">
 
         <div class="gallery-card fade-in" id="boavista-card"
@@ -338,10 +450,15 @@ footer .links a:hover { color:var(--accent); }
               <span class="project-year">2021–2022</span>
               <span class="project-company-tag">Gabriel Couto</span>
             </div>
-            <div class="project-name">Bairro da Boavista F3 — Lisbon</div>
-            <div class="project-desc">
-              Full BIM models for Structural, MEP disciplines. 3D concrete reinforcement using Dynamo, clash detection, QTO extraction, and drawing generation for on-site use. Client: C.M. Lisboa.
-            </div>
+            <div class="project-name">Bairro da Boavista — Lisbon</div>
+            <div class="project-desc">Social housing complex for C.M. Lisboa.</div>
+            <div class="project-role-label">Role / Tasks</div>
+            <ul class="code-bullets" style="margin-top:4px;">
+              <li>Full BIM models for Structural and MEP disciplines</li>
+              <li>3D concrete reinforcement via Dynamo scripting</li>
+              <li>Clash detection and QTO extraction</li>
+              <li>Drawing generation for on-site use</li>
+            </ul>
             <div class="project-tags">
               <span class="tag">BIM Coordinator</span>
               <span class="tag">3D Rebar</span>
@@ -367,10 +484,14 @@ footer .links a:hover { color:var(--accent); }
               <span class="project-year">2021–2022</span>
               <span class="project-company-tag">Gabriel Couto</span>
             </div>
-            <div class="project-name">EDP LABELEC</div>
-            <div class="project-desc">
-              As-built BIM models for concrete structural and plumbing systems with quantity take-off for EDP.
-            </div>
+            <div class="project-name">EDP LABELEC — Lisbon</div>
+            <div class="project-desc">As-built BIM models for EDP Labelec facilities.</div>
+            <div class="project-role-label">Role / Tasks</div>
+            <ul class="code-bullets" style="margin-top:4px;">
+              <li>Concrete structural as-built modeling</li>
+              <li>Plumbing system models</li>
+              <li>Quantity take-off</li>
+            </ul>
             <div class="project-tags">
               <span class="tag">As-Built</span>
               <span class="tag">Structural</span>
@@ -384,11 +505,27 @@ footer .links a:hover { color:var(--accent); }
 
     <!-- Garcia -->
     <div class="company-section">
-      <div class="company-divider fade-in"><h3>Garcia, Garcia S.A.</h3></div>
+      <div class="company-divider fade-in"><h3><a href="https://www.garcia.pt/en/" target="_blank">Garcia, Garcia S.A.</a></h3></div>
       <div class="projects-grid">
-        <div class="gallery-card fade-in" data-images="images/hotel_1.svg,images/hotel_2.svg,images/hotel_3.svg">
-          <div class="gallery-viewport h240"><img src="images/hotel_1.svg" alt="Hotel BB"><span class="img-counter">1 / 3</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
-          <div class="gallery-body"><div class="project-meta"><span class="project-type">Hospitality</span><span class="project-year">2021</span><span class="project-company-tag">Garcia, Garcia</span></div><div class="project-name">Hotel B&B Famalicão — Master Thesis</div><div class="project-desc">Case study for MSc thesis: "Automatic Estimation of Quantities of Reinforced Concrete using BIM". Compared traditional vs. BIM workflows for rebar modeling and automated QTO in Revit.</div><div class="project-tags"><span class="tag">Research</span><span class="tag">Rebar Modeling</span><span class="tag">QTO</span></div></div>
+        <div class="gallery-card fade-in">
+          <div class="gallery-viewport h240">
+            <div class="img-placeholder-box">
+              <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
+              <span>No images</span>
+            </div>
+          </div>
+          <div class="gallery-body">
+            <div class="project-meta"><span class="project-type">Hospitality</span><span class="project-year">2021</span><span class="project-company-tag">Garcia, Garcia</span></div>
+            <div class="project-name">Hotel B&B Famalicão — Master Thesis</div>
+            <div class="project-desc">Case study for MSc thesis: "Automatic Estimation of Quantities of Reinforced Concrete using BIM".</div>
+            <div class="project-role-label">Role / Tasks</div>
+            <ul class="code-bullets" style="margin-top:4px;">
+              <li>Rebar modeling in Revit</li>
+              <li>Automated QTO workflow development</li>
+              <li>Comparison: traditional vs. BIM-driven quantity extraction</li>
+            </ul>
+            <div class="project-tags"><span class="tag">Research</span><span class="tag">Rebar Modeling</span><span class="tag">QTO</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -399,30 +536,11 @@ footer .links a:hover { color:var(--accent); }
 <!-- OTHER WORK -->
 <section id="other">
   <div class="container">
-    <div class="section-label fade-in">Beyond BIM</div>
-    <h2 class="section-title fade-in">3D Renders, Scripts &amp; Automation</h2>
+    <h2 class="section-title fade-in">Other Work</h2>
 
-    <!-- Render Gallery -->
-    <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:20px;color:var(--text-2);" class="fade-in">3D Renders — Personal House Project</h3>
+    <!-- pyRevit & Automations -->
+    <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:20px;color:var(--text-2);" class="fade-in">pyRevit, Automations &amp; Development Work</h3>
 
-    <div class="render-gallery fade-in" id="render-gallery">
-      <div class="gallery-viewport h320">
-        <img id="render-img" src="images/Renders/Exterior_1.png" alt="Render">
-        <span class="img-counter" id="render-counter">1 / 10</span>
-        <div class="gallery-nav">
-          <button onclick="renderPrev()" aria-label="Previous">‹</button>
-          <button onclick="renderNext()" aria-label="Next">›</button>
-        </div>
-      </div>
-      <div class="gallery-caption">
-        <div class="caption-text" id="render-caption">Exterior View <span>Enscape Render</span></div>
-      </div>
-    </div>
-
-    <!-- Scripts -->
-    <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:20px;color:var(--text-2);" class="fade-in">pyRevit Extension & Automation Scripts</h3>
-
-    <!-- pyRevit full-width -->
     <div class="code-card fade-in" style="margin-bottom:20px;" data-images="images/pyrevit_1.svg,images/pyrevit_2.svg">
       <div class="gallery-viewport h240"><img src="images/pyrevit_1.svg" alt="pyRevit"><span class="img-counter">1 / 2</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
       <div class="code-body">
@@ -442,8 +560,7 @@ footer .links a:hover { color:var(--accent); }
       </div>
     </div>
 
-    <!-- 3 smaller automation cards -->
-    <div class="other-grid">
+    <div class="other-grid" style="margin-bottom:20px;">
       <div class="code-card fade-in" data-images="images/revizto_exp_1.svg,images/revizto_exp_2.svg">
         <div class="gallery-viewport h240"><img src="images/revizto_exp_1.svg" alt="Revizto Exporter"><span class="img-counter">1 / 2</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
         <div class="code-body"><div class="code-title">Revizto Issue Exporter</div><div class="code-desc">Desktop app that connects to the Revizto API, fetches project issues, and exports a styled Excel report with color-coded statuses, summary dashboards, and drawing review tracking.</div><div class="project-tags" style="margin-top:10px;"><span class="tag">Python</span><span class="tag">Revizto API</span></div></div>
@@ -455,6 +572,35 @@ footer .links a:hover { color:var(--accent); }
       <div class="code-card fade-in fade-in-delay-2" data-images="images/hours_1.svg,images/hours_2.svg">
         <div class="gallery-viewport h240"><img src="images/hours_1.svg" alt="Hours Tracker"><span class="img-counter">1 / 2</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
         <div class="code-body"><div class="code-title">Hours Tracker Automation</div><div class="code-desc">n8n workflow that extracts calendar events, categorizes them by project, and auto-updates an Excel spreadsheet with logged hours and task descriptions per project.</div><div class="project-tags" style="margin-top:10px;"><span class="tag">n8n</span></div></div>
+      </div>
+    </div>
+
+    <div class="code-card fade-in" style="margin-bottom:48px;">
+      <div class="code-body">
+        <div class="code-title">Development &amp; BIM Infrastructure</div>
+        <div class="code-desc">Foundational BIM delivery work built from scratch at NIRAS and Gabriel Couto, enabling consistent model quality and team scalability.</div>
+        <ul class="code-bullets">
+          <li><strong>Revit Templates</strong> — built from scratch for Structural, MEP, and infrastructure disciplines at both companies</li>
+          <li><strong>BIM Procedures</strong> — authored BIM execution plans, naming conventions, and data standards</li>
+          <li><strong>Knowledge Platform</strong> — internal documentation website with guides, tutorials, and reference material for project teams</li>
+          <li><strong>Training</strong> — onboarding sessions and workshops for engineers, modelers, and BIM users</li>
+          <li><strong>QA Procedures</strong> — cross-project quality checklists, review workflows, and model audit reports</li>
+        </ul>
+        <div class="project-tags" style="margin-top:14px;"><span class="tag">NIRAS</span><span class="tag">Gabriel Couto</span></div>
+      </div>
+    </div>
+
+    <!-- 3D Renders -->
+    <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:20px;color:var(--text-2);" class="fade-in">3D Renders — Family House Project</h3>
+
+    <div class="gallery-card fade-in" id="render-gallery">
+      <div class="gallery-viewport h320">
+        <img id="render-img" src="images/Renders/Exterior_1.png" alt="Render">
+        <span class="img-counter" id="render-counter">1 / 10</span>
+        <div class="gallery-nav">
+          <button onclick="renderPrev()">‹</button>
+          <button onclick="renderNext()">›</button>
+        </div>
       </div>
     </div>
 
@@ -524,26 +670,47 @@ var renderIdx = 0;
 function renderUpdate() {
   var img = document.getElementById('render-img');
   var counter = document.getElementById('render-counter');
-  var caption = document.getElementById('render-caption');
   img.style.opacity = 0;
   setTimeout(function() {
     img.src = renderImages[renderIdx].src;
     img.alt = renderImages[renderIdx].label;
     img.style.opacity = 1;
     counter.textContent = (renderIdx + 1) + ' / ' + renderImages.length;
-    caption.innerHTML = renderImages[renderIdx].label + ' <span>Enscape Render</span>';
   }, 150);
 }
+function renderNext() { renderIdx = (renderIdx + 1) % renderImages.length; renderUpdate(); }
+function renderPrev() { renderIdx = (renderIdx - 1 + renderImages.length) % renderImages.length; renderUpdate(); }
 
-function renderNext() {
-  renderIdx = (renderIdx + 1) % renderImages.length;
-  renderUpdate();
-}
+// ── Touch swipe for all gallery viewports ──
+document.querySelectorAll('.gallery-viewport').forEach(function(vp) {
+  var startX = 0;
+  vp.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+  vp.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) < 40) return;
+    var btns = vp.querySelectorAll('.gallery-nav button');
+    if (btns.length < 2) return;
+    if (dx < 0) btns[1].click();
+    else btns[0].click();
+  }, { passive: true });
+});
 
-function renderPrev() {
-  renderIdx = (renderIdx - 1 + renderImages.length) % renderImages.length;
-  renderUpdate();
+// ── Lightbox ──
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+document.querySelectorAll('.gallery-viewport img').forEach(function(img) {
+  img.addEventListener('click', function(e) { e.stopPropagation(); openLightbox(this.src); });
+});
 
 // ── Smooth nav ──
 document.querySelectorAll('.nav-links a').forEach(function(a){
