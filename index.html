@@ -7,7 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-
 :root {
   --font-display: 'Syne', sans-serif;
   --font-body: 'DM Sans', sans-serif;
@@ -18,394 +17,176 @@
   --max-w: 1200px;
   --gap: 24px;
 }
-
 [data-theme="dark"] {
-  --bg: #0a0a0c;
-  --bg-2: #131317;
-  --bg-3: #1a1a20;
-  --bg-card: #16161b;
-  --border: #2a2a32;
-  --text: #e8e8ec;
-  --text-2: #9898a4;
-  --text-3: #5c5c68;
-  --accent: #4f8aff;
-  --accent-2: #7eaaff;
-  --tag-bg: rgba(79,138,255,0.1);
-  --tag-border: rgba(79,138,255,0.2);
-  --gradient-hero: linear-gradient(160deg, #0a0a0c 0%, #0f1628 50%, #0a0a0c 100%);
-  --shadow: 0 1px 3px rgba(0,0,0,0.4);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
-  --img-placeholder: #1e1e26;
-  --toggle-track: #2a2a32;
-  --toggle-knob: #e8e8ec;
+  --bg:#0a0a0c; --bg-2:#131317; --bg-card:#16161b; --border:#2a2a32;
+  --text:#e8e8ec; --text-2:#9898a4; --text-3:#5c5c68;
+  --accent:#4f8aff; --accent-2:#7eaaff;
+  --tag-bg:rgba(79,138,255,0.1); --tag-border:rgba(79,138,255,0.2);
+  --gradient-hero:linear-gradient(160deg,#0a0a0c 0%,#0f1628 50%,#0a0a0c 100%);
+  --shadow:0 1px 3px rgba(0,0,0,0.4); --shadow-lg:0 12px 40px rgba(0,0,0,0.5);
+  --img-placeholder:#1e1e26; --toggle-track:#2a2a32; --toggle-knob:#e8e8ec;
 }
-
 [data-theme="light"] {
-  --bg: #f6f6f8;
-  --bg-2: #ffffff;
-  --bg-3: #eeeef2;
-  --bg-card: #ffffff;
-  --border: #dddde4;
-  --text: #1a1a22;
-  --text-2: #5c5c6e;
-  --text-3: #9898a6;
-  --accent: #2d6be0;
-  --accent-2: #1b52b8;
-  --tag-bg: rgba(45,107,224,0.07);
-  --tag-border: rgba(45,107,224,0.18);
-  --gradient-hero: linear-gradient(160deg, #f6f6f8 0%, #e8ecf6 50%, #f6f6f8 100%);
-  --shadow: 0 1px 3px rgba(0,0,0,0.06);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
-  --img-placeholder: #e8e8ee;
-  --toggle-track: #c8c8d0;
-  --toggle-knob: #ffffff;
+  --bg:#f6f6f8; --bg-2:#ffffff; --bg-card:#ffffff; --border:#dddde4;
+  --text:#1a1a22; --text-2:#5c5c6e; --text-3:#9898a6;
+  --accent:#2d6be0; --accent-2:#1b52b8;
+  --tag-bg:rgba(45,107,224,0.07); --tag-border:rgba(45,107,224,0.18);
+  --gradient-hero:linear-gradient(160deg,#f6f6f8 0%,#e8ecf6 50%,#f6f6f8 100%);
+  --shadow:0 1px 3px rgba(0,0,0,0.06); --shadow-lg:0 12px 40px rgba(0,0,0,0.08);
+  --img-placeholder:#e8e8ee; --toggle-track:#c8c8d0; --toggle-knob:#ffffff;
 }
+html { scroll-behavior:smooth; }
+body { font-family:var(--font-body); background:var(--bg); color:var(--text); line-height:1.6; overflow-x:hidden; transition:background .4s var(--ease),color .4s var(--ease); }
+a { color:var(--accent); text-decoration:none; cursor:pointer; }
+a:hover { color:var(--accent-2); }
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
 
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--font-body);
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  overflow-x: hidden;
-  transition: background .4s var(--ease), color .4s var(--ease);
-}
+/* NAV */
+nav { position:fixed; top:0; left:0; right:0; z-index:900; backdrop-filter:blur(20px) saturate(1.6); -webkit-backdrop-filter:blur(20px) saturate(1.6); background:color-mix(in srgb,var(--bg) 80%,transparent); border-bottom:1px solid var(--border); transition:background .4s var(--ease); }
+.nav-inner { max-width:var(--max-w); margin:0 auto; padding:0 var(--gap); display:flex; align-items:center; justify-content:space-between; height:56px; }
+.nav-logo { font-family:var(--font-display); font-weight:700; font-size:1.1rem; color:var(--text); letter-spacing:-0.02em; }
+.nav-right { display:flex; align-items:center; gap:28px; }
+.nav-links { display:flex; gap:28px; }
+.nav-links a { font-size:0.82rem; font-weight:500; color:var(--text-2); letter-spacing:0.04em; text-transform:uppercase; transition:color .2s; position:relative; cursor:pointer; }
+.nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1.5px; background:var(--accent); transition:width .3s var(--ease); }
+.nav-links a:hover { color:var(--text); }
+.nav-links a:hover::after { width:100%; }
 
-a { color: var(--accent); text-decoration: none; cursor: pointer; }
-a:hover { color: var(--accent-2); }
+/* THEME TOGGLE */
+.theme-switch { display:flex; align-items:center; gap:7px; cursor:pointer; -webkit-user-select:none; user-select:none; }
+.theme-switch .ico { font-size:13px; line-height:1; }
+.switch-track { width:38px; height:20px; border-radius:10px; background:var(--toggle-track); position:relative; transition:background .3s var(--ease); }
+.switch-knob { width:14px; height:14px; border-radius:50%; background:var(--toggle-knob); position:absolute; top:3px; left:3px; transition:transform .3s var(--ease); box-shadow:0 1px 3px rgba(0,0,0,0.2); }
+[data-theme="light"] .switch-knob { transform:translateX(18px); }
 
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+/* SECTIONS */
+section { padding:100px 0; }
+.container { max-width:var(--max-w); margin:0 auto; padding:0 var(--gap); }
+.section-label { font-family:var(--font-mono); font-size:0.72rem; font-weight:500; text-transform:uppercase; letter-spacing:0.14em; color:var(--accent); margin-bottom:12px; display:flex; align-items:center; gap:10px; }
+.section-label::before { content:''; width:24px; height:1px; background:var(--accent); }
+.section-title { font-family:var(--font-display); font-size:clamp(1.8rem,4vw,2.8rem); font-weight:700; letter-spacing:-0.03em; line-height:1.15; margin-bottom:48px; }
 
-/* ── NAV ──────────────────────────────────────────── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
-  backdrop-filter: blur(20px) saturate(1.6);
-  -webkit-backdrop-filter: blur(20px) saturate(1.6);
-  background: color-mix(in srgb, var(--bg) 80%, transparent);
-  border-bottom: 1px solid var(--border);
-  transition: background .4s var(--ease);
-}
-.nav-inner {
-  max-width: var(--max-w); margin: 0 auto;
-  padding: 0 var(--gap);
-  display: flex; align-items: center; justify-content: space-between;
-  height: 56px;
-}
-.nav-logo {
-  font-family: var(--font-display); font-weight: 700; font-size: 1.1rem;
-  color: var(--text); letter-spacing: -0.02em;
-}
-.nav-right { display: flex; align-items: center; gap: 28px; }
-.nav-links { display: flex; gap: 28px; }
-.nav-links a {
-  font-size: 0.82rem; font-weight: 500; color: var(--text-2);
-  letter-spacing: 0.04em; text-transform: uppercase;
-  transition: color .2s; position: relative; cursor: pointer;
-}
-.nav-links a::after {
-  content: ''; position: absolute; bottom: -4px; left: 0;
-  width: 0; height: 1.5px; background: var(--accent);
-  transition: width .3s var(--ease);
-}
-.nav-links a:hover { color: var(--text); }
-.nav-links a:hover::after { width: 100%; }
+/* HERO */
+.hero { min-height:100vh; display:flex; align-items:center; background:var(--gradient-hero); position:relative; overflow:hidden; padding-top:56px; }
+.hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+.hero h1 { font-family:var(--font-display); font-size:clamp(2.6rem,5.5vw,4.2rem); font-weight:800; letter-spacing:-0.04em; line-height:1.05; margin-bottom:20px; }
+.hero h1 .accent { color:var(--accent); }
+.hero-sub { font-size:1.1rem; color:var(--text-2); line-height:1.7; max-width:520px; margin-bottom:32px; }
+.hero-contacts { display:flex; flex-wrap:wrap; gap:12px; }
+.hero-contacts a { display:inline-flex; align-items:center; gap:8px; padding:10px 18px; border-radius:var(--radius-sm); font-size:0.82rem; font-weight:500; border:1px solid var(--border); color:var(--text-2); background:var(--bg-2); transition:all .25s var(--ease); cursor:pointer; }
+.hero-contacts a:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); box-shadow:var(--shadow-lg); }
+.hero-stats { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.stat-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:28px 24px; }
+.stat-num { font-family:var(--font-display); font-size:2.4rem; font-weight:800; color:var(--accent); letter-spacing:-0.03em; line-height:1; }
+.stat-label { font-size:0.82rem; color:var(--text-2); margin-top:6px; font-weight:500; }
 
-/* ── THEME TOGGLE ─────────────────────────────────── */
-.theme-switch {
-  display: flex; align-items: center; gap: 7px; cursor: pointer;
-  -webkit-user-select: none; user-select: none;
-}
-.theme-switch .ico { font-size: 13px; line-height: 1; }
-.switch-track {
-  width: 38px; height: 20px; border-radius: 10px;
-  background: var(--toggle-track); position: relative;
-  transition: background .3s var(--ease);
-}
-.switch-knob {
-  width: 14px; height: 14px; border-radius: 50%;
-  background: var(--toggle-knob);
-  position: absolute; top: 3px; left: 3px;
-  transition: transform .3s var(--ease);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-}
-[data-theme="light"] .switch-knob { transform: translateX(18px); }
+/* SKILLS */
+.skills-section { background:var(--bg-2); }
+.skills-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:20px; }
+.skill-group { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:28px; }
+.skill-group-title { font-family:var(--font-display); font-size:0.95rem; font-weight:700; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+.skill-group-title .icon { width:32px; height:32px; border-radius:8px; background:var(--tag-bg); display:flex; align-items:center; justify-content:center; font-size:16px; }
+.skill-tags { display:flex; flex-wrap:wrap; gap:8px; }
+.tag { padding:5px 12px; border-radius:100px; font-size:0.76rem; font-weight:500; background:var(--tag-bg); border:1px solid var(--tag-border); color:var(--accent); }
 
-/* ── SECTION ──────────────────────────────────────── */
-section { padding: 100px 0; }
-.container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gap); }
-.section-label {
-  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500;
-  text-transform: uppercase; letter-spacing: 0.14em;
-  color: var(--accent); margin-bottom: 12px;
-  display: flex; align-items: center; gap: 10px;
-}
-.section-label::before {
-  content: ''; width: 24px; height: 1px; background: var(--accent);
-}
-.section-title {
-  font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: 700; letter-spacing: -0.03em; line-height: 1.15;
-  margin-bottom: 48px;
-}
+/* EXPERIENCE */
+.exp-list { display:flex; flex-direction:column; }
+.exp-item { display:grid; grid-template-columns:200px 1fr; gap:40px; padding:36px 0; border-bottom:1px solid var(--border); }
+.exp-item:last-child { border-bottom:none; }
+.exp-date { font-family:var(--font-mono); font-size:0.78rem; color:var(--text-3); padding-top:4px; letter-spacing:0.02em; }
+.exp-company { font-family:var(--font-display); font-size:1.3rem; font-weight:700; letter-spacing:-0.02em; margin-bottom:4px; }
+.exp-role { font-size:0.88rem; color:var(--accent); font-weight:500; margin-bottom:12px; }
+.exp-desc { font-size:0.88rem; color:var(--text-2); line-height:1.7; max-width:640px; }
 
-/* ── HERO ─────────────────────────────────────────── */
-.hero {
-  min-height: 100vh; display: flex; align-items: center;
-  background: var(--gradient-hero);
-  position: relative; overflow: hidden; padding-top: 56px;
-}
-.hero-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
-  align-items: center;
-}
-.hero h1 {
-  font-family: var(--font-display); font-size: clamp(2.6rem, 5.5vw, 4.2rem);
-  font-weight: 800; letter-spacing: -0.04em; line-height: 1.05;
-  margin-bottom: 20px;
-}
-.hero h1 .accent { color: var(--accent); }
-.hero-sub {
-  font-size: 1.1rem; color: var(--text-2); line-height: 1.7;
-  max-width: 520px; margin-bottom: 32px;
-}
-.hero-contacts { display: flex; flex-wrap: wrap; gap: 12px; }
-.hero-contacts a {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 10px 18px; border-radius: var(--radius-sm);
-  font-size: 0.82rem; font-weight: 500;
-  border: 1px solid var(--border);
-  color: var(--text-2); background: var(--bg-2);
-  transition: all .25s var(--ease); cursor: pointer;
-}
-.hero-contacts a:hover {
-  border-color: var(--accent); color: var(--accent);
-  transform: translateY(-2px); box-shadow: var(--shadow-lg);
-}
-.hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.stat-card {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 28px 24px;
-}
-.stat-num {
-  font-family: var(--font-display); font-size: 2.4rem; font-weight: 800;
-  color: var(--accent); letter-spacing: -0.03em; line-height: 1;
-}
-.stat-label { font-size: 0.82rem; color: var(--text-2); margin-top: 6px; font-weight: 500; }
+/* PROJECTS */
+.company-section { margin-bottom:64px; }
+.company-section:last-child { margin-bottom:0; }
+.company-divider { display:flex; align-items:center; gap:14px; margin-bottom:28px; }
+.company-divider h3 { font-family:var(--font-display); font-size:1.3rem; font-weight:700; letter-spacing:-0.02em; white-space:nowrap; }
+.company-divider::after { content:''; flex:1; height:1px; background:var(--border); }
+.projects-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
 
-/* ── SKILLS ───────────────────────────────────────── */
-.skills-section { background: var(--bg-2); }
-.skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
-.skill-group {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 28px;
-}
-.skill-group-title {
-  font-family: var(--font-display); font-size: 0.95rem; font-weight: 700;
-  margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
-}
-.skill-group-title .icon {
-  width: 32px; height: 32px; border-radius: 8px;
-  background: var(--tag-bg); display: flex; align-items: center; justify-content: center;
-  font-size: 16px;
-}
-.skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.tag {
-  padding: 5px 12px; border-radius: 100px;
-  font-size: 0.76rem; font-weight: 500;
-  background: var(--tag-bg); border: 1px solid var(--tag-border);
-  color: var(--accent);
-}
+/* GALLERY CARD (shared by projects, renders, code) */
+.gallery-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+.gallery-card.full-width { grid-column:1 / -1; }
+.gallery-viewport { position:relative; overflow:hidden; background:var(--img-placeholder); touch-action:pan-y; }
+.gallery-viewport img { width:100%; height:100%; object-fit:cover; transition:opacity .25s var(--ease); display:block; }
+.gallery-viewport.h240 { height:240px; }
+.gallery-viewport.h320 { height:320px; }
+.gallery-viewport.h480 { height:480px; }
+.gallery-nav { position:absolute; bottom:12px; right:12px; display:flex; gap:4px; }
+.gallery-nav button { width:28px; height:28px; border-radius:50%; border:1px solid rgba(255,255,255,0.3); background:rgba(0,0,0,0.5); color:#fff; font-size:12px; cursor:pointer; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(8px); transition:background .2s,border-color .2s; }
+.gallery-nav button:hover { background:var(--accent); border-color:var(--accent); }
+.img-counter { position:absolute; top:12px; right:12px; padding:4px 10px; border-radius:100px; font-size:0.7rem; font-weight:600; background:rgba(0,0,0,0.55); color:#fff; backdrop-filter:blur(8px); }
+.gallery-body { padding:24px; }
+.gallery-caption { padding:20px 24px; display:flex; align-items:center; justify-content:space-between; }
+.caption-text { font-size:0.88rem; font-weight:500; }
+.caption-text span { color:var(--text-3); font-size:0.76rem; margin-left:12px; }
 
-/* ── EXPERIENCE ───────────────────────────────────── */
-.exp-list { display: flex; flex-direction: column; }
-.exp-item {
-  display: grid; grid-template-columns: 200px 1fr; gap: 40px;
-  padding: 36px 0; border-bottom: 1px solid var(--border);
-}
-.exp-item:last-child { border-bottom: none; }
-.exp-date {
-  font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-3);
-  padding-top: 4px; letter-spacing: 0.02em;
-}
-.exp-company {
-  font-family: var(--font-display); font-size: 1.3rem; font-weight: 700;
-  letter-spacing: -0.02em; margin-bottom: 4px;
-}
-.exp-role { font-size: 0.88rem; color: var(--accent); font-weight: 500; margin-bottom: 12px; }
-.exp-desc { font-size: 0.88rem; color: var(--text-2); line-height: 1.7; max-width: 640px; }
+.project-meta { display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
+.project-type { font-family:var(--font-mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent); font-weight:500; }
+.project-year { font-size:0.72rem; color:var(--text-3); }
+.project-company-tag { margin-left:auto; padding:3px 10px; border-radius:100px; font-size:0.68rem; font-weight:600; background:var(--tag-bg); border:1px solid var(--tag-border); color:var(--accent); }
+.project-name { font-family:var(--font-display); font-size:1.15rem; font-weight:700; letter-spacing:-0.02em; margin-bottom:8px; }
+.project-desc { font-size:0.82rem; color:var(--text-2); line-height:1.65; }
+.project-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; }
+.project-tags .tag { font-size:0.68rem; padding:3px 10px; }
 
-/* ── PROJECTS ─────────────────────────────────────── */
-.company-section { margin-bottom: 64px; }
-.company-section:last-child { margin-bottom: 0; }
-.company-divider { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
-.company-divider h3 {
-  font-family: var(--font-display); font-size: 1.3rem; font-weight: 700;
-  letter-spacing: -0.02em; white-space: nowrap;
-}
-.company-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+/* CODE CARDS */
+.other-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.code-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+.code-body { padding:24px; }
+.code-title { font-family:var(--font-display); font-size:1rem; font-weight:700; margin-bottom:10px; }
+.code-desc { font-size:0.82rem; color:var(--text-2); line-height:1.6; }
+.code-bullets { margin:14px 0 0; padding:0 0 0 18px; font-size:0.82rem; color:var(--text-2); line-height:1.85; list-style:disc; }
+.code-bullets strong { color:var(--text); font-weight:600; }
 
-.projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-.project-card {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius); overflow: hidden;
-}
-.project-card.full-width { grid-column: 1 / -1; }
-.project-card.full-width .project-images { height: 320px; }
+/* LANGUAGES */
+.lang-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:32px; }
+.lang-card { text-align:center; padding:24px 16px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); }
+.lang-name { font-family:var(--font-display); font-weight:700; font-size:0.95rem; margin-bottom:4px; }
+.lang-level { font-size:0.78rem; color:var(--text-2); }
+.lang-bar { height:3px; background:var(--border); border-radius:2px; margin-top:12px; overflow:hidden; }
+.lang-bar-fill { height:100%; background:var(--accent); border-radius:2px; transition:width 1s var(--ease); }
 
-.project-images {
-  height: 240px; overflow: hidden; position: relative;
-  background: var(--img-placeholder);
-}
-.project-images img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: opacity .25s var(--ease);
-}
-.gallery-nav {
-  position: absolute; bottom: 12px; right: 12px;
-  display: flex; gap: 4px;
-}
-.gallery-nav button {
-  width: 28px; height: 28px; border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.3);
-  background: rgba(0,0,0,0.5); color: #fff; font-size: 12px;
-  cursor: pointer; display: flex; align-items: center; justify-content: center;
-  backdrop-filter: blur(8px); transition: background .2s, border-color .2s;
-}
-.gallery-nav button:hover { background: var(--accent); border-color: var(--accent); }
-.img-counter {
-  position: absolute; top: 12px; right: 12px;
-  padding: 4px 10px; border-radius: 100px;
-  font-size: 0.7rem; font-weight: 600;
-  background: rgba(0,0,0,0.55); color: #fff; backdrop-filter: blur(8px);
-}
-.project-body { padding: 24px; }
-.project-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
-.project-type {
-  font-family: var(--font-mono); font-size: 0.68rem;
-  text-transform: uppercase; letter-spacing: 0.1em;
-  color: var(--accent); font-weight: 500;
-}
-.project-year { font-size: 0.72rem; color: var(--text-3); }
-.project-company-tag {
-  margin-left: auto;
-  padding: 3px 10px; border-radius: 100px;
-  font-size: 0.68rem; font-weight: 600;
-  background: var(--tag-bg); border: 1px solid var(--tag-border);
-  color: var(--accent);
-}
-.project-name {
-  font-family: var(--font-display); font-size: 1.15rem; font-weight: 700;
-  letter-spacing: -0.02em; margin-bottom: 8px;
-}
-.project-desc { font-size: 0.82rem; color: var(--text-2); line-height: 1.65; }
-.project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
-.project-tags .tag { font-size: 0.68rem; padding: 3px 10px; }
+/* FOOTER */
+footer { padding:48px 0; border-top:1px solid var(--border); text-align:center; }
+footer p { font-size:0.8rem; color:var(--text-3); }
+footer .links { display:flex; justify-content:center; gap:20px; margin-bottom:14px; }
+footer .links a { color:var(--text-2); font-size:0.82rem; font-weight:500; cursor:pointer; }
+footer .links a:hover { color:var(--accent); }
 
-.img-placeholder {
-  width: 100%; height: 100%;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  background: var(--img-placeholder);
-  color: var(--text-3); font-size: 0.82rem; gap: 8px;
-}
-.img-placeholder svg { opacity: 0.4; }
+/* ANIMATIONS */
+.fade-in { opacity:0; transform:translateY(30px); transition:opacity .7s var(--ease),transform .7s var(--ease); }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+.fade-in-delay-1 { transition-delay:.1s; }
+.fade-in-delay-2 { transition-delay:.2s; }
+.fade-in-delay-3 { transition-delay:.3s; }
 
-/* ── RENDER GALLERY CARD ──────────────────────────── */
-.render-gallery {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius); overflow: hidden;
-  margin-bottom: 48px;
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .projects-grid{grid-template-columns:1fr}
+  .other-grid{grid-template-columns:1fr 1fr}
+  .exp-item{grid-template-columns:1fr;gap:8px}
+  .nav-links{gap:16px}
+  .lang-grid{grid-template-columns:1fr 1fr}
+  .gallery-viewport.h480{height:320px}
 }
-.render-gallery .gallery-viewport {
-  height: 480px; position: relative; overflow: hidden;
-  background: var(--img-placeholder);
-}
-.render-gallery .gallery-viewport img {
-  width: 100%; height: 100%; object-fit: cover;
-  transition: opacity .3s var(--ease);
-}
-.render-gallery .gallery-caption {
-  padding: 20px 24px;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.render-gallery .caption-text {
-  font-size: 0.88rem; font-weight: 500;
-}
-.render-gallery .caption-text span {
-  color: var(--text-3); font-size: 0.76rem; margin-left: 12px;
-}
-
-/* ── OTHER (CODE) ─────────────────────────────────── */
-.other-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.code-card {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 28px;
-}
-.code-title {
-  font-family: var(--font-display); font-size: 1rem; font-weight: 700;
-  margin-bottom: 10px;
-}
-.code-desc { font-size: 0.82rem; color: var(--text-2); line-height: 1.6; }
-.code-bullets {
-  margin: 14px 0 0 0; padding: 0 0 0 18px;
-  font-size: 0.82rem; color: var(--text-2); line-height: 1.85;
-  list-style: disc;
-}
-.code-bullets strong { color: var(--text); font-weight: 600; }
-
-/* ── LANGUAGES ────────────────────────────────────── */
-.lang-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px; }
-.lang-card {
-  text-align: center; padding: 24px 16px;
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-.lang-name { font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
-.lang-level { font-size: 0.78rem; color: var(--text-2); }
-.lang-bar { height: 3px; background: var(--border); border-radius: 2px; margin-top: 12px; overflow: hidden; }
-.lang-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width 1s var(--ease); }
-
-/* ── FOOTER ───────────────────────────────────────── */
-footer { padding: 48px 0; border-top: 1px solid var(--border); text-align: center; }
-footer p { font-size: 0.8rem; color: var(--text-3); }
-footer .links { display: flex; justify-content: center; gap: 20px; margin-bottom: 14px; }
-footer .links a { color: var(--text-2); font-size: 0.82rem; font-weight: 500; cursor: pointer; }
-footer .links a:hover { color: var(--accent); }
-
-/* ── ANIMATIONS ───────────────────────────────────── */
-.fade-in {
-  opacity: 0; transform: translateY(30px);
-  transition: opacity .7s var(--ease), transform .7s var(--ease);
-}
-.fade-in.visible { opacity: 1; transform: translateY(0); }
-.fade-in-delay-1 { transition-delay: .1s; }
-.fade-in-delay-2 { transition-delay: .2s; }
-.fade-in-delay-3 { transition-delay: .3s; }
-
-/* ── RESPONSIVE ───────────────────────────────────── */
-@media (max-width: 900px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-  .projects-grid { grid-template-columns: 1fr; }
-  .other-grid { grid-template-columns: 1fr 1fr; }
-  .exp-item { grid-template-columns: 1fr; gap: 8px; }
-  .nav-links { gap: 16px; }
-  .lang-grid { grid-template-columns: 1fr 1fr; }
-  .render-gallery .gallery-viewport { height: 320px; }
-}
-@media (max-width: 600px) {
-  .nav-links { display: none; }
-  .other-grid { grid-template-columns: 1fr; }
-  .skills-grid { grid-template-columns: 1fr; }
-  section { padding: 60px 0; }
-  .render-gallery .gallery-viewport { height: 240px; }
+@media(max-width:600px){
+  .nav-links{display:none}
+  .other-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr}
+  section{padding:60px 0}
+  .gallery-viewport.h480{height:220px}
+  .gallery-viewport.h320{height:200px}
 }
 </style>
 </head>
 <body>
 
-<!-- Nav -->
 <nav>
   <div class="nav-inner">
     <div class="nav-logo">Miguel Pinheiro</div>
@@ -426,15 +207,13 @@ footer .links a:hover { color: var(--accent); }
   </div>
 </nav>
 
-<!-- Hero -->
+<!-- HERO -->
 <section class="hero" id="about">
   <div class="container">
     <div class="hero-grid">
       <div>
         <h1 class="fade-in">Miguel<br><span class="accent">Pinheiro</span></h1>
-        <p class="hero-sub fade-in fade-in-delay-1">
-          BIM Specialist & Civil Engineer with experience shaping infrastructure across Denmark, Norway, Nigeria and Portugal. Bridging design intent and digital delivery — from 3D structural modeling to automated workflows and custom Revit tooling.
-        </p>
+        <p class="hero-sub fade-in fade-in-delay-1">BIM Specialist & Civil Engineer with experience shaping infrastructure across Denmark, Norway, Nigeria and Portugal. Bridging design intent and digital delivery — from 3D structural modeling to automated workflows and custom Revit tooling.</p>
         <div class="hero-contacts fade-in fade-in-delay-2">
           <a href="mailto:miguelcvp10@gmail.com">✉ miguelcvp10@gmail.com</a>
           <a href="tel:+351912322614">☎ +351 912 322 614</a>
@@ -442,169 +221,65 @@ footer .links a:hover { color: var(--accent); }
         </div>
       </div>
       <div class="hero-stats fade-in fade-in-delay-2">
-        <div class="stat-card">
-          <div class="stat-num">15+</div>
-          <div class="stat-label">Projects Delivered</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">40+</div>
-          <div class="stat-label">Custom Scripts Built</div>
-        </div>
+        <div class="stat-card"><div class="stat-num">15+</div><div class="stat-label">Projects Delivered</div></div>
+        <div class="stat-card"><div class="stat-num">40+</div><div class="stat-label">Custom Scripts Built</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Skills -->
+<!-- SKILLS -->
 <section class="skills-section" id="skills">
   <div class="container">
     <div class="section-label fade-in">Capabilities</div>
     <h2 class="section-title fade-in">Skills &amp; Software</h2>
-
     <div class="skills-grid">
       <div class="skill-group fade-in">
         <div class="skill-group-title"><span class="icon">🏗</span> BIM</div>
         <div class="skill-tags">
-          <span class="tag">Revit</span>
-          <span class="tag">Revizto</span>
-          <span class="tag">Revizto API</span>
-          <span class="tag">ACC / BIM360</span>
-          <span class="tag">Navisworks</span>
-          <span class="tag">ProjectWise</span>
-          <span class="tag">Trimble Connect</span>
-          <span class="tag">Rhino</span>
-          <span class="tag">Enscape</span>
-          <span class="tag">Lumion</span>
-          <span class="tag">Structural Modeling</span>
-          <span class="tag">3D Reinforcement</span>
-          <span class="tag">MEP Coordination</span>
-          <span class="tag">Quantity Take-Off</span>
-          <span class="tag">Drawing Production</span>
-          <span class="tag">AutoCAD</span>
-          <span class="tag">CYPE</span>
+          <span class="tag">Revit</span><span class="tag">Revizto</span><span class="tag">Revizto API</span><span class="tag">ACC / BIM360</span><span class="tag">Navisworks</span><span class="tag">ProjectWise</span><span class="tag">Trimble Connect</span><span class="tag">Rhino</span><span class="tag">Enscape</span><span class="tag">Lumion</span><span class="tag">Structural Modeling</span><span class="tag">3D Reinforcement</span><span class="tag">MEP Coordination</span><span class="tag">Quantity Take-Off</span><span class="tag">Drawing Production</span><span class="tag">AutoCAD</span><span class="tag">CYPE</span>
         </div>
       </div>
       <div class="skill-group fade-in fade-in-delay-1">
         <div class="skill-group-title"><span class="icon">⚙️</span> Automation & Scripting</div>
         <div class="skill-tags">
-          <span class="tag">Python</span>
-          <span class="tag">pyRevit</span>
-          <span class="tag">Revit API</span>
-          <span class="tag">Dynamo</span>
-          <span class="tag">Grasshopper</span>
-          <span class="tag">C#</span>
-          <span class="tag">n8n</span>
-          <span class="tag">Virtual Machines</span>
+          <span class="tag">Python</span><span class="tag">pyRevit</span><span class="tag">Revit API</span><span class="tag">Dynamo</span><span class="tag">Grasshopper</span><span class="tag">C#</span><span class="tag">n8n</span><span class="tag">Virtual Machines</span>
         </div>
       </div>
       <div class="skill-group fade-in fade-in-delay-2">
         <div class="skill-group-title"><span class="icon">📋</span> Coordination & Management</div>
         <div class="skill-tags">
-          <span class="tag">BIM Coordination</span>
-          <span class="tag">BIM Management</span>
-          <span class="tag">Clash Detection</span>
-          <span class="tag">Quality Assurance</span>
-          <span class="tag">CDE Management</span>
-          <span class="tag">Deliveries Supervision</span>
-          <span class="tag">Team Mentoring</span>
-          <span class="tag">Excel</span>
+          <span class="tag">BIM Coordination</span><span class="tag">BIM Management</span><span class="tag">Clash Detection</span><span class="tag">Quality Assurance</span><span class="tag">CDE Management</span><span class="tag">Deliveries Supervision</span><span class="tag">Team Mentoring</span><span class="tag">Excel</span>
         </div>
       </div>
     </div>
-
     <div class="section-label fade-in" style="margin-top:56px;">Languages</div>
     <div class="lang-grid">
-      <div class="lang-card fade-in">
-        <div class="lang-name">Portuguese</div>
-        <div class="lang-level">Native</div>
-        <div class="lang-bar"><div class="lang-bar-fill" data-width="100"></div></div>
-      </div>
-      <div class="lang-card fade-in fade-in-delay-1">
-        <div class="lang-name">English</div>
-        <div class="lang-level">C1 — Excellent</div>
-        <div class="lang-bar"><div class="lang-bar-fill" data-width="90"></div></div>
-      </div>
-      <div class="lang-card fade-in fade-in-delay-2">
-        <div class="lang-name">Spanish</div>
-        <div class="lang-level">Intermediate</div>
-        <div class="lang-bar"><div class="lang-bar-fill" data-width="45"></div></div>
-      </div>
-      <div class="lang-card fade-in fade-in-delay-3">
-        <div class="lang-name">Danish</div>
-        <div class="lang-level">Beginner</div>
-        <div class="lang-bar"><div class="lang-bar-fill" data-width="15"></div></div>
-      </div>
+      <div class="lang-card fade-in"><div class="lang-name">Portuguese</div><div class="lang-level">Native</div><div class="lang-bar"><div class="lang-bar-fill" data-width="100"></div></div></div>
+      <div class="lang-card fade-in fade-in-delay-1"><div class="lang-name">English</div><div class="lang-level">C1 — Excellent</div><div class="lang-bar"><div class="lang-bar-fill" data-width="90"></div></div></div>
+      <div class="lang-card fade-in fade-in-delay-2"><div class="lang-name">Spanish</div><div class="lang-level">Intermediate</div><div class="lang-bar"><div class="lang-bar-fill" data-width="45"></div></div></div>
+      <div class="lang-card fade-in fade-in-delay-3"><div class="lang-name">Danish</div><div class="lang-level">Beginner</div><div class="lang-bar"><div class="lang-bar-fill" data-width="15"></div></div></div>
     </div>
   </div>
 </section>
 
-<!-- Experience -->
+<!-- EXPERIENCE -->
 <section id="experience">
   <div class="container">
     <div class="section-label fade-in">Career</div>
     <h2 class="section-title fade-in">Professional Experience</h2>
-
     <div class="exp-list">
-      <div class="exp-item fade-in">
-        <div class="exp-date">2022 — Present</div>
-        <div>
-          <div class="exp-company">NIRAS A/S</div>
-          <div class="exp-role">BIM Specialist → BIM Coordinator → BIM Manager</div>
-          <div class="exp-desc">
-            Leading BIM coordination and model development for large-scale infrastructure projects across Denmark, Norway and Nigeria. Responsibilities span Revit model refinement, 3D reinforcement, CDE management, process automation via Python/Dynamo/VMs, drawing standards development, and team mentoring. Developed a full pyRevit extension (40+ tools) deployed company-wide, plus standalone Python automation workflows for Revizto export and Revit cloud model management. Acted as BIM Manager during manager paternity leave.
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-item fade-in">
-        <div class="exp-date">2021 — 2022</div>
-        <div>
-          <div class="exp-company">Gabriel A.S. Couto S.A.</div>
-          <div class="exp-role">BIM Coordinator (Founded BIM Department)</div>
-          <div class="exp-desc">
-            First member and founder of the BIM department at one of Portugal's largest general contractors. Created company templates for Structural, MEP disciplines. Developed BIM procedures, reinforcement modeling workflows, and trained colleagues. Led BIM coordination for multiple projects including social housing, educational and commercial buildings.
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-item fade-in">
-        <div class="exp-date">2021</div>
-        <div>
-          <div class="exp-company">Garcia, Garcia S.A.</div>
-          <div class="exp-role">Master Thesis Internship</div>
-          <div class="exp-desc">
-            Developed thesis on "Automatic Estimation of Quantities of Reinforced Concrete using BIM" — comparing traditional QTO workflows with BIM-driven approaches using Revit for rebar modeling and automated quantity extraction.
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-item fade-in">
-        <div class="exp-date">2020</div>
-        <div>
-          <div class="exp-company">Construções Capela Braga</div>
-          <div class="exp-role">Director of Construction Assistant (Intern)</div>
-          <div class="exp-desc">
-            Internship at a Portuguese general contractor covering quantity measurements, cost estimation, sub-contractor coordination, and daily on-site monitoring for the Centro de Arte Alberto Carneiro project.
-          </div>
-        </div>
-      </div>
-
-      <div class="exp-item fade-in">
-        <div class="exp-date">2015 — 2021</div>
-        <div>
-          <div class="exp-company">FEUP — University of Porto</div>
-          <div class="exp-role">MSc Civil Engineering</div>
-          <div class="exp-desc">
-            Master's degree in Civil Engineering. Exchange semester at Lund University, Sweden. Active in extracurriculars: Assertive Communication, Sustain'Be 2019, PTBIM 2020.
-          </div>
-        </div>
-      </div>
+      <div class="exp-item fade-in"><div class="exp-date">2022 — Present</div><div><div class="exp-company">NIRAS A/S</div><div class="exp-role">BIM Specialist → BIM Coordinator → BIM Manager</div><div class="exp-desc">Leading BIM coordination and model development for large-scale infrastructure projects across Denmark, Norway and Nigeria. Responsibilities span Revit model refinement, 3D reinforcement, CDE management, process automation via Python/Dynamo/VMs, drawing standards development, and team mentoring. Developed a full pyRevit extension (40+ tools) deployed company-wide, plus standalone Python automation workflows for Revizto export and Revit cloud model management. Acted as BIM Manager during manager paternity leave.</div></div></div>
+      <div class="exp-item fade-in"><div class="exp-date">2021 — 2022</div><div><div class="exp-company">Gabriel A.S. Couto S.A.</div><div class="exp-role">BIM Coordinator (Founded BIM Department)</div><div class="exp-desc">First member and founder of the BIM department at one of Portugal's largest general contractors. Created company templates for Structural, MEP disciplines. Developed BIM procedures, reinforcement modeling workflows, and trained colleagues. Led BIM coordination for multiple projects including social housing, educational and commercial buildings.</div></div></div>
+      <div class="exp-item fade-in"><div class="exp-date">2021</div><div><div class="exp-company">Garcia, Garcia S.A.</div><div class="exp-role">Master Thesis Internship</div><div class="exp-desc">Developed thesis on "Automatic Estimation of Quantities of Reinforced Concrete using BIM" — comparing traditional QTO workflows with BIM-driven approaches using Revit for rebar modeling and automated quantity extraction.</div></div></div>
+      <div class="exp-item fade-in"><div class="exp-date">2020</div><div><div class="exp-company">Construções Capela Braga</div><div class="exp-role">Director of Construction Assistant (Intern)</div><div class="exp-desc">Internship at a Portuguese general contractor covering quantity measurements, cost estimation, sub-contractor coordination, and daily on-site monitoring for the Centro de Arte Alberto Carneiro project.</div></div></div>
+      <div class="exp-item fade-in"><div class="exp-date">2015 — 2021</div><div><div class="exp-company">FEUP — University of Porto</div><div class="exp-role">MSc Civil Engineering</div><div class="exp-desc">Master's degree in Civil Engineering. Exchange semester at Lund University, Sweden. Active in extracurriculars: Assertive Communication, Sustain'Be 2019, PTBIM 2020.</div></div></div>
     </div>
   </div>
 </section>
 
-<!-- Projects -->
-<section id="projects" style="background: var(--bg-2);">
+<!-- PROJECTS -->
+<section id="projects" style="background:var(--bg-2);">
   <div class="container">
     <div class="section-label fade-in">Portfolio</div>
     <h2 class="section-title fade-in">Key Projects</h2>
@@ -614,129 +289,29 @@ footer .links a:hover { color: var(--accent); }
       <div class="company-divider fade-in"><h3>NIRAS A/S</h3></div>
       <div class="projects-grid">
 
-        <div class="project-card full-width fade-in" data-images="">
-          <div class="project-images">
-            <div class="img-placeholder">
-              <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
-              Images to be added
-            </div>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span class="project-type">Infrastructure</span>
-              <span class="project-year">2022–Present</span>
-              <span class="project-company-tag">NIRAS</span>
-            </div>
-            <div class="project-name">Nordhavnstunnel — Copenhagen</div>
-            <div class="project-desc">
-              1.4 km cut & cover tunnel for the Danish Road Directorate, designed by NIRAS for BESIX-MTH JV. Managed Revit models, multi-discipline coordination via Revizto, drawing production, QA, and developed Python-based automation for exports using virtual machines.
-            </div>
-            <div class="project-tags">
-              <span class="tag">BIM Coordinator</span>
-              <span class="tag">Revit</span>
-              <span class="tag">Revizto</span>
-              <span class="tag">Python Automation</span>
-            </div>
-          </div>
+        <div class="gallery-card full-width fade-in" data-images="images/nordhavn_1.svg,images/nordhavn_2.svg,images/nordhavn_3.svg">
+          <div class="gallery-viewport h320"><img src="images/nordhavn_1.svg" alt="Nordhavnstunnel"><span class="img-counter">1 / 3</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
+          <div class="gallery-body"><div class="project-meta"><span class="project-type">Infrastructure</span><span class="project-year">2022–Present</span><span class="project-company-tag">NIRAS</span></div><div class="project-name">Nordhavnstunnel — Copenhagen</div><div class="project-desc">1.4 km cut & cover tunnel for the Danish Road Directorate, designed by NIRAS for BESIX-MTH JV. Managed Revit models, multi-discipline coordination via Revizto, drawing production, QA, and developed Python-based automation for exports using virtual machines.</div><div class="project-tags"><span class="tag">BIM Coordinator</span><span class="tag">Revit</span><span class="tag">Revizto</span><span class="tag">Python Automation</span></div></div>
         </div>
 
-        <div class="project-card fade-in" data-images="">
-          <div class="project-images">
-            <div class="img-placeholder">
-              <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
-              Images to be added
-            </div>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span class="project-type">Infrastructure</span>
-              <span class="project-year">2022–Present</span>
-              <span class="project-company-tag">NIRAS</span>
-            </div>
-            <div class="project-name">Valby Skybrudstunnel</div>
-            <div class="project-desc">
-              Cloudburst tunnel for HOFOR — 3D reinforcement modeling, BIM coordination, drawing production, QA and process automation. Acted as BIM Manager during manager leave.
-            </div>
-            <div class="project-tags">
-              <span class="tag">BIM Manager</span>
-              <span class="tag">3D Rebar</span>
-              <span class="tag">Dynamo</span>
-            </div>
-          </div>
+        <div class="gallery-card fade-in" data-images="images/valby_1.svg,images/valby_2.svg,images/valby_3.svg">
+          <div class="gallery-viewport h240"><img src="images/valby_1.svg" alt="Valby"><span class="img-counter">1 / 3</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
+          <div class="gallery-body"><div class="project-meta"><span class="project-type">Infrastructure</span><span class="project-year">2022–Present</span><span class="project-company-tag">NIRAS</span></div><div class="project-name">Valby Skybrudstunnel</div><div class="project-desc">Cloudburst tunnel for HOFOR — 3D reinforcement modeling, BIM coordination, drawing production, QA and process automation. Acted as BIM Manager during manager leave.</div><div class="project-tags"><span class="tag">BIM Manager</span><span class="tag">3D Rebar</span><span class="tag">Dynamo</span></div></div>
         </div>
 
-        <div class="project-card fade-in" data-images="">
-          <div class="project-images">
-            <div class="img-placeholder">
-              <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
-              Images to be added
-            </div>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span class="project-type">Infrastructure</span>
-              <span class="project-year">2017–Present</span>
-              <span class="project-company-tag">NIRAS</span>
-            </div>
-            <div class="project-name">Kalvebod Brygge Cloudburst Tunnel</div>
-            <div class="project-desc">
-              Large-scale cloudburst tunnel in central Copenhagen for HOFOR. 1250m tunnel passing under dense urban areas. Model development, rebar, drawings, Revizto coordination, QA, and BIM management.
-            </div>
-            <div class="project-tags">
-              <span class="tag">BIM Specialist</span>
-              <span class="tag">Reinforcement</span>
-              <span class="tag">Revizto</span>
-            </div>
-          </div>
+        <div class="gallery-card fade-in" data-images="images/kalvebod_1.svg,images/kalvebod_2.svg,images/kalvebod_3.svg">
+          <div class="gallery-viewport h240"><img src="images/kalvebod_1.svg" alt="Kalvebod"><span class="img-counter">1 / 3</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
+          <div class="gallery-body"><div class="project-meta"><span class="project-type">Infrastructure</span><span class="project-year">2017–Present</span><span class="project-company-tag">NIRAS</span></div><div class="project-name">Kalvebod Brygge Cloudburst Tunnel</div><div class="project-desc">Large-scale cloudburst tunnel in central Copenhagen for HOFOR. 1250m tunnel passing under dense urban areas. Model development, rebar, drawings, Revizto coordination, QA, and BIM management.</div><div class="project-tags"><span class="tag">BIM Specialist</span><span class="tag">Reinforcement</span><span class="tag">Revizto</span></div></div>
         </div>
 
-        <div class="project-card fade-in" data-images="">
-          <div class="project-images">
-            <div class="img-placeholder">
-              <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
-              Images to be added
-            </div>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span class="project-type">Port / Logistics</span>
-              <span class="project-year">2022–Present</span>
-              <span class="project-company-tag">NIRAS</span>
-            </div>
-            <div class="project-name">Snake Island CT — Nigeria</div>
-            <div class="project-desc">
-              T7S smart port terminal development with MSC and Nigerdock. CDE setup in ACC, Revit template preparation, model/drawing coordination and workflow optimization.
-            </div>
-            <div class="project-tags">
-              <span class="tag">BIM Advisor</span>
-              <span class="tag">ACC</span>
-              <span class="tag">Templates</span>
-            </div>
-          </div>
+        <div class="gallery-card fade-in" data-images="images/snake_1.svg,images/snake_2.svg,images/snake_3.svg">
+          <div class="gallery-viewport h240"><img src="images/snake_1.svg" alt="Snake Island"><span class="img-counter">1 / 3</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
+          <div class="gallery-body"><div class="project-meta"><span class="project-type">Port / Logistics</span><span class="project-year">2022–Present</span><span class="project-company-tag">NIRAS</span></div><div class="project-name">Snake Island CT — Nigeria</div><div class="project-desc">T7S smart port terminal development with MSC and Nigerdock. CDE setup in ACC, Revit template preparation, model/drawing coordination and workflow optimization.</div><div class="project-tags"><span class="tag">BIM Advisor</span><span class="tag">ACC</span><span class="tag">Templates</span></div></div>
         </div>
 
-        <div class="project-card fade-in" data-images="">
-          <div class="project-images">
-            <div class="img-placeholder">
-              <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
-              Images to be added
-            </div>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span class="project-type">Railway</span>
-              <span class="project-year">2023–Present</span>
-              <span class="project-company-tag">NIRAS</span>
-            </div>
-            <div class="project-name">KTT Nord — Trondheim, Norway</div>
-            <div class="project-desc">
-              Railway project for Bane NOR. Ensured BIM model integrity per BPE, controlled delivery deadlines, and coordinated multiple disciplines in Trimble Connect.
-            </div>
-            <div class="project-tags">
-              <span class="tag">BIM Coordinator</span>
-              <span class="tag">Trimble Connect</span>
-            </div>
-          </div>
+        <div class="gallery-card fade-in" data-images="images/ktt_1.svg,images/ktt_2.svg,images/ktt_3.svg">
+          <div class="gallery-viewport h240"><img src="images/ktt_1.svg" alt="KTT Nord"><span class="img-counter">1 / 3</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
+          <div class="gallery-body"><div class="project-meta"><span class="project-type">Railway</span><span class="project-year">2023–Present</span><span class="project-company-tag">NIRAS</span></div><div class="project-name">KTT Nord — Trondheim, Norway</div><div class="project-desc">Railway project for Bane NOR. Ensured BIM model integrity per BPE, controlled delivery deadlines, and coordinated multiple disciplines in Trimble Connect.</div><div class="project-tags"><span class="tag">BIM Coordinator</span><span class="tag">Trimble Connect</span></div></div>
         </div>
 
       </div>
@@ -747,134 +322,55 @@ footer .links a:hover { color: var(--accent); }
       <div class="company-divider fade-in"><h3>Gabriel A.S. Couto S.A.</h3></div>
       <div class="projects-grid">
 
-        <div class="project-card fade-in" id="boavista-card"
-             data-images="images/BBoavista_Completo.jpg,images/BBoavista_L4.png,images/Boavista_L4_EST_Pormenor3.png,images/Boavista_L4_EST_Pormenor4.png,images/Concrete.png,images/Concrete_2.png,images/Rebar.png,images/Rebar_2.png,images/DAR.png,images/DAR2.png,images/DAP.png,images/HID.png,images/ELE.png,images/MEC.png,images/MEP.png,images/DAPELE.jpg,images/DAPELE2.jpg,images/DARMEC.jpg,images/HIDMEC.jpg,images/ESTHID.jpg,images/ABA.png,images/ABA2.png">
-          <div class="project-images">
-            <img src="images/BBoavista_Completo.jpg" alt="Bairro da Boavista">
-            <span class="img-counter">1 / 22</span>
-            <div class="gallery-nav">
-              <button onclick="galleryPrev(this)" aria-label="Previous">‹</button>
-              <button onclick="galleryNext(this)" aria-label="Next">›</button>
-            </div>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span class="project-type">Social Housing</span>
-              <span class="project-year">2021–2022</span>
-              <span class="project-company-tag">Gabriel Couto</span>
-            </div>
-            <div class="project-name">Bairro da Boavista F3 — Lisbon</div>
-            <div class="project-desc">
-              Full BIM models for Structural, MEP disciplines. 3D concrete reinforcement using Dynamo, clash detection, QTO extraction, and drawing generation for on-site use. Client: C.M. Lisboa.
-            </div>
-            <div class="project-tags">
-              <span class="tag">BIM Coordinator</span>
-              <span class="tag">3D Rebar</span>
-              <span class="tag">MEP</span>
-              <span class="tag">Dynamo</span>
-            </div>
-          </div>
+        <div class="gallery-card fade-in" data-images="images/BBoavista_Completo.jpg,images/BBoavista_L4.png,images/Boavista_L4_EST_Pormenor3.png,images/Boavista_L4_EST_Pormenor4.png,images/Concrete.png,images/Concrete_2.png,images/Rebar.png,images/Rebar_2.png,images/DAR.png,images/DAR2.png,images/DAP.png,images/HID.png,images/ELE.png,images/MEC.png,images/MEP.png,images/DAPELE.jpg,images/DAPELE2.jpg,images/DARMEC.jpg,images/HIDMEC.jpg,images/ESTHID.jpg,images/ABA.png,images/ABA2.png">
+          <div class="gallery-viewport h240"><img src="images/BBoavista_Completo.jpg" alt="Bairro da Boavista"><span class="img-counter">1 / 22</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
+          <div class="gallery-body"><div class="project-meta"><span class="project-type">Social Housing</span><span class="project-year">2021–2022</span><span class="project-company-tag">Gabriel Couto</span></div><div class="project-name">Bairro da Boavista F3 — Lisbon</div><div class="project-desc">Full BIM models for Structural, MEP disciplines. 3D concrete reinforcement using Dynamo, clash detection, QTO extraction, and drawing generation for on-site use. Client: C.M. Lisboa.</div><div class="project-tags"><span class="tag">BIM Coordinator</span><span class="tag">3D Rebar</span><span class="tag">MEP</span><span class="tag">Dynamo</span></div></div>
         </div>
 
-        <div class="project-card fade-in" id="edp-card"
-             data-images="images/EDP_EST.png,images/EDP_EST2.png">
-          <div class="project-images">
-            <img src="images/EDP_EST.png" alt="EDP Labelec">
-            <span class="img-counter">1 / 2</span>
-            <div class="gallery-nav">
-              <button onclick="galleryPrev(this)" aria-label="Previous">‹</button>
-              <button onclick="galleryNext(this)" aria-label="Next">›</button>
-            </div>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span class="project-type">Commercial</span>
-              <span class="project-year">2021–2022</span>
-              <span class="project-company-tag">Gabriel Couto</span>
-            </div>
-            <div class="project-name">EDP LABELEC</div>
-            <div class="project-desc">
-              As-built BIM models for concrete structural and plumbing systems with quantity take-off for EDP.
-            </div>
-            <div class="project-tags">
-              <span class="tag">As-Built</span>
-              <span class="tag">Structural</span>
-              <span class="tag">QTO</span>
-            </div>
-          </div>
+        <div class="gallery-card fade-in" data-images="images/EDP_EST.png,images/EDP_EST2.png,images/edp_3.svg">
+          <div class="gallery-viewport h240"><img src="images/EDP_EST.png" alt="EDP"><span class="img-counter">1 / 3</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
+          <div class="gallery-body"><div class="project-meta"><span class="project-type">Commercial</span><span class="project-year">2021–2022</span><span class="project-company-tag">Gabriel Couto</span></div><div class="project-name">EDP LABELEC</div><div class="project-desc">As-built BIM models for concrete structural and plumbing systems with quantity take-off for EDP.</div><div class="project-tags"><span class="tag">As-Built</span><span class="tag">Structural</span><span class="tag">QTO</span></div></div>
         </div>
 
       </div>
     </div>
 
-    <!-- Garcia, Garcia -->
+    <!-- Garcia -->
     <div class="company-section">
       <div class="company-divider fade-in"><h3>Garcia, Garcia S.A.</h3></div>
       <div class="projects-grid">
-
-        <div class="project-card fade-in" data-images="">
-          <div class="project-images">
-            <div class="img-placeholder">
-              <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
-              Images to be added
-            </div>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span class="project-type">Hospitality</span>
-              <span class="project-year">2021</span>
-              <span class="project-company-tag">Garcia, Garcia</span>
-            </div>
-            <div class="project-name">Hotel B&B Famalicão — Master Thesis</div>
-            <div class="project-desc">
-              Case study for MSc thesis: "Automatic Estimation of Quantities of Reinforced Concrete using BIM". Compared traditional vs. BIM workflows for rebar modeling and automated QTO in Revit.
-            </div>
-            <div class="project-tags">
-              <span class="tag">Research</span>
-              <span class="tag">Rebar Modeling</span>
-              <span class="tag">QTO</span>
-            </div>
-          </div>
+        <div class="gallery-card fade-in" data-images="images/hotel_1.svg,images/hotel_2.svg,images/hotel_3.svg">
+          <div class="gallery-viewport h240"><img src="images/hotel_1.svg" alt="Hotel BB"><span class="img-counter">1 / 3</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
+          <div class="gallery-body"><div class="project-meta"><span class="project-type">Hospitality</span><span class="project-year">2021</span><span class="project-company-tag">Garcia, Garcia</span></div><div class="project-name">Hotel B&B Famalicão — Master Thesis</div><div class="project-desc">Case study for MSc thesis: "Automatic Estimation of Quantities of Reinforced Concrete using BIM". Compared traditional vs. BIM workflows for rebar modeling and automated QTO in Revit.</div><div class="project-tags"><span class="tag">Research</span><span class="tag">Rebar Modeling</span><span class="tag">QTO</span></div></div>
         </div>
-
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- Other Work -->
+<!-- OTHER WORK -->
 <section id="other">
   <div class="container">
     <div class="section-label fade-in">Beyond BIM</div>
     <h2 class="section-title fade-in">3D Renders, Scripts &amp; Automation</h2>
 
-    <!-- Render Gallery — single card -->
+    <!-- Render Gallery -->
     <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:20px;color:var(--text-2);" class="fade-in">3D Renders — Personal House Project</h3>
-
-    <div class="render-gallery fade-in" id="render-gallery">
-      <div class="gallery-viewport">
-        <img id="render-img" src="images/Exterior_1.png" alt="Render">
-        <span class="img-counter" id="render-counter">1 / 10</span>
-        <div class="gallery-nav">
-          <button onclick="renderPrev()" aria-label="Previous">‹</button>
-          <button onclick="renderNext()" aria-label="Next">›</button>
-        </div>
-      </div>
-      <div class="gallery-caption">
-        <div class="caption-text" id="render-caption">Exterior View <span>Enscape Render</span></div>
-      </div>
+    <div class="gallery-card fade-in" style="margin-bottom:48px;" id="render-gallery" data-images="images/Exterior_1.png,images/Exterior_2.png,images/Exterior_3.png,images/Exterior_4.png,images/Exterior_5.png,images/Sala_1.png,images/Sala_2.png,images/Cozinha_1.png,images/Cozinha_2.png,images/WC.png" data-captions="Exterior View,Exterior — Garden,Exterior — Approach,Exterior — Entrance,Exterior — Side,Living Room,Living Room — Alt. View,Kitchen,Kitchen — Alt. View,Bathroom">
+      <div class="gallery-viewport h480"><img src="images/Exterior_1.png" alt="Render"><span class="img-counter">1 / 10</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
+      <div class="gallery-caption"><div class="caption-text">Exterior View <span>Enscape Render</span></div></div>
     </div>
 
     <!-- Scripts -->
     <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:20px;color:var(--text-2);" class="fade-in">pyRevit Extension & Automation Scripts</h3>
 
-    <div style="margin-bottom:20px;">
-      <div class="code-card fade-in">
+    <!-- pyRevit full-width -->
+    <div class="code-card fade-in" style="margin-bottom:20px;" data-images="images/pyrevit_1.svg,images/pyrevit_2.svg">
+      <div class="gallery-viewport h240"><img src="images/pyrevit_1.svg" alt="pyRevit"><span class="img-counter">1 / 2</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
+      <div class="code-body">
         <div class="code-title">pyRevit Extension Tab</div>
-        <div class="code-desc">
-          Custom pyRevit tab deployed company-wide at NIRAS with 40+ tools built in Python using the Revit API. Designed to standardize workflows, reduce repetitive tasks, and enforce quality across all BIM projects.
-        </div>
+        <div class="code-desc">Custom pyRevit tab deployed company-wide at NIRAS with 40+ tools built in Python using the Revit API. Designed to standardize workflows, reduce repetitive tasks, and enforce quality across all BIM projects.</div>
         <ul class="code-bullets">
           <li><strong>Model Cleanup</strong> — automated purging of unused families, views, and line styles; bulk model health checks</li>
           <li><strong>QA Checks</strong> — 2D element audits, dimension and text validation, in-place family detection, view filter overview and cross-model copy</li>
@@ -885,50 +381,29 @@ footer .links a:hover { color: var(--accent); }
           <li><strong>Productivity</strong> — coordinate setting, wall/floor type creation, parameter concatenation, sheet renumbering, project browser reorganization</li>
           <li><strong>Help & Standards</strong> — integrated links to ACC, drawing standards, MOLIO, naming conventions, templates, and a changelog/feedback system</li>
         </ul>
-        <div class="project-tags" style="margin-top:14px;">
-          <span class="tag">Python</span>
-          <span class="tag">Revit API</span>
-        </div>
+        <div class="project-tags" style="margin-top:14px;"><span class="tag">Python</span><span class="tag">Revit API</span></div>
       </div>
     </div>
 
+    <!-- 3 smaller automation cards -->
     <div class="other-grid">
-      <div class="code-card fade-in">
-        <div class="code-title">Revizto Issue Exporter</div>
-        <div class="code-desc">
-          Desktop app that connects to the Revizto API, fetches project issues, and exports a styled Excel report with color-coded statuses, summary dashboards, and drawing review tracking.
-        </div>
-        <div class="project-tags" style="margin-top:10px;">
-          <span class="tag">Python</span>
-          <span class="tag">Revizto API</span>
-        </div>
+      <div class="code-card fade-in" data-images="images/revizto_exp_1.svg,images/revizto_exp_2.svg">
+        <div class="gallery-viewport h240"><img src="images/revizto_exp_1.svg" alt="Revizto Exporter"><span class="img-counter">1 / 2</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
+        <div class="code-body"><div class="code-title">Revizto Issue Exporter</div><div class="code-desc">Desktop app that connects to the Revizto API, fetches project issues, and exports a styled Excel report with color-coded statuses, summary dashboards, and drawing review tracking.</div><div class="project-tags" style="margin-top:10px;"><span class="tag">Python</span><span class="tag">Revizto API</span></div></div>
       </div>
-
-      <div class="code-card fade-in fade-in-delay-1">
-        <div class="code-title">Revit Launcher</div>
-        <div class="code-desc">
-          Batch launcher for opening Revit cloud models from ACC/BIM360, with per-model options to skip links, trigger exports, and sync & close automatically.
-        </div>
-        <div class="project-tags" style="margin-top:10px;">
-          <span class="tag">Python</span>
-        </div>
+      <div class="code-card fade-in fade-in-delay-1" data-images="images/launcher_1.svg,images/launcher_2.svg">
+        <div class="gallery-viewport h240"><img src="images/launcher_1.svg" alt="Revit Launcher"><span class="img-counter">1 / 2</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
+        <div class="code-body"><div class="code-title">Revit Launcher</div><div class="code-desc">Batch launcher for opening Revit cloud models from ACC/BIM360, with per-model options to skip links, trigger exports, and sync & close automatically.</div><div class="project-tags" style="margin-top:10px;"><span class="tag">Python</span></div></div>
       </div>
-
-      <div class="code-card fade-in fade-in-delay-2">
-        <div class="code-title">Hours Tracker Automation</div>
-        <div class="code-desc">
-          n8n workflow that extracts calendar events, categorizes them by project, and auto-updates an Excel spreadsheet with logged hours and task descriptions per project.
-        </div>
-        <div class="project-tags" style="margin-top:10px;">
-          <span class="tag">n8n</span>
-        </div>
+      <div class="code-card fade-in fade-in-delay-2" data-images="images/hours_1.svg,images/hours_2.svg">
+        <div class="gallery-viewport h240"><img src="images/hours_1.svg" alt="Hours Tracker"><span class="img-counter">1 / 2</span><div class="gallery-nav"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
+        <div class="code-body"><div class="code-title">Hours Tracker Automation</div><div class="code-desc">n8n workflow that extracts calendar events, categorizes them by project, and auto-updates an Excel spreadsheet with logged hours and task descriptions per project.</div><div class="project-tags" style="margin-top:10px;"><span class="tag">n8n</span></div></div>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- Footer -->
 <footer>
   <div class="container">
     <div class="links">
@@ -942,98 +417,79 @@ footer .links a:hover { color: var(--accent); }
 
 <script>
 // ── Theme ──
-function toggleTheme() {
-  const html = document.documentElement;
-  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  html.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-}
-(function() {
-  const saved = localStorage.getItem('theme');
-  if (saved) document.documentElement.setAttribute('data-theme', saved);
-})();
+function toggleTheme(){var h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);}
+(function(){var s=localStorage.getItem('theme');if(s)document.documentElement.setAttribute('data-theme',s);})();
 
 // ── Scroll animations ──
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.fade-in').forEach(function(el){obs.observe(el);});
 
 // ── Language bars ──
-const barObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) e.target.style.width = e.target.dataset.width + '%';
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('.lang-bar-fill').forEach(el => {
-  el.style.width = '0%';
-  barObserver.observe(el);
+var barObs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.style.width=x.target.dataset.width+'%';});},{threshold:0.5});
+document.querySelectorAll('.lang-bar-fill').forEach(function(el){el.style.width='0%';barObs.observe(el);});
+
+// ── Universal gallery (click + touch swipe) ──
+function gNav(btn,dir){
+  var card=btn.closest('[data-images]');
+  doNav(card,dir);
+}
+function gNext(btn){gNav(btn,1);}
+function gPrev(btn){gNav(btn,-1);}
+
+function doNav(card,dir){
+  var imgs=card.dataset.images.split(',').filter(Boolean);
+  if(imgs.length<2)return;
+  var imgEl=card.querySelector('.gallery-viewport img');
+  var counter=card.querySelector('.img-counter');
+  if(card._idx===undefined)card._idx=0;
+  card._idx=(card._idx+dir+imgs.length)%imgs.length;
+  imgEl.style.opacity=0;
+  setTimeout(function(){
+    imgEl.src=imgs[card._idx];
+    imgEl.style.opacity=1;
+    counter.textContent=(card._idx+1)+' / '+imgs.length;
+    // update caption if render gallery
+    var captions=card.dataset.captions;
+    if(captions){
+      var caps=captions.split(',');
+      var capEl=card.querySelector('.caption-text');
+      if(capEl)capEl.innerHTML=caps[card._idx]+' <span>Enscape Render</span>';
+    }
+  },150);
+}
+
+// ── Touch swipe on all gallery viewports ──
+document.querySelectorAll('.gallery-viewport').forEach(function(vp){
+  var startX=0,startY=0,distX=0,locked=false;
+  vp.addEventListener('touchstart',function(e){
+    startX=e.touches[0].clientX;
+    startY=e.touches[0].clientY;
+    distX=0;locked=false;
+  },{passive:true});
+  vp.addEventListener('touchmove',function(e){
+    if(locked)return;
+    distX=e.touches[0].clientX-startX;
+    var distY=e.touches[0].clientY-startY;
+    // if horizontal swipe dominant, prevent vertical scroll
+    if(Math.abs(distX)>Math.abs(distY)&&Math.abs(distX)>10){
+      e.preventDefault();
+      locked=true;
+    }
+  },{passive:false});
+  vp.addEventListener('touchend',function(){
+    if(Math.abs(distX)>40){
+      var card=vp.closest('[data-images]');
+      doNav(card,distX<0?1:-1);
+    }
+  },{passive:true});
 });
 
-// ── Generic project card gallery (Boavista, EDP) ──
-function galleryNav(btn, dir) {
-  const card = btn.closest('[data-images]');
-  const imgs = card.dataset.images.split(',').filter(Boolean);
-  if (imgs.length < 2) return;
-  const imgEl = card.querySelector('.project-images img');
-  const counter = card.querySelector('.img-counter');
-  if (card._idx === undefined) card._idx = 0;
-  card._idx = (card._idx + dir + imgs.length) % imgs.length;
-  imgEl.style.opacity = 0;
-  setTimeout(() => {
-    imgEl.src = imgs[card._idx];
-    imgEl.style.opacity = 1;
-    counter.textContent = (card._idx + 1) + ' / ' + imgs.length;
-  }, 150);
-}
-function galleryNext(btn) { galleryNav(btn, 1); }
-function galleryPrev(btn) { galleryNav(btn, -1); }
-
-// ── Render gallery ──
-var renderImages = [
-  { src: 'images/Exterior_1.png', label: 'Exterior View' },
-  { src: 'images/Exterior_2.png', label: 'Exterior — Garden' },
-  { src: 'images/Exterior_3.png', label: 'Exterior — Approach' },
-  { src: 'images/Exterior_4.png', label: 'Exterior — Entrance' },
-  { src: 'images/Exterior_5.png', label: 'Exterior — Side' },
-  { src: 'images/Sala_1.png',     label: 'Living Room' },
-  { src: 'images/Sala_2.png',     label: 'Living Room — Alt. View' },
-  { src: 'images/Cozinha_1.png',  label: 'Kitchen' },
-  { src: 'images/Cozinha_2.png',  label: 'Kitchen — Alt. View' },
-  { src: 'images/WC.png',         label: 'Bathroom' }
-];
-var renderIdx = 0;
-
-function renderUpdate() {
-  var img = document.getElementById('render-img');
-  var counter = document.getElementById('render-counter');
-  var caption = document.getElementById('render-caption');
-  img.style.opacity = 0;
-  setTimeout(function() {
-    img.src = renderImages[renderIdx].src;
-    img.alt = renderImages[renderIdx].label;
-    img.style.opacity = 1;
-    counter.textContent = (renderIdx + 1) + ' / ' + renderImages.length;
-    caption.innerHTML = renderImages[renderIdx].label + ' <span>Enscape Render</span>';
-  }, 150);
-}
-
-function renderNext() {
-  renderIdx = (renderIdx + 1) % renderImages.length;
-  renderUpdate();
-}
-
-function renderPrev() {
-  renderIdx = (renderIdx - 1 + renderImages.length) % renderImages.length;
-  renderUpdate();
-}
-
 // ── Smooth nav ──
-document.querySelectorAll('.nav-links a').forEach(function(a) {
-  a.addEventListener('click', function(e) {
+document.querySelectorAll('.nav-links a').forEach(function(a){
+  a.addEventListener('click',function(e){
     e.preventDefault();
-    var target = document.querySelector(a.getAttribute('href'));
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var t=document.querySelector(a.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
   });
 });
 </script>
