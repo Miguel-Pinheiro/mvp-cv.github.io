@@ -322,17 +322,17 @@ footer .links a:hover { color:var(--accent); }
       <div class="company-divider fade-in"><h3>Gabriel A.S. Couto S.A.</h3></div>
       <div class="projects-grid">
 
-        <div class="project-card fade-in" id="boavista-card"
-             data-images="images/BBoavista_Completo.jpg,images/BBoavista_L4.png,images/Boavista_L4_EST_Pormenor3.png,images/Boavista_L4_EST_Pormenor4.png,images/Concrete.png,images/Concrete_2.png,images/Rebar.png,images/Rebar_2.png,images/DAR.png,images/DAR2.png,images/DAP.png,images/HID.png,images/ELE.png,images/MEC.png,images/MEP.png,images/DAPELE.jpg,images/DAPELE2.jpg,images/DARMEC.jpg,images/HIDMEC.jpg,images/ESTHID.jpg,images/ABA.png,images/ABA2.png">
-          <div class="project-images">
-            <img src="images/BBoavista_Completo.jpg" alt="Bairro da Boavista">
-            <span class="img-counter">1 / 22</span>
+        <div class="gallery-card fade-in" id="boavista-card"
+             data-images="images/BBoavista/BBoavista_Completo.jpg,images/BBoavista/BBoavista_L4.png,images/BBoavista/EST/Boavista_L4_EST_Pormenor3.png,images/BBoavista/EST/Boavista_L4_EST_Pormenor4.png,images/BBoavista/EST/Concrete.png,images/BBoavista/EST/Concrete_2.png,images/BBoavista/EST/Rebar.png,images/BBoavista/EST/Rebar_2.png,images/BBoavista/MEP/DAR.png,images/BBoavista/MEP/DAP.png,images/BBoavista/MEP/HID.png,images/BBoavista/MEP/ELE.png,images/BBoavista/MEP/MEC.png,images/BBoavista/MEP/MEP.png,images/BBoavista/MEP/ABA.png,images/BBoavista/NAVIS/EST-HID.jpg,images/BBoavista/NAVIS/HID-MEC.jpg">
+          <div class="gallery-viewport h240">
+            <img src="images/BBoavista/BBoavista_Completo.jpg" alt="Bairro da Boavista">
+            <span class="img-counter">1 / 17</span>
             <div class="gallery-nav">
-              <button onclick="galleryPrev(this)" aria-label="Previous">‹</button>
-              <button onclick="galleryNext(this)" aria-label="Next">›</button>
+              <button onclick="gPrev(this)">‹</button>
+              <button onclick="gNext(this)">›</button>
             </div>
           </div>
-          <div class="project-body">
+          <div class="gallery-body">
             <div class="project-meta">
               <span class="project-type">Social Housing</span>
               <span class="project-year">2021–2022</span>
@@ -351,17 +351,17 @@ footer .links a:hover { color:var(--accent); }
           </div>
         </div>
 
-        <div class="project-card fade-in" id="edp-card"
-             data-images="images/EDP_EST.png,images/EDP_EST2.png">
-          <div class="project-images">
-            <img src="images/EDP_EST.png" alt="EDP Labelec">
-            <span class="img-counter">1 / 2</span>
+        <div class="gallery-card fade-in" id="edp-card"
+             data-images="images/EDP/EST/EDP_EST.png,images/EDP/EST/EDP_EST2.png,images/EDP/DES/H310.png,images/EDP/DES/S099.png,images/EDP/HID/ABA.png,images/EDP/HID/ABA2.png,images/EDP/HID/DAP.png,images/EDP/HID/DAR.png,images/EDP/HID/DAR2.png,images/EDP/HID/HID.png,images/EDP/NAVIS/DAP-ELE.jpg,images/EDP/NAVIS/DAP-ELE2.jpg,images/EDP/NAVIS/DAR-MEC.jpg">
+          <div class="gallery-viewport h240">
+            <img src="images/EDP/EST/EDP_EST.png" alt="EDP Labelec">
+            <span class="img-counter">1 / 13</span>
             <div class="gallery-nav">
-              <button onclick="galleryPrev(this)" aria-label="Previous">‹</button>
-              <button onclick="galleryNext(this)" aria-label="Next">›</button>
+              <button onclick="gPrev(this)">‹</button>
+              <button onclick="gNext(this)">›</button>
             </div>
           </div>
-          <div class="project-body">
+          <div class="gallery-body">
             <div class="project-meta">
               <span class="project-type">Commercial</span>
               <span class="project-year">2021–2022</span>
@@ -406,8 +406,8 @@ footer .links a:hover { color:var(--accent); }
     <h3 style="font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:20px;color:var(--text-2);" class="fade-in">3D Renders — Personal House Project</h3>
 
     <div class="render-gallery fade-in" id="render-gallery">
-      <div class="gallery-viewport">
-        <img id="render-img" src="images/Exterior_1.png" alt="Render">
+      <div class="gallery-viewport h320">
+        <img id="render-img" src="images/Renders/Exterior_1.png" alt="Render">
         <span class="img-counter" id="render-counter">1 / 10</span>
         <div class="gallery-nav">
           <button onclick="renderPrev()" aria-label="Previous">‹</button>
@@ -485,12 +485,12 @@ document.querySelectorAll('.fade-in').forEach(function(el){obs.observe(el);});
 var barObs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.style.width=x.target.dataset.width+'%';});},{threshold:0.5});
 document.querySelectorAll('.lang-bar-fill').forEach(function(el){el.style.width='0%';barObs.observe(el);});
 
-// ── Generic project card gallery (Boavista, EDP) ──
+// ── Generic gallery nav (all cards) ──
 function galleryNav(btn, dir) {
   const card = btn.closest('[data-images]');
   const imgs = card.dataset.images.split(',').filter(Boolean);
   if (imgs.length < 2) return;
-  const imgEl = card.querySelector('.project-images img');
+  const imgEl = card.querySelector('img');
   const counter = card.querySelector('.img-counter');
   if (card._idx === undefined) card._idx = 0;
   card._idx = (card._idx + dir + imgs.length) % imgs.length;
@@ -503,19 +503,21 @@ function galleryNav(btn, dir) {
 }
 function galleryNext(btn) { galleryNav(btn, 1); }
 function galleryPrev(btn) { galleryNav(btn, -1); }
+function gNext(btn) { galleryNav(btn, 1); }
+function gPrev(btn) { galleryNav(btn, -1); }
 
 // ── Render gallery ──
 var renderImages = [
-  { src: 'images/Exterior_1.png', label: 'Exterior View' },
-  { src: 'images/Exterior_2.png', label: 'Exterior — Garden' },
-  { src: 'images/Exterior_3.png', label: 'Exterior — Approach' },
-  { src: 'images/Exterior_4.png', label: 'Exterior — Entrance' },
-  { src: 'images/Exterior_5.png', label: 'Exterior — Side' },
-  { src: 'images/Sala_1.png',     label: 'Living Room' },
-  { src: 'images/Sala_2.png',     label: 'Living Room — Alt. View' },
-  { src: 'images/Cozinha_1.png',  label: 'Kitchen' },
-  { src: 'images/Cozinha_2.png',  label: 'Kitchen — Alt. View' },
-  { src: 'images/WC.png',         label: 'Bathroom' }
+  { src: 'images/Renders/Exterior_1.png', label: 'Exterior View' },
+  { src: 'images/Renders/Exterior_2.png', label: 'Exterior — Garden' },
+  { src: 'images/Renders/Exterior_3.png', label: 'Exterior — Approach' },
+  { src: 'images/Renders/Exterior_4.png', label: 'Exterior — Entrance' },
+  { src: 'images/Renders/Exterior_5.png', label: 'Exterior — Side' },
+  { src: 'images/Renders/Sala_1.png',     label: 'Living Room' },
+  { src: 'images/Renders/Sala_2.png',     label: 'Living Room — Alt. View' },
+  { src: 'images/Renders/Cozinha_1.png',  label: 'Kitchen' },
+  { src: 'images/Renders/Cozinha_2.png',  label: 'Kitchen — Alt. View' },
+  { src: 'images/Renders/WC.png',         label: 'Bathroom' }
 ];
 var renderIdx = 0;
 
