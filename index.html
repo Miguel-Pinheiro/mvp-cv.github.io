@@ -118,6 +118,8 @@ section{padding:80px 0;}
 .skill-group-title{font-family:var(--font-display);font-size:0.9rem;font-weight:600;margin-bottom:14px;color:var(--text);}
 .skill-tags{display:flex;flex-wrap:wrap;gap:6px;}
 .tag{padding:4px 11px;border-radius:4px;font-size:0.7rem;font-weight:500;background:var(--tag-bg);border:1px solid var(--tag-border);color:var(--tag-text);}
+a.tag{color:var(--tag-text);text-decoration:none;}
+a.tag:hover{opacity:.7;color:var(--tag-text);border-color:var(--text-3);}
 
 /* ── EXPERIENCE ── */
 .exp-list{display:flex;flex-direction:column;}
@@ -193,7 +195,7 @@ section{padding:80px 0;}
 .lang-bar-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 1s var(--ease);}
 
 /* ── FOOTER ── */
-footer{padding:44px 0;border-top:1px solid var(--border);text-align:center;}
+footer{padding:44px 0 80px;border-top:1px solid var(--border);text-align:center;}
 footer p{font-size:0.74rem;color:var(--text-3);}
 footer .links{display:flex;justify-content:center;gap:18px;margin-bottom:12px;}
 footer .links a{color:var(--text-2);font-size:0.78rem;font-weight:500;opacity:1;}
@@ -219,9 +221,6 @@ footer .links a:hover{color:var(--text);opacity:1;}
 .scroll-top svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none;}
 .scroll-top:hover{border-color:var(--text-2);color:var(--text);}
 .scroll-top.visible{display:flex;}
-@media(min-width:601px){
-  .scroll-top{left:auto;right:24px;transform:none;bottom:24px;}
-}
 
 /* ── HERO DOWN ARROW ── */
 .hero-arrow{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:800;width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:var(--bg-card);color:var(--text-2);cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);transition:border-color .2s,color .2s;}
@@ -348,13 +347,13 @@ footer .links a:hover{color:var(--text);opacity:1;}
           <div class="skill-group fade-in">
             <div class="skill-group-title">BIM</div>
             <div class="skill-tags">
-              <span class="tag">Revit</span><span class="tag">Revizto</span><span class="tag">Revizto API</span><span class="tag">ACC / BIM360</span><span class="tag">Navisworks</span><span class="tag">ProjectWise</span><span class="tag">Trimble Connect</span><span class="tag">Rhino</span><span class="tag">Enscape</span><span class="tag">Lumion</span><span class="tag">Structural Modeling</span><span class="tag">3D Reinforcement</span><span class="tag">MEP Coordination</span><span class="tag">Quantity Take-Off</span><span class="tag">Drawing Production</span><span class="tag">AutoCAD</span><span class="tag">CYPE</span>
+              <a class="tag" href="https://www.autodesk.com/products/revit/overview" target="_blank">Revit</a><a class="tag" href="https://revizto.com" target="_blank">Revizto</a><span class="tag">Revizto API</span><a class="tag" href="https://construction.autodesk.com" target="_blank">ACC / BIM360</a><a class="tag" href="https://www.autodesk.com/products/navisworks/overview" target="_blank">Navisworks</a><a class="tag" href="https://www.bentley.com/software/projectwise/" target="_blank">ProjectWise</a><a class="tag" href="https://connect.trimble.com" target="_blank">Trimble Connect</a><a class="tag" href="https://www.rhino3d.com" target="_blank">Rhino</a><a class="tag" href="https://enscape3d.com" target="_blank">Enscape</a><a class="tag" href="https://lumion.com" target="_blank">Lumion</a><span class="tag">Structural Modeling</span><span class="tag">3D Reinforcement</span><span class="tag">MEP Coordination</span><span class="tag">Quantity Take-Off</span><span class="tag">Drawing Production</span><a class="tag" href="https://www.autodesk.com/products/autocad/overview" target="_blank">AutoCAD</a><a class="tag" href="https://www.cype.com" target="_blank">CYPE</a>
             </div>
           </div>
           <div class="skill-group fade-in fade-in-delay-1">
             <div class="skill-group-title">Automation &amp; Scripting</div>
             <div class="skill-tags">
-              <span class="tag">Python</span><span class="tag">pyRevit</span><span class="tag">Revit API</span><span class="tag">Dynamo</span><span class="tag">Grasshopper</span><span class="tag">C#</span><span class="tag">n8n</span><span class="tag">Virtual Machines</span>
+              <a class="tag" href="https://www.python.org" target="_blank">Python</a><a class="tag" href="https://github.com/pyrevitlabs/pyRevit" target="_blank">pyRevit</a><a class="tag" href="https://aps.autodesk.com/developer/overview/revit" target="_blank">Revit API</a><a class="tag" href="https://dynamobim.org" target="_blank">Dynamo</a><a class="tag" href="https://www.rhino3d.com/features/grasshopper/" target="_blank">Grasshopper</a><a class="tag" href="https://dotnet.microsoft.com/languages/csharp" target="_blank">C#</a><a class="tag" href="https://n8n.io" target="_blank">n8n</a><span class="tag">Virtual Machines</span>
             </div>
           </div>
           <div class="skill-group fade-in fade-in-delay-2">
@@ -775,6 +774,9 @@ function toggleSec(hdr) {
     if (hdr.id === 'projects-hdr') {
       setTimeout(function() { openCoById('co-niras'); }, 80);
     }
+    // Scroll to section top so it starts at the top of the viewport
+    var sec = hdr.closest('section');
+    if (sec) setTimeout(function() { sec.scrollIntoView({behavior:'smooth', block:'start'}); }, 50);
   }
 }
 
