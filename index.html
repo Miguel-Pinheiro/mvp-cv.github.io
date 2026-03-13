@@ -143,6 +143,12 @@ a.tag:hover{opacity:.7;color:var(--tag-text);border-color:var(--text-3);}
 @media(min-width:601px){.co-hdr:hover h3 a{opacity:.65;}}
 .co-years{font-family:var(--font-mono);font-size:0.68rem;color:var(--text-3);font-weight:400;margin-left:10px;letter-spacing:0.02em;}
 
+/* ── OTHER WORK SUB-SECTIONS ── */
+.ow-hdr{display:flex;align-items:center;gap:14px;cursor:pointer;padding:14px 0;user-select:none;border-bottom:1px solid var(--border);}
+.ow-hdr h3{font-family:var(--font-display);font-size:1rem;font-weight:600;flex:1;color:var(--text-2);}
+.ow-hdr.open .coll-btn svg{transform:rotate(180deg);}
+.ow-body{overflow:hidden;max-height:0;transition:max-height .55s var(--ease);}
+
 /* ── PROJECTS GRID ── */
 .projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
 .gallery-card.full-width{grid-column:1 / -1;}
@@ -679,69 +685,76 @@ footer .links a:hover{color:var(--text);opacity:1;}
     <div class="sec-body" id="other-body">
       <div class="sec-inner">
 
-        <!-- pyRevit sub-section -->
-        <div class="subsec-hdr" id="subsec-pyrevit-hdr">
+        <!-- pyRevit -->
+        <div class="ow-hdr" id="ow-pyrevit-hdr" onclick="toggleOw(this)">
           <h3>pyRevit</h3>
+          <button class="coll-btn" tabindex="-1"><svg viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
         </div>
-        <div class="subsec-body" id="subsec-pyrevit-body">
-          <div class="subsec-inner">
-            <div class="auto-cards">
-              <div class="code-card fade-in">
-                <div class="code-body">
-                  <div class="code-title">pyRevit Extension Tab</div>
-                  <div class="code-desc">Custom pyRevit tab deployed company-wide at NIRAS with 40+ tools built in Python using the Revit API. Designed to standardize workflows, reduce repetitive tasks, and enforce quality across all BIM projects.</div>
-                  <ul class="code-bullets">
-                    <li><strong>Model Cleanup</strong> — automated purging of unused families, views, and line styles; bulk model health checks</li>
-                    <li><strong>QA Checks</strong> — 2D element audits, dimension and text validation, in-place family detection, view filter overview and cross-model copy</li>
-                    <li><strong>Reinforcement Tools</strong> — rebar location tagging, partition splitting, unobscured visibility cleanup, and RFT detailing automation</li>
-                    <li><strong>Multi-Export</strong> — batch export to IFC, NWC, PDF, and DWG with configurable settings per view/sheet set</li>
-                    <li><strong>Element Picker</strong> — advanced selection and filtering tool with multi-criteria search across categories, parameters, and worksets</li>
-                    <li><strong>Model Checker</strong> — comprehensive model audit generating reports on naming, parameters, warnings, and compliance</li>
-                    <li><strong>Productivity</strong> — coordinate setting, wall/floor type creation, parameter concatenation, sheet renumbering, project browser reorganization</li>
-                    <li><strong>Help &amp; Standards</strong> — integrated links to ACC, drawing standards, MOLIO, naming conventions, templates, and a changelog/feedback system</li>
-                  </ul>
-                  <div class="project-tags" style="margin-top:14px;"><a class="tag" href="https://www.python.org" target="_blank">Python</a><a class="tag" href="https://aps.autodesk.com/developer/overview/revit" target="_blank">Revit API</a></div>
-                </div>
-              </div>
-            </div>
+        <div class="ow-body" id="ow-pyrevit-body">
+          <div class="co-inner">
+            <div class="code-desc" style="margin-bottom:12px;">Custom pyRevit tab deployed company-wide at NIRAS with 40+ tools built in Python using the Revit API. Designed to standardize workflows, reduce repetitive tasks, and enforce quality across all BIM projects.</div>
+            <ul class="code-bullets">
+              <li><strong>Model Cleanup</strong> — automated purging of unused families, views, and line styles; bulk model health checks</li>
+              <li><strong>QA Checks</strong> — 2D element audits, dimension and text validation, in-place family detection, view filter overview and cross-model copy</li>
+              <li><strong>Reinforcement Tools</strong> — rebar location tagging, partition splitting, unobscured visibility cleanup, and RFT detailing automation</li>
+              <li><strong>Multi-Export</strong> — batch export to IFC, NWC, PDF, and DWG with configurable settings per view/sheet set</li>
+              <li><strong>Element Picker</strong> — advanced selection and filtering tool with multi-criteria search across categories, parameters, and worksets</li>
+              <li><strong>Model Checker</strong> — comprehensive model audit generating reports on naming, parameters, warnings, and compliance</li>
+              <li><strong>Productivity</strong> — coordinate setting, wall/floor type creation, parameter concatenation, sheet renumbering, project browser reorganization</li>
+              <li><strong>Help &amp; Standards</strong> — integrated links to ACC, drawing standards, MOLIO, naming conventions, templates, and a changelog/feedback system</li>
+            </ul>
+            <div class="project-tags" style="margin-top:14px;"><a class="tag" href="https://www.python.org" target="_blank">Python</a><a class="tag" href="https://aps.autodesk.com/developer/overview/revit" target="_blank">Revit API</a></div>
           </div>
         </div>
 
-        <!-- Automations sub-section -->
-        <div class="subsec-hdr" id="subsec-auto-hdr" style="margin-top:32px;">
-          <h3>Automations &amp; Development Work</h3>
+        <!-- Development Work -->
+        <div class="ow-hdr" id="ow-devwork-hdr" onclick="toggleOw(this)">
+          <h3>Development Work</h3>
+          <button class="coll-btn" tabindex="-1"><svg viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
         </div>
-        <div class="subsec-body" id="subsec-auto-body">
-          <div class="subsec-inner">
-            <div class="auto-cards">
+        <div class="ow-body" id="ow-devwork-body">
+          <div class="co-inner">
+            <div class="code-desc" style="margin-bottom:12px;">Foundational BIM delivery work built from scratch at NIRAS and Gabriel Couto, enabling consistent model quality and team scalability.</div>
+            <ul class="code-bullets">
+              <li><strong>Revit Templates</strong> — built from scratch for Structural, MEP, and infrastructure disciplines at both companies</li>
+              <li><strong>BIM Procedures</strong> — authored BIM execution plans, naming conventions, and data standards</li>
+              <li><strong>Knowledge Platform</strong> — internal documentation website with guides, tutorials, and reference material for project teams</li>
+              <li><strong>Training</strong> — onboarding sessions and workshops for engineers, modelers, and BIM users</li>
+              <li><strong>QA Procedures</strong> — cross-project quality checklists, review workflows, and model audit reports</li>
+            </ul>
+            <div class="project-tags" style="margin-top:14px;"><a class="tag" href="https://www.niras.com/" target="_blank">NIRAS</a><a class="tag" href="https://www.gabrielcouto.pt/" target="_blank">Gabriel Couto</a></div>
+          </div>
+        </div>
 
-              <div class="code-card fade-in">
-                <div class="code-body"><div class="code-title">Revizto Issue Exporter</div><div class="code-desc">Desktop app that connects to the Revizto API, fetches project issues, and exports a styled Excel report with color-coded statuses, summary dashboards, and drawing review tracking.</div><div class="project-tags" style="margin-top:10px;"><a class="tag" href="https://www.python.org" target="_blank">Python</a><a class="tag" href="https://revizto.com" target="_blank">Revizto API</a></div></div>
-              </div>
-
-              <div class="code-card fade-in">
-                <div class="code-body"><div class="code-title">Revit Launcher</div><div class="code-desc">Batch launcher for opening Revit cloud models from ACC/BIM360, with per-model options to skip links, trigger exports, and sync &amp; close automatically.</div><div class="project-tags" style="margin-top:10px;"><a class="tag" href="https://www.python.org" target="_blank">Python</a></div></div>
-              </div>
-
-              <div class="code-card fade-in">
-                <div class="code-body"><div class="code-title">Hours Tracker Automation</div><div class="code-desc">n8n workflow that extracts calendar events, categorizes them by project, and auto-updates an Excel spreadsheet with logged hours and task descriptions per project.</div><div class="project-tags" style="margin-top:10px;"><a class="tag" href="https://n8n.io" target="_blank">n8n</a></div></div>
-              </div>
-
+        <!-- Other Scripts & Automations -->
+        <div class="ow-hdr" id="ow-scripts-hdr" onclick="toggleOw(this)">
+          <h3>Other Scripts &amp; Automations</h3>
+          <button class="coll-btn" tabindex="-1"><svg viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
+        </div>
+        <div class="ow-body" id="ow-scripts-body">
+          <div class="co-inner">
+            <div class="other-grid">
               <div class="code-card fade-in">
                 <div class="code-body">
-                  <div class="code-title">Development &amp; BIM Infrastructure</div>
-                  <div class="code-desc">Foundational BIM delivery work built from scratch at NIRAS and Gabriel Couto, enabling consistent model quality and team scalability.</div>
-                  <ul class="code-bullets">
-                    <li><strong>Revit Templates</strong> — built from scratch for Structural, MEP, and infrastructure disciplines at both companies</li>
-                    <li><strong>BIM Procedures</strong> — authored BIM execution plans, naming conventions, and data standards</li>
-                    <li><strong>Knowledge Platform</strong> — internal documentation website with guides, tutorials, and reference material for project teams</li>
-                    <li><strong>Training</strong> — onboarding sessions and workshops for engineers, modelers, and BIM users</li>
-                    <li><strong>QA Procedures</strong> — cross-project quality checklists, review workflows, and model audit reports</li>
-                  </ul>
-                  <div class="project-tags" style="margin-top:14px;"><a class="tag" href="https://www.niras.com/" target="_blank">NIRAS</a><a class="tag" href="https://www.gabrielcouto.pt/" target="_blank">Gabriel Couto</a></div>
+                  <div class="code-title">Revizto Issue Exporter</div>
+                  <div class="code-desc">Desktop app that connects to the Revizto API, fetches project issues, and exports a styled Excel report with color-coded statuses, summary dashboards, and drawing review tracking.</div>
+                  <div class="project-tags" style="margin-top:10px;"><a class="tag" href="https://www.python.org" target="_blank">Python</a><a class="tag" href="https://revizto.com" target="_blank">Revizto API</a></div>
                 </div>
               </div>
-
+              <div class="code-card fade-in">
+                <div class="code-body">
+                  <div class="code-title">Revit Launcher</div>
+                  <div class="code-desc">Batch launcher for opening Revit cloud models from ACC/BIM360, with per-model options to skip links, trigger exports, and sync &amp; close automatically.</div>
+                  <div class="project-tags" style="margin-top:10px;"><a class="tag" href="https://www.python.org" target="_blank">Python</a></div>
+                </div>
+              </div>
+              <div class="code-card fade-in">
+                <div class="code-body">
+                  <div class="code-title">Hours Tracker Automation</div>
+                  <div class="code-desc">n8n workflow that extracts calendar events, categorizes them by project, and auto-updates an Excel spreadsheet with logged hours and task descriptions per project.</div>
+                  <div class="project-tags" style="margin-top:10px;"><a class="tag" href="https://n8n.io" target="_blank">n8n</a></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -996,6 +1009,29 @@ function toggleCo(hdr, event) {
       openEl(body);
       var grid = body.querySelector('.projects-grid');
       if (grid) setTimeout(function() { initCarousel(grid); }, 80);
+    });
+  }
+}
+
+// ── Other Work sub-section toggle (accordion) ──
+function toggleOw(hdr) {
+  var isOpen = hdr.classList.contains('open');
+  var body = hdr.nextElementSibling;
+  document.querySelectorAll('.ow-hdr.open').forEach(function(h) {
+    if (h !== hdr) {
+      h.classList.remove('open');
+      var b = h.nextElementSibling;
+      if (b) { b.style.transition = 'none'; b.style.maxHeight = '0'; b.offsetHeight; b.style.transition = ''; }
+    }
+  });
+  if (isOpen) {
+    hdr.classList.remove('open');
+    closeEl(body);
+  } else {
+    hdr.classList.add('open');
+    requestAnimationFrame(function() {
+      scrollToEl(hdr);
+      openEl(body);
     });
   }
 }
