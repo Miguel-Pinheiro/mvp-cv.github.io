@@ -36,7 +36,7 @@
   --img-placeholder:#e8e8e6;--toggle-track:#c8c8c6;--toggle-knob:#ffffff;
 }
 
-html{scroll-behavior:smooth;}
+html{scroll-behavior:auto;}
 body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;transition:background .4s var(--ease),color .4s var(--ease);}
 a{color:var(--accent);text-decoration:none;cursor:pointer;}
 a:hover{opacity:.75;}
@@ -81,8 +81,8 @@ section{padding:80px 0;}
 .sec-hdr:hover .coll-btn{border-color:var(--text-2);color:var(--text);}
 
 /* ── COLLAPSIBLE BODIES ── */
-.sec-body{overflow:hidden;max-height:0;transition:max-height .45s var(--ease);}
-.co-body{overflow:hidden;max-height:0;transition:max-height .4s var(--ease);}
+.sec-body{overflow:hidden;max-height:0;transition:max-height .6s var(--ease);}
+.co-body{overflow:hidden;max-height:0;transition:max-height .55s var(--ease);}
 .subsec-body{overflow:visible;max-height:none;}
 .sec-inner{padding-top:36px;}
 .co-inner{padding-top:16px;}
@@ -761,6 +761,32 @@ footer .links a:hover{color:var(--text);opacity:1;}
 function toggleTheme(){var h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);}
 (function(){var s=localStorage.getItem('theme');if(s)document.documentElement.setAttribute('data-theme',s);})();
 
+// ── Smooth scroll helpers ──
+var NAV_H = 56; // fixed nav height
+var SCROLL_PAD = 14; // breathing room below nav
+
+function smoothScrollTo(targetY) {
+  targetY = Math.max(0, targetY);
+  var startY = window.scrollY;
+  var diff = targetY - startY;
+  if (Math.abs(diff) < 2) return;
+  // Duration scales with distance: 480ms–860ms
+  var dur = Math.min(860, Math.max(480, Math.abs(diff) * 0.45));
+  var t0 = null;
+  function ease(t) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2; }
+  function step(ts) {
+    if (!t0) t0 = ts;
+    var p = Math.min((ts - t0) / dur, 1);
+    window.scrollTo(0, startY + diff * ease(p));
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function scrollToEl(el) {
+  smoothScrollTo(window.scrollY + el.getBoundingClientRect().top - NAV_H - SCROLL_PAD);
+}
+
 // ── Collapsible helpers ──
 function openEl(el) {
   el.style.maxHeight = el.scrollHeight + 'px';
@@ -793,7 +819,7 @@ function toggleSec(hdr) {
     // Layout is now stable — scroll then open in next frame
     requestAnimationFrame(function() {
       var sec = hdr.closest('section');
-      if (sec) sec.scrollIntoView({behavior:'smooth', block:'start'});
+      if (sec) scrollToEl(sec);
       openEl(body);
       if (hdr.id === 'projects-hdr') {
         setTimeout(function() { openCoById('co-niras'); }, 80);
@@ -824,8 +850,8 @@ function navTo(sel) {
   }
   var t = document.getElementById(id);
   if (t) {
-    var delay = hdr ? 80 : 0;
-    setTimeout(function() { t.scrollIntoView({behavior:'smooth', block:'start'}); }, delay);
+    // Small delay so any layout changes (open/close) settle before measuring position
+    setTimeout(function() { scrollToEl(t); }, hdr ? 60 : 0);
   }
 }
 
@@ -948,7 +974,7 @@ function toggleCo(hdr, event) {
   } else {
     hdr.classList.add('open');
     requestAnimationFrame(function() {
-      hdr.scrollIntoView({behavior:'smooth', block:'start'});
+      scrollToEl(hdr);
       openEl(body);
       var grid = body.querySelector('.projects-grid');
       if (grid) setTimeout(function() { initCarousel(grid); }, 80);
