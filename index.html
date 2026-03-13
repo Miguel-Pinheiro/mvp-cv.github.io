@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,16 +83,13 @@ section{padding:80px 0;}
 /* ── COLLAPSIBLE BODIES ── */
 .sec-body{overflow:hidden;max-height:0;transition:max-height .45s var(--ease);}
 .co-body{overflow:hidden;max-height:0;transition:max-height .4s var(--ease);}
-.subsec-body{overflow:hidden;max-height:0;transition:max-height .4s var(--ease);}
+.subsec-body{overflow:visible;max-height:none;}
 .sec-inner{padding-top:36px;}
 .co-inner{padding-top:16px;}
 .subsec-inner{padding-top:18px;}
 
-/* Desktop: company always expanded */
+/* Company header links: clickable on desktop only (mobile whole header is the toggle) */
 @media(min-width:601px){
-  .co-body{max-height:none!important;overflow:visible!important;transition:none!important;}
-  .co-hdr{cursor:default!important;pointer-events:none;}
-  .co-hdr .coll-btn{display:none!important;}
   .co-hdr h3 a{pointer-events:all;}
 }
 @media(max-width:600px){
@@ -184,10 +181,8 @@ section{padding:80px 0;}
 .code-bullets strong{color:var(--text);font-weight:600;}
 
 /* ── SUB-SECTION HEADER (Other Work) ── */
-.subsec-hdr{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:10px 0;user-select:none;border-bottom:1px solid var(--border);}
-.subsec-hdr h3{font-family:var(--font-display);font-size:1rem;font-weight:600;color:var(--text-2);transition:color .2s;}
-.subsec-hdr:hover h3{color:var(--text);}
-.subsec-hdr.open .coll-btn svg{transform:rotate(180deg);}
+.subsec-hdr{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.subsec-hdr h3{font-family:var(--font-display);font-size:1rem;font-weight:600;color:var(--text-2);}
 
 /* ── LANGUAGES ── */
 .lang-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px;}
@@ -228,6 +223,13 @@ footer .links a:hover{color:var(--text);opacity:1;}
   .scroll-top{left:auto;right:24px;transform:none;bottom:24px;}
 }
 
+/* ── HERO DOWN ARROW ── */
+.hero-arrow{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:800;width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:var(--bg-card);color:var(--text-2);cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);transition:border-color .2s,color .2s;}
+.hero-arrow svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none;}
+.hero-arrow:hover{border-color:var(--text-2);color:var(--text);}
+.hero-arrow.visible{display:flex;animation:bounce-hero 2s ease-in-out infinite;}
+@keyframes bounce-hero{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
+
 /* ── ANIMATIONS ── */
 .fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
 .fade-in.visible{opacity:1;transform:translateY(0);}
@@ -253,8 +255,6 @@ footer .links a:hover{color:var(--text);opacity:1;}
   .gallery-viewport.h480{height:220px;}
   .gallery-viewport.h320{height:200px;}
   .gallery-viewport.h240{height:180px;}
-  .co-hdr{cursor:pointer;}
-  .co-hdr .coll-btn{display:flex!important;}
 }
 </style>
 </head>
@@ -272,6 +272,11 @@ footer .links a:hover{color:var(--text);opacity:1;}
 <!-- ── SCROLL TO TOP ── -->
 <button class="scroll-top" id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
   <svg viewBox="0 0 14 14"><polyline points="2,10 7,4 12,10"/></svg>
+</button>
+
+<!-- ── HERO DOWN ARROW ── -->
+<button class="hero-arrow" id="hero-arrow" onclick="document.getElementById('skills').scrollIntoView({behavior:'smooth'})">
+  <svg viewBox="0 0 14 14"><polyline points="2,4 7,10 12,4"/></svg>
 </button>
 
 <!-- ── NAV ── -->
@@ -320,8 +325,8 @@ footer .links a:hover{color:var(--text);opacity:1;}
         </div>
       </div>
       <div class="hero-stats fade-in fade-in-delay-2">
-        <a class="stat-card" onclick="navTo('#projects')"><div class="stat-num">15+</div><div class="stat-label">Projects Delivered</div></a>
-        <a class="stat-card" onclick="navTo('#other')"><div class="stat-num">40+</div><div class="stat-label">Custom Scripts Built</div></a>
+        <a class="stat-card" onclick="navTo('#projects')"><div class="stat-num">15+</div><div class="stat-label">Projects</div></a>
+        <a class="stat-card" onclick="navTo('#other')"><div class="stat-num">40+</div><div class="stat-label">Custom Scripts</div></a>
       </div>
     </div>
   </div>
@@ -445,7 +450,7 @@ footer .links a:hover{color:var(--text);opacity:1;}
 
         <!-- NIRAS -->
         <div class="company-section">
-          <div class="co-hdr" id="co-niras-hdr" onclick="toggleCo(this)">
+          <div class="co-hdr" id="co-niras-hdr" onclick="toggleCo(this,event)">
             <h3><a href="https://www.niras.com/" target="_blank">NIRAS A/S</a><span class="co-years">2022–Present</span></h3>
             <button class="coll-btn" tabindex="-1"><svg viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
           </div>
@@ -564,7 +569,7 @@ footer .links a:hover{color:var(--text);opacity:1;}
 
         <!-- Gabriel Couto -->
         <div class="company-section">
-          <div class="co-hdr" id="co-couto-hdr" onclick="toggleCo(this)">
+          <div class="co-hdr" id="co-couto-hdr" onclick="toggleCo(this,event)">
             <h3><a href="https://www.gabrielcouto.pt/" target="_blank">Gabriel A.S. Couto S.A.</a><span class="co-years">2021–2022</span></h3>
             <button class="coll-btn" tabindex="-1"><svg viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
           </div>
@@ -639,9 +644,8 @@ footer .links a:hover{color:var(--text);opacity:1;}
       <div class="sec-inner">
 
         <!-- pyRevit sub-section -->
-        <div class="subsec-hdr" id="subsec-pyrevit-hdr" onclick="toggleSubsec(this)">
+        <div class="subsec-hdr" id="subsec-pyrevit-hdr">
           <h3>pyRevit, Automations &amp; Development Work</h3>
-          <button class="coll-btn" tabindex="-1"><svg viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
         </div>
         <div class="subsec-body" id="subsec-pyrevit-body">
           <div class="subsec-inner">
@@ -699,9 +703,8 @@ footer .links a:hover{color:var(--text);opacity:1;}
         </div>
 
         <!-- 3D Renders sub-section -->
-        <div class="subsec-hdr" id="subsec-renders-hdr" onclick="toggleSubsec(this)" style="margin-top:32px;">
+        <div class="subsec-hdr" id="subsec-renders-hdr" style="margin-top:32px;">
           <h3>3D Renders — Family House Project (2020)</h3>
-          <button class="coll-btn" tabindex="-1"><svg viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
         </div>
         <div class="subsec-body" id="subsec-renders-body">
           <div class="subsec-inner">
@@ -768,6 +771,10 @@ function toggleSec(hdr) {
   if (!isOpen) {
     hdr.classList.add('open');
     openEl(body);
+    // Auto-expand NIRAS when projects section opens
+    if (hdr.id === 'projects-hdr') {
+      setTimeout(function() { openCoById('co-niras'); }, 80);
+    }
   }
 }
 
@@ -786,6 +793,10 @@ function navTo(sel) {
     hdr.classList.add('open');
     var body = document.getElementById(id + '-body');
     if (body) openEl(body);
+    // Auto-expand NIRAS when navigating to projects
+    if (id === 'projects') {
+      setTimeout(function() { openCoById('co-niras'); }, 80);
+    }
   }
   var t = document.getElementById(id);
   if (t) {
@@ -794,24 +805,31 @@ function navTo(sel) {
   }
 }
 
-// ── Company toggle (mobile only) ──
-function toggleCo(hdr) {
-  if (window.innerWidth > 600) return;
-  var body = hdr.nextElementSibling;
-  var isOpen = hdr.classList.contains('open');
-  if (isOpen) {
-    hdr.classList.remove('open');
-    closeEl(body);
-  } else {
+// ── Company section: open by id (accordion) ──
+function openCoById(coId) {
+  var hdr = document.getElementById(coId + '-hdr');
+  if (!hdr) return;
+  var body = document.getElementById(coId + '-body');
+  // Close all other company sections first
+  document.querySelectorAll('.co-hdr.open').forEach(function(h) {
+    if (h !== hdr) { h.classList.remove('open'); closeEl(h.nextElementSibling); }
+  });
+  if (!hdr.classList.contains('open')) {
     hdr.classList.add('open');
     openEl(body);
   }
 }
 
-// ── Sub-section toggle ──
-function toggleSubsec(hdr) {
-  var body = hdr.nextElementSibling;
+// ── Company toggle (both desktop + mobile, accordion) ──
+function toggleCo(hdr, event) {
+  // On desktop, don't toggle if clicking the company name link
+  if (event && event.target.closest('a')) return;
   var isOpen = hdr.classList.contains('open');
+  var body = hdr.nextElementSibling;
+  // Accordion: close all other company sections
+  document.querySelectorAll('.co-hdr.open').forEach(function(h) {
+    if (h !== hdr) { h.classList.remove('open'); closeEl(h.nextElementSibling); }
+  });
   if (isOpen) {
     hdr.classList.remove('open');
     closeEl(body);
@@ -918,13 +936,17 @@ var barObs = new IntersectionObserver(function(entries) {
 }, { threshold: 0.5 });
 document.querySelectorAll('.lang-bar-fill').forEach(function(el) { el.style.width = '0%'; barObs.observe(el); });
 
-// ── Scroll to top button ──
+// ── Scroll to top + hero arrow ──
 var scrollTopBtn = document.getElementById('scroll-top');
+var heroArrowBtn = document.getElementById('hero-arrow');
 var heroEl = document.getElementById('about');
-window.addEventListener('scroll', function() {
+function updateScrollBtns() {
   var pastHero = window.scrollY > heroEl.offsetHeight * 0.6;
   scrollTopBtn.classList.toggle('visible', pastHero);
-}, { passive: true });
+  heroArrowBtn.classList.toggle('visible', !pastHero);
+}
+window.addEventListener('scroll', updateScrollBtns, { passive: true });
+updateScrollBtns();
 </script>
 </body>
 </html>
