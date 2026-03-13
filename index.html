@@ -760,23 +760,23 @@ function toggleSec(hdr) {
   var isOpen = hdr.classList.contains('open');
   var bodyId = hdr.id.replace('-hdr', '-body');
   var body = document.getElementById(bodyId);
-  // Close all other sections
+  // Close all other sections instantly so layout is stable before scrolling
   document.querySelectorAll('.sec-hdr.open').forEach(function(h) {
     h.classList.remove('open');
     var b = document.getElementById(h.id.replace('-hdr', '-body'));
-    if (b) closeEl(b);
+    if (b) { b.style.transition = 'none'; b.style.maxHeight = '0'; b.offsetHeight; b.style.transition = ''; }
   });
-  // Open this one if it was closed
   if (!isOpen) {
     hdr.classList.add('open');
-    openEl(body);
-    // Auto-expand NIRAS when projects section opens
-    if (hdr.id === 'projects-hdr') {
-      setTimeout(function() { openCoById('co-niras'); }, 80);
-    }
-    // Scroll to section top so it starts at the top of the viewport
-    var sec = hdr.closest('section');
-    if (sec) setTimeout(function() { sec.scrollIntoView({behavior:'smooth', block:'start'}); }, 50);
+    // Layout is now stable — scroll then open in next frame
+    requestAnimationFrame(function() {
+      var sec = hdr.closest('section');
+      if (sec) sec.scrollIntoView({behavior:'smooth', block:'start'});
+      openEl(body);
+      if (hdr.id === 'projects-hdr') {
+        setTimeout(function() { openCoById('co-niras'); }, 80);
+      }
+    });
   }
 }
 
