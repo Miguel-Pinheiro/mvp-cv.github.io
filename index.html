@@ -60,7 +60,7 @@ nav{
   max-width:var(--max-w);margin:0 auto;padding:0 var(--gap);
   height:100%;display:flex;align-items:center;justify-content:space-between;
 }
-.nav-logo{font-size:0.88rem;font-weight:600;letter-spacing:-0.01em;color:var(--text);white-space:nowrap;}
+.nav-logo{font-size:0.88rem;font-weight:600;letter-spacing:-0.01em;color:var(--text);white-space:nowrap;cursor:pointer;}
 .nav-logo .dim{color:var(--text-2);font-weight:400;}
 .nav-right{display:flex;align-items:center;gap:18px;}
 .nav-links{display:flex;gap:20px;}
@@ -76,6 +76,8 @@ nav{
 }
 .nav-links a:hover{color:var(--text);opacity:1;}
 .nav-links a:hover::after{width:100%;}
+.nav-links a.nav-active{color:var(--text);}
+.nav-links a.nav-active::after{width:100%;}
 
 /* ── ICON BUTTON ── */
 .icon-btn{
@@ -144,27 +146,13 @@ section{padding:80px 0;}
 .sec-hdr:hover .coll-btn{border-color:var(--text-3);color:var(--text-2);}
 
 /* ── COLLAPSIBLE ── */
-/* Pure class-driven: JS only toggles .open — no inline maxHeight juggling */
-.sec-body{
-  overflow:hidden;max-height:0;
-  opacity:0;
-  transition:max-height .6s var(--ease-out),opacity .45s var(--ease);
-}
-.sec-body.open{max-height:9000px;opacity:1;}
-
-.co-body{
-  overflow:hidden;max-height:0;
-  opacity:0;
-  transition:max-height .5s var(--ease-out),opacity .38s var(--ease);
-}
-.co-body.open{max-height:7000px;opacity:1;}
-
-.ow-body{
-  overflow:hidden;max-height:0;
-  opacity:0;
-  transition:max-height .45s var(--ease-out),opacity .32s var(--ease);
-}
-.ow-body.open{max-height:4000px;opacity:1;}
+/* Animation is JS-driven (measured height); .open tracks open state for chevrons */
+.sec-body{overflow:hidden;max-height:0;opacity:0;}
+.sec-body.open{max-height:none;opacity:1;overflow:visible;}
+.co-body{overflow:hidden;max-height:0;opacity:0;}
+.co-body.open{max-height:none;opacity:1;overflow:visible;}
+.ow-body{overflow:hidden;max-height:0;opacity:0;}
+.ow-body.open{max-height:none;opacity:1;overflow:visible;}
 
 .sec-inner{padding-top:36px;}
 .co-inner{padding-top:18px;}
@@ -445,14 +433,14 @@ footer p{font-size:0.71rem;color:var(--text-3);}
 <!-- ── NAV ── -->
 <nav>
   <div class="nav-inner">
-    <div class="nav-logo">Miguel Pinheiro <span class="dim">— BIM Specialist</span></div>
+    <div class="nav-logo" onclick="smoothTo(0)">Miguel Pinheiro <span class="dim">— BIM Specialist</span></div>
     <div class="nav-right">
       <div class="nav-links">
-        <a onclick="scrollToSection('about')">About</a>
-        <a onclick="scrollToSection('skills')">Skills</a>
-        <a onclick="scrollToSection('experience')">Experience</a>
-        <a onclick="navTo('projects')">Projects</a>
-        <a onclick="navTo('other')">Other Work</a>
+        <a data-section="about" onclick="scrollToSection('about')">About</a>
+        <a data-section="skills" onclick="scrollToSection('skills')">Skills</a>
+        <a data-section="experience" onclick="scrollToSection('experience')">Experience</a>
+        <a data-section="projects" onclick="navTo('projects')">Projects</a>
+        <a data-section="other" onclick="navTo('other')">Other Work</a>
       </div>
       <button class="icon-btn hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
@@ -497,9 +485,9 @@ footer p{font-size:0.71rem;color:var(--text-3);}
         <h1 class="fade-in">Miguel<br><span class="accent">Pinheiro</span></h1>
         <p class="hero-sub fade-in fd1">BIM Specialist & Civil Engineer with experience in infrastructure projects across Scandinavia, Africa and Southeast Asia. Bridging design intent and digital delivery — from BIM models to automated workflows and custom scripts.</p>
         <div class="hero-contacts fade-in fd2">
-          <a class="contact-btn" href="/cdn-cgi/l/email-protection#167b7f7163737a756066272656717b777f7a3875797b">
+          <a class="contact-btn" href="mailto:miguelcvp10@gmail.com">
             <svg viewBox="0 0 16 16"><rect x="1.5" y="3.5" width="13" height="9" rx="1.5"/><polyline points="1.5,3.5 8,9 14.5,3.5"/></svg>
-            <span class="__cf_email__" data-cfemail="f29f9b9587979e918482c3c2b2959f939b9edc919d9f">[email&#160;protected]</span>
+            miguelcvp10@gmail.com
           </a>
           <a class="contact-btn" href="tel:+351912322614">
             <svg viewBox="0 0 16 16"><path d="M3.2 2.5h2.8l1 2.5L5.5 6.5A8.5 8.5 0 009.5 10.5l1.5-1.5 2.5 1V13a1 1 0 01-1 1A12.5 12.5 0 012 2.5a1 1 0 011.2 0z" stroke-width="1.7"/></svg>
@@ -971,7 +959,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
 <footer>
   <div class="container">
     <div class="footer-links">
-      <a href="/cdn-cgi/l/email-protection#d5b8bcb2a0b0b9b6a3a5e4e595b2b8b4bcb9fbb6bab8">Email</a>
+      <a href="mailto:miguelcvp10@gmail.com">Email</a>
       <a href="https://www.linkedin.com/in/miguelpinheiro23" target="_blank">LinkedIn</a>
       <a href="tel:+351912322614">Phone</a>
     </div>
@@ -979,7 +967,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ── Force light mode always on first load ──
 document.documentElement.setAttribute('data-theme','light');
 
@@ -1031,7 +1019,46 @@ function scrollToEl(el){
   smoothTo(window.scrollY + el.getBoundingClientRect().top - NAV - PAD);
 }
 
-// ── Section toggle (class-driven, no inline style juggling) ──
+// ── Animation helpers (JS-measured height for true smooth timing) ──
+var EASE_OPEN = 'cubic-bezier(0,0,0.12,1)';
+var EASE_CLOSE = 'cubic-bezier(0.4,0,0.9,1)';
+
+function animOpen(el, dur){
+  dur = dur || 1100;
+  if(el._animTimer) clearTimeout(el._animTimer);
+  el.style.overflow = 'hidden';
+  el.style.transition = 'none';
+  // Measure natural height with overflow visible
+  el.style.maxHeight = 'none';
+  el.style.opacity = '1';
+  var h = el.scrollHeight;
+  el.style.maxHeight = '0px';
+  el.style.opacity = '0';
+  el.offsetHeight; // force reflow
+  el.style.transition = 'max-height '+dur+'ms '+EASE_OPEN+', opacity '+Math.round(dur*0.68)+'ms ease';
+  el.style.maxHeight = h+'px';
+  el.style.opacity = '1';
+  el._animTimer = setTimeout(function(){
+    el.style.maxHeight = 'none';
+    el.style.overflow = '';
+    el.style.transition = '';
+    el._animTimer = null;
+  }, dur+60);
+}
+
+function animClose(el, dur){
+  dur = dur || 520;
+  if(el._animTimer) clearTimeout(el._animTimer);
+  el.style.overflow = 'hidden';
+  el.style.maxHeight = el.scrollHeight+'px';
+  el.offsetHeight; // force reflow
+  el.style.transition = 'max-height '+dur+'ms '+EASE_CLOSE+', opacity '+Math.round(dur*0.5)+'ms ease';
+  el.style.maxHeight = '0px';
+  el.style.opacity = '0';
+  el._animTimer = setTimeout(function(){ el._animTimer = null; }, dur+60);
+}
+
+// ── Section toggle ──
 function toggleSec(id){
   var hdr = document.getElementById(id+'-hdr');
   var body = document.getElementById(id+'-body');
@@ -1041,19 +1068,17 @@ function toggleSec(id){
   document.querySelectorAll('.sec-hdr.open').forEach(function(h){
     h.classList.remove('open');
     var b = document.getElementById(h.id.replace('-hdr','-body'));
-    if(b) b.classList.remove('open');
+    if(b){ b.classList.remove('open'); animClose(b, 520); }
   });
 
   if(!isOpen){
-    // Capture header's absolute Y before expansion changes layout
     var hdrAbsY = window.scrollY + hdr.getBoundingClientRect().top;
     hdr.classList.add('open');
     body.classList.add('open');
-    // After a short settle let layout reflow, then scroll so header sits just below nav
+    animOpen(body, 1100);
     setTimeout(function(){
       smoothTo(hdrAbsY - NAV - PAD);
-      // Auto-open NIRAS on projects
-      if(id === 'projects') setTimeout(function(){ openCo('niras'); }, 80);
+      if(id === 'projects') setTimeout(function(){ openCo('niras'); }, 120);
     }, 20);
   }
 }
@@ -1071,10 +1096,11 @@ function openCo(name){
   document.querySelectorAll('.co-hdr.open').forEach(function(h){
     h.classList.remove('open');
     var b = document.getElementById(h.id.replace('-hdr','-body'));
-    if(b) b.classList.remove('open');
+    if(b){ b.classList.remove('open'); animClose(b, 380); }
   });
   hdr.classList.add('open');
   body.classList.add('open');
+  animOpen(body, 800);
 }
 function toggleCo(name, e){
   if(e && e.target.closest('a')) return;
@@ -1084,12 +1110,13 @@ function toggleCo(name, e){
   document.querySelectorAll('.co-hdr.open').forEach(function(h){
     h.classList.remove('open');
     var b = document.getElementById(h.id.replace('-hdr','-body'));
-    if(b) b.classList.remove('open');
+    if(b){ b.classList.remove('open'); animClose(b, 380); }
   });
   if(!isOpen){
     var hdrAbsY = window.scrollY + hdr.getBoundingClientRect().top;
     hdr.classList.add('open');
     body.classList.add('open');
+    animOpen(body, 800);
     setTimeout(function(){ smoothTo(hdrAbsY - NAV - PAD); }, 20);
   }
 }
@@ -1102,12 +1129,13 @@ function toggleOw(name){
   document.querySelectorAll('.ow-hdr.open').forEach(function(h){
     h.classList.remove('open');
     var b = document.getElementById(h.id.replace('-hdr','-body'));
-    if(b) b.classList.remove('open');
+    if(b){ b.classList.remove('open'); animClose(b, 320); }
   });
   if(!isOpen){
     var hdrAbsY = window.scrollY + hdr.getBoundingClientRect().top;
     hdr.classList.add('open');
     body.classList.add('open');
+    animOpen(body, 640);
     setTimeout(function(){ smoothTo(hdrAbsY - NAV - PAD); }, 20);
   }
 }
@@ -1228,6 +1256,25 @@ function updateFabs(){
 }
 window.addEventListener('scroll', updateFabs, {passive:true});
 updateFabs();
+
+// ── Active nav link on scroll ──
+var NAV_SECTIONS = ['about','skills','experience','projects','other'];
+var navAs = document.querySelectorAll('.nav-links a[data-section]');
+function updateNavActive(){
+  var scrollY = window.scrollY;
+  var active = null;
+  NAV_SECTIONS.forEach(function(id){
+    var el = document.getElementById(id);
+    if(!el) return;
+    var top = el.getBoundingClientRect().top + scrollY;
+    if(scrollY + NAV + 30 >= top) active = id;
+  });
+  navAs.forEach(function(a){
+    a.classList.toggle('nav-active', a.dataset.section === active);
+  });
+}
+window.addEventListener('scroll', updateNavActive, {passive:true});
+updateNavActive();
 </script>
 </body>
 </html>
