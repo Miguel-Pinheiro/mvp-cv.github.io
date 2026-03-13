@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Miguel Pinheiro — BIM Specialist & Civil Engineer</title>
+<link rel="icon" type="image/png" sizes="32x32" href="images/MP_web-logo.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/MP_web-logo.png">
+
+<link rel="apple-touch-icon" href="images/MP_web-logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -49,7 +53,7 @@ a:hover{opacity:.7;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 
-/* ── NAV ── */
+/* NAV */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:900;height:var(--nav-h);
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
@@ -79,7 +83,7 @@ nav{
 .nav-links a.nav-active{color:var(--text);}
 .nav-links a.nav-active::after{width:100%;}
 
-/* ── ICON BUTTON ── */
+/* ICON BUTTON */
 .icon-btn{
   background:transparent;border:1px solid var(--border);color:var(--text-3);
   width:32px;height:32px;border-radius:var(--radius-sm);
@@ -93,7 +97,7 @@ nav{
 [data-theme="light"] .icon-moon{display:none;}
 [data-theme="light"] .icon-sun{display:block;}
 
-/* ── HAMBURGER ── */
+/* HAMBURGER */
 .hamburger{display:none;}
 .mobile-menu{
   display:none;position:fixed;top:var(--nav-h);left:0;right:0;z-index:850;
@@ -110,11 +114,19 @@ nav{
   letter-spacing:0.06em;text-transform:uppercase;
   padding:13px 0;border-bottom:1px solid var(--border-2);
   cursor:pointer;transition:color .18s;
+  position:relative;
 }
+.mobile-menu a::after{
+  content:'';position:absolute;bottom:0;left:0;
+  width:0;height:1px;background:var(--accent);
+  transition:width .25s var(--ease);
+}
+.mobile-menu a.nav-active{color:var(--text);}
+.mobile-menu a.nav-active::after{width:100%;}
 .mobile-menu a:last-child{border-bottom:none;}
 .mobile-menu a:hover{color:var(--text);opacity:1;}
 
-/* ── SECTION ── */
+/* SECTION */
 section{padding:80px 0;}
 .container{max-width:var(--max-w);margin:0 auto;padding:0 var(--gap);}
 .section-label{
@@ -128,7 +140,7 @@ section{padding:80px 0;}
   letter-spacing:-0.022em;line-height:1.12;color:var(--text);
 }
 
-/* ── COLLAPSE BUTTON ── */
+/* COLLAPSE BUTTON */
 .coll-btn{
   width:32px;height:32px;border-radius:var(--radius-sm);
   border:1px solid var(--border);background:transparent;
@@ -138,15 +150,14 @@ section{padding:80px 0;}
 .coll-btn svg{
   width:10px;height:10px;fill:none;stroke:currentColor;
   stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;
-  transition:transform .38s var(--ease);
+  transition:transform .42s var(--ease);
 }
 .sec-hdr{display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;user-select:none;}
 .sec-hdr-left{flex:1;}
 .sec-hdr.open .coll-btn svg{transform:rotate(180deg);}
 .sec-hdr:hover .coll-btn{border-color:var(--text-3);color:var(--text-2);}
 
-/* ── COLLAPSIBLE ── */
-/* Animation is JS-driven (measured height); .open tracks open state for chevrons */
+/* COLLAPSIBLE — JS drives maxHeight, class tracks open state for chevrons */
 .sec-body{overflow:hidden;max-height:0;opacity:0;}
 .sec-body.open{max-height:none;opacity:1;overflow:visible;}
 .co-body{overflow:hidden;max-height:0;opacity:0;}
@@ -157,12 +168,11 @@ section{padding:80px 0;}
 .sec-inner{padding-top:36px;}
 .co-inner{padding-top:18px;}
 
-/* co-hdr chevron */
 .co-hdr.open .coll-btn svg{transform:rotate(180deg);}
 .ow-hdr.open .coll-btn svg{transform:rotate(180deg);}
 .co-hdr:hover .coll-btn,.ow-hdr:hover .coll-btn{border-color:var(--text-3);color:var(--text-2);}
 
-/* ── HERO ── */
+/* HERO */
 .hero{
   min-height:100vh;min-height:100svh;
   display:flex;align-items:center;
@@ -183,7 +193,6 @@ section{padding:80px 0;}
 }
 .hero-contacts{display:flex;flex-wrap:wrap;gap:8px;}
 
-/* Contact buttons with consistent SVG icons */
 .contact-btn{
   display:inline-flex;align-items:center;gap:7px;
   padding:9px 14px;border-radius:var(--radius-sm);
@@ -191,7 +200,7 @@ section{padding:80px 0;}
   border:1px solid var(--border);color:var(--text-2);
   background:var(--bg-card);
   transition:border-color .2s,color .2s,transform .2s,box-shadow .2s;
-  cursor:pointer;
+  cursor:pointer;white-space:nowrap;
 }
 .contact-btn:hover{border-color:var(--text-3);color:var(--text);opacity:1;transform:translateY(-1px);box-shadow:var(--shadow-lg);}
 .contact-btn svg{width:13px;height:13px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
@@ -207,7 +216,7 @@ section{padding:80px 0;}
 .stat-num{font-size:2rem;font-weight:700;color:var(--accent);letter-spacing:-0.02em;line-height:1;}
 .stat-label{font-size:0.72rem;color:var(--text-2);margin-top:5px;}
 
-/* ── SKILLS ── */
+/* SKILLS */
 .skills-section{background:var(--bg-2);}
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
 .skill-group{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;}
@@ -221,7 +230,7 @@ section{padding:80px 0;}
 a.tag{color:var(--tag-text);}
 a.tag:hover{border-color:var(--text-3);color:var(--text-2);opacity:1;}
 
-/* ── LANGUAGES ── */
+/* LANGUAGES */
 .lang-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px;}
 .lang-card{text-align:center;padding:18px 12px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);}
 .lang-name{font-size:0.8rem;font-weight:600;margin-bottom:3px;color:var(--text);}
@@ -229,7 +238,7 @@ a.tag:hover{border-color:var(--text-3);color:var(--text-2);opacity:1;}
 .lang-bar{height:2px;background:var(--border);border-radius:2px;margin-top:10px;overflow:hidden;}
 .lang-bar-fill{height:100%;background:var(--accent);border-radius:2px;width:0;transition:width 1.1s var(--ease);}
 
-/* ── EXPERIENCE ── */
+/* EXPERIENCE */
 .exp-list{display:flex;flex-direction:column;}
 .exp-item{display:grid;grid-template-columns:160px 1fr;gap:32px;padding:28px 0;border-bottom:1px solid var(--border);}
 .exp-item:last-child{border-bottom:none;}
@@ -242,7 +251,7 @@ a.tag:hover{border-color:var(--text-3);color:var(--text-2);opacity:1;}
 .thesis-link{color:inherit;text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px;}
 .thesis-link:hover{opacity:.65;}
 
-/* ── COMPANY SECTIONS ── */
+/* COMPANY SECTIONS */
 .company-section{margin-bottom:36px;}
 .company-section:last-child{margin-bottom:0;}
 .co-hdr{
@@ -255,19 +264,19 @@ a.tag:hover{border-color:var(--text-3);color:var(--text-2);opacity:1;}
 @media(max-width:600px){.co-hdr h3 a{pointer-events:none;}}
 .co-years{font-size:0.64rem;color:var(--text-3);font-weight:400;margin-left:6px;}
 
-/* ── OTHER WORK ── */
+/* OTHER WORK */
 .ow-hdr{
   display:flex;align-items:center;gap:12px;cursor:pointer;
   padding:13px 0;user-select:none;border-bottom:1px solid var(--border);
 }
 .ow-hdr h3{font-size:0.88rem;font-weight:600;flex:1;color:var(--text-2);}
 
-/* ── PROJECTS GRID ── */
+/* PROJECTS GRID */
 .projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .gallery-card.full-width{grid-column:1/-1;}
 .gallery-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
 
-/* ── GALLERY VIEWPORT ── */
+/* GALLERY VIEWPORT */
 .gallery-viewport{position:relative;overflow:hidden;background:var(--img-ph);}
 .gallery-viewport img{width:100%;height:100%;object-fit:cover;transition:opacity .18s;display:block;cursor:zoom-in;}
 .gallery-viewport.h240{height:240px;}
@@ -296,18 +305,18 @@ a.tag:hover{border-color:var(--text-3);color:var(--text-2);opacity:1;}
 .project-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px;}
 .project-tags .tag{font-size:0.59rem;padding:3px 8px;}
 
-/* ── BULLETS ── */
+/* BULLETS */
 .code-bullets{margin:10px 0 0;padding:0 0 0 15px;font-size:0.76rem;color:var(--text-2);line-height:1.92;list-style:disc;}
 .code-bullets strong{color:var(--text);font-weight:600;}
 
-/* ── OTHER WORK CARDS ── */
+/* OTHER WORK CARDS */
 .other-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
 .code-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);}
 .code-body{padding:20px;}
 .code-title{font-size:0.88rem;font-weight:700;margin-bottom:8px;color:var(--text);letter-spacing:-0.01em;}
 .code-desc{font-size:0.76rem;color:var(--text-2);line-height:1.72;}
 
-/* ── LIGHTBOX ── */
+/* LIGHTBOX */
 #lightbox{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.94);align-items:center;justify-content:center;}
 #lightbox.active{display:flex;}
 #lightbox-img{max-width:88vw;max-height:88vh;object-fit:contain;border-radius:var(--radius);cursor:default;display:block;}
@@ -339,7 +348,7 @@ a.tag:hover{border-color:var(--text-3);color:var(--text-2);opacity:1;}
 #lb-prev{left:16px;}#lb-next{right:16px;}
 .lb-arrow.hidden{opacity:0;pointer-events:none;}
 
-/* ── FLOATING BUTTONS ── */
+/* FLOATING BUTTONS */
 .fab{
   position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
   z-index:800;width:40px;height:40px;border-radius:50%;
@@ -354,19 +363,19 @@ a.tag:hover{border-color:var(--text-3);color:var(--text-2);opacity:1;}
 #hero-arrow.visible{animation:bounce 2.4s ease-in-out infinite;}
 @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(7px);}}
 
-/* ── FADE IN ── */
+/* FADE IN */
 .fade-in{opacity:0;transform:translateY(14px);transition:opacity .5s var(--ease),transform .5s var(--ease);}
 .fade-in.visible{opacity:1;transform:translateY(0);}
 .fd1{transition-delay:.08s;}.fd2{transition-delay:.16s;}.fd3{transition-delay:.24s;}
 
-/* ── FOOTER ── */
+/* FOOTER */
 footer{padding:40px 0 68px;border-top:1px solid var(--border);text-align:center;}
 footer p{font-size:0.71rem;color:var(--text-3);}
 .footer-links{display:flex;justify-content:center;gap:20px;margin-bottom:10px;}
 .footer-links a{color:var(--text-2);font-size:0.75rem;font-weight:500;transition:color .2s;}
 .footer-links a:hover{color:var(--text);opacity:1;}
 
-/* ── RESPONSIVE 900px ── */
+/* RESPONSIVE 900px */
 @media(max-width:900px){
   .hero-grid{grid-template-columns:1fr;gap:32px;padding:28px 0;}
   .projects-grid{grid-template-columns:1fr;}
@@ -375,7 +384,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
   .lang-grid{grid-template-columns:1fr 1fr;}
 }
 
-/* ── RESPONSIVE 600px ── */
+/* RESPONSIVE 600px */
 @media(max-width:600px){
   :root{--gap:18px;}
   .hamburger{display:flex;}
@@ -385,22 +394,19 @@ footer p{font-size:0.71rem;color:var(--text-3);}
   .hero-grid{padding:18px 0 28px;gap:24px;}
   .hero h1{font-size:clamp(2rem,9vw,2.8rem);}
 
-  /* Pure CSS scroll snap — no JS needed */
+  /* Force email alone on first line, phone+linkedin on second */
+  .hero-contacts{flex-direction:column;align-items:flex-start;}
+  .hero-contacts .contact-btn:first-child{align-self:auto;}
+  .contact-row{display:flex;gap:8px;flex-wrap:nowrap;}
+
+  /* Pure CSS scroll snap */
   .projects-grid{
-    display:flex;
-    overflow-x:scroll;
-    overflow-y:hidden;
-    scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;
-    gap:10px;
-    padding-bottom:6px;
-    scrollbar-width:none;-ms-overflow-style:none;
+    display:flex;overflow-x:scroll;overflow-y:hidden;
+    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+    gap:10px;padding-bottom:6px;scrollbar-width:none;-ms-overflow-style:none;
   }
   .projects-grid::-webkit-scrollbar{display:none;}
-  .projects-grid>.gallery-card{
-    flex:0 0 86%;min-width:0;
-    scroll-snap-align:start;
-  }
+  .projects-grid>.gallery-card{flex:0 0 86%;min-width:0;scroll-snap-align:start;}
   .projects-grid>.gallery-card.full-width{grid-column:auto;flex:0 0 86%;}
 
   .other-grid{grid-template-columns:1fr;}
@@ -413,7 +419,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
 </head>
 <body>
 
-<!-- ── LIGHTBOX ── -->
+<!-- LIGHTBOX -->
 <div id="lightbox" onclick="closeLightbox()">
   <button id="lightbox-close" onclick="event.stopPropagation();closeLightbox()">×</button>
   <span id="lb-counter">1 / 1</span>
@@ -422,7 +428,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
   <button class="lb-arrow" id="lb-next" onclick="lbNext();event.stopPropagation()">›</button>
 </div>
 
-<!-- ── FAB ── -->
+<!-- FAB -->
 <button class="fab" id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
   <svg viewBox="0 0 14 14"><polyline points="2,10 7,4 12,10"/></svg>
 </button>
@@ -430,7 +436,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
   <svg viewBox="0 0 14 14"><polyline points="2,4 7,10 12,4"/></svg>
 </button>
 
-<!-- ── NAV ── -->
+<!-- NAV -->
 <nav>
   <div class="nav-inner">
     <div class="nav-logo" onclick="smoothTo(0)">Miguel Pinheiro <span class="dim">— BIM Specialist</span></div>
@@ -468,16 +474,16 @@ footer p{font-size:0.71rem;color:var(--text-3);}
   </div>
 </nav>
 
-<!-- ── MOBILE MENU ── -->
+<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobile-menu">
-  <a onclick="scrollToSection('about');closeMenu()">About</a>
-  <a onclick="scrollToSection('skills');closeMenu()">Skills</a>
-  <a onclick="scrollToSection('experience');closeMenu()">Experience</a>
-  <a onclick="navTo('projects');closeMenu()">Projects</a>
-  <a onclick="navTo('other');closeMenu()">Other Work</a>
+  <a data-section="about" onclick="scrollToSection('about');closeMenu()">About</a>
+  <a data-section="skills" onclick="scrollToSection('skills');closeMenu()">Skills</a>
+  <a data-section="experience" onclick="scrollToSection('experience');closeMenu()">Experience</a>
+  <a data-section="projects" onclick="navTo('projects');closeMenu()">Projects</a>
+  <a data-section="other" onclick="navTo('other');closeMenu()">Other Work</a>
 </div>
 
-<!-- ── HERO ── -->
+<!-- HERO -->
 <section class="hero" id="about">
   <div class="container">
     <div class="hero-grid">
@@ -489,14 +495,16 @@ footer p{font-size:0.71rem;color:var(--text-3);}
             <svg viewBox="0 0 16 16"><rect x="1.5" y="3.5" width="13" height="9" rx="1.5"/><polyline points="1.5,3.5 8,9 14.5,3.5"/></svg>
             miguelcvp10@gmail.com
           </a>
-          <a class="contact-btn" href="tel:+351912322614">
-            <svg viewBox="0 0 16 16"><path d="M3.2 2.5h2.8l1 2.5L5.5 6.5A8.5 8.5 0 009.5 10.5l1.5-1.5 2.5 1V13a1 1 0 01-1 1A12.5 12.5 0 012 2.5a1 1 0 011.2 0z" stroke-width="1.7"/></svg>
-            +351 912 322 614
-          </a>
-          <a class="contact-btn" href="https://www.linkedin.com/in/miguelpinheiro23" target="_blank">
-            <svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2"/><line x1="5" y1="7" x2="5" y2="11.5" stroke-width="1.7"/><circle cx="5" cy="4.8" r="0.7" fill="currentColor" stroke="none"/><path d="M8 7v4.5M8 8.8c0-1.8 5.5-1.8 5.5 0v2.7" stroke-width="1.7"/></svg>
-            LinkedIn
-          </a>
+          <div class="contact-row">
+            <a class="contact-btn" href="tel:+351912322614">
+              <svg viewBox="0 0 16 16"><path d="M3.2 2.5h2.8l1 2.5L5.5 6.5A8.5 8.5 0 009.5 10.5l1.5-1.5 2.5 1V13a1 1 0 01-1 1A12.5 12.5 0 012 2.5a1 1 0 011.2 0z" stroke-width="1.7"/></svg>
+              +351 912 322 614
+            </a>
+            <a class="contact-btn" href="https://www.linkedin.com/in/miguelpinheiro23" target="_blank">
+              <svg viewBox="0 0 16 16"><rect x="1.5" y="1.5" width="13" height="13" rx="2"/><line x1="5" y1="7" x2="5" y2="11.5" stroke-width="1.7"/><circle cx="5" cy="4.8" r="0.7" fill="currentColor" stroke="none"/><path d="M8 7v4.5M8 8.8c0-1.8 5.5-1.8 5.5 0v2.7" stroke-width="1.7"/></svg>
+              LinkedIn
+            </a>
+          </div>
         </div>
       </div>
       <div class="hero-stats fade-in fd2">
@@ -513,7 +521,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
   </div>
 </section>
 
-<!-- ── SKILLS ── -->
+<!-- SKILLS -->
 <section class="skills-section" id="skills">
   <div class="container">
     <div class="sec-hdr" id="skills-hdr" onclick="toggleSec('skills')">
@@ -589,7 +597,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
   </div>
 </section>
 
-<!-- ── EXPERIENCE ── -->
+<!-- EXPERIENCE -->
 <section id="experience">
   <div class="container">
     <div class="sec-hdr" id="experience-hdr" onclick="toggleSec('experience')">
@@ -648,7 +656,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
   </div>
 </section>
 
-<!-- ── PROJECTS ── -->
+<!-- PROJECTS -->
 <section id="projects" style="background:var(--bg-2);">
   <div class="container">
     <div class="sec-hdr" id="projects-hdr" onclick="toggleSec('projects')">
@@ -675,7 +683,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
                   <div class="gallery-viewport h240">
                     <img src="images/Nordhavnstunnel/NHT-Overview.png" alt="Nordhavnstunnel">
                     <span class="img-counter">1 / 2</span>
-                    <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
+                    <div class="gal-arrows"><button onclick="gPrev(this)">&#8249;</button><button onclick="gNext(this)">&#8250;</button></div>
                   </div>
                   <div class="gallery-body">
                     <div class="project-meta"><span class="project-type">Tunnel / Infrastructure</span><span class="project-year">2022–Present</span></div>
@@ -697,7 +705,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
                   <div class="gallery-viewport h240">
                     <img src="images/Valby%20Skybrudstunnel/VAL_BLU.png" alt="Valby Skybrudstunnel">
                     <span class="img-counter">1 / 10</span>
-                    <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
+                    <div class="gal-arrows"><button onclick="gPrev(this)">&#8249;</button><button onclick="gNext(this)">&#8250;</button></div>
                   </div>
                   <div class="gallery-body">
                     <div class="project-meta"><span class="project-type">Tunnel / Climate Adaptation</span><span class="project-year">2022–Present</span></div>
@@ -739,7 +747,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
                   <div class="gallery-viewport h240">
                     <img src="images/Snake%20Island%20CT/SICT-Overview.png" alt="Snake Island CT">
                     <span class="img-counter">1 / 2</span>
-                    <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
+                    <div class="gal-arrows"><button onclick="gPrev(this)">&#8249;</button><button onclick="gNext(this)">&#8250;</button></div>
                   </div>
                   <div class="gallery-body">
                     <div class="project-meta"><span class="project-type">Port / Logistics</span><span class="project-year">2022–Present</span></div>
@@ -821,7 +829,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
                   <div class="gallery-viewport h240">
                     <img src="images/BBoavista/BBoavista_Completo.jpg" alt="Bairro da Boavista">
                     <span class="img-counter">1 / 12</span>
-                    <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
+                    <div class="gal-arrows"><button onclick="gPrev(this)">&#8249;</button><button onclick="gNext(this)">&#8250;</button></div>
                   </div>
                   <div class="gallery-body">
                     <div class="project-meta"><span class="project-type">Social Housing</span><span class="project-year">2021–2022</span></div>
@@ -841,7 +849,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
                   <div class="gallery-viewport h240">
                     <img src="images/EDP/EDP_EST.png" alt="EDP Labelec">
                     <span class="img-counter">1 / 7</span>
-                    <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
+                    <div class="gal-arrows"><button onclick="gPrev(this)">&#8249;</button><button onclick="gNext(this)">&#8250;</button></div>
                   </div>
                   <div class="gallery-body">
                     <div class="project-meta"><span class="project-type">Commercial</span><span class="project-year">2021–2022</span></div>
@@ -866,7 +874,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
   </div>
 </section>
 
-<!-- ── OTHER WORK ── -->
+<!-- OTHER WORK -->
 <section id="other">
   <div class="container">
     <div class="sec-hdr" id="other-hdr" onclick="toggleSec('other')">
@@ -955,7 +963,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="footer-links">
@@ -968,7 +976,6 @@ footer p{font-size:0.71rem;color:var(--text-3);}
 </footer>
 
 <script>
-// ── Force light mode always on first load ──
 document.documentElement.setAttribute('data-theme','light');
 
 function toggleTheme(){
@@ -976,25 +983,19 @@ function toggleTheme(){
   document.documentElement.setAttribute('data-theme', t);
 }
 
-// ── Mobile menu ──
 var menuOpen = false;
 function toggleMenu(){
   menuOpen = !menuOpen;
-  var m = document.getElementById('mobile-menu');
-  m.classList.toggle('open', menuOpen);
+  document.getElementById('mobile-menu').classList.toggle('open', menuOpen);
 }
 function closeMenu(){
   menuOpen = false;
   document.getElementById('mobile-menu').classList.remove('open');
 }
-// Close on outside click
 document.addEventListener('click', function(e){
-  if(menuOpen && !e.target.closest('nav') && !e.target.closest('.mobile-menu')){
-    closeMenu();
-  }
+  if(menuOpen && !e.target.closest('nav') && !e.target.closest('.mobile-menu')) closeMenu();
 });
 
-// ── Smooth scroll ──
 var NAV = 56, PAD = 12;
 function smoothTo(y){
   y = Math.max(0, y);
@@ -1015,27 +1016,23 @@ function scrollToSection(id){
   var el = document.getElementById(id);
   if(el) smoothTo(window.scrollY + el.getBoundingClientRect().top - NAV - PAD);
 }
-function scrollToEl(el){
-  smoothTo(window.scrollY + el.getBoundingClientRect().top - NAV - PAD);
-}
 
-// ── Animation helpers (JS-measured height for true smooth timing) ──
-var EASE_OPEN = 'cubic-bezier(0,0,0.12,1)';
-var EASE_CLOSE = 'cubic-bezier(0.4,0,0.9,1)';
+/* Animation helpers — JS-measured height for true smooth timing */
+var EASE_OPEN  = 'cubic-bezier(0,0,0.06,1)';
+var EASE_CLOSE = 'cubic-bezier(0.5,0,1,1)';
 
 function animOpen(el, dur){
-  dur = dur || 1100;
+  dur = dur || 1500;
   if(el._animTimer) clearTimeout(el._animTimer);
   el.style.overflow = 'hidden';
   el.style.transition = 'none';
-  // Measure natural height with overflow visible
   el.style.maxHeight = 'none';
   el.style.opacity = '1';
   var h = el.scrollHeight;
   el.style.maxHeight = '0px';
   el.style.opacity = '0';
-  el.offsetHeight; // force reflow
-  el.style.transition = 'max-height '+dur+'ms '+EASE_OPEN+', opacity '+Math.round(dur*0.68)+'ms ease';
+  el.offsetHeight;
+  el.style.transition = 'max-height '+dur+'ms '+EASE_OPEN+', opacity '+Math.round(dur*0.6)+'ms ease';
   el.style.maxHeight = h+'px';
   el.style.opacity = '1';
   el._animTimer = setTimeout(function(){
@@ -1043,104 +1040,100 @@ function animOpen(el, dur){
     el.style.overflow = '';
     el.style.transition = '';
     el._animTimer = null;
-  }, dur+60);
+  }, dur + 80);
 }
 
 function animClose(el, dur){
-  dur = dur || 520;
+  dur = dur || 560;
   if(el._animTimer) clearTimeout(el._animTimer);
   el.style.overflow = 'hidden';
-  el.style.maxHeight = el.scrollHeight+'px';
-  el.offsetHeight; // force reflow
-  el.style.transition = 'max-height '+dur+'ms '+EASE_CLOSE+', opacity '+Math.round(dur*0.5)+'ms ease';
+  el.style.maxHeight = el.scrollHeight + 'px';
+  el.offsetHeight;
+  el.style.transition = 'max-height '+dur+'ms '+EASE_CLOSE+', opacity '+Math.round(dur*0.45)+'ms ease';
   el.style.maxHeight = '0px';
   el.style.opacity = '0';
-  el._animTimer = setTimeout(function(){ el._animTimer = null; }, dur+60);
+  el._animTimer = setTimeout(function(){ el._animTimer = null; }, dur + 80);
 }
 
-// ── Section toggle ──
+/* Section toggle */
 function toggleSec(id){
-  var hdr = document.getElementById(id+'-hdr');
+  var hdr  = document.getElementById(id+'-hdr');
   var body = document.getElementById(id+'-body');
   var isOpen = hdr.classList.contains('open');
 
-  // Close all sections
   document.querySelectorAll('.sec-hdr.open').forEach(function(h){
     h.classList.remove('open');
     var b = document.getElementById(h.id.replace('-hdr','-body'));
-    if(b){ b.classList.remove('open'); animClose(b, 520); }
+    if(b){ b.classList.remove('open'); animClose(b, 560); }
   });
 
   if(!isOpen){
     var hdrAbsY = window.scrollY + hdr.getBoundingClientRect().top;
     hdr.classList.add('open');
     body.classList.add('open');
-    animOpen(body, 1100);
+    animOpen(body, 1500);
     setTimeout(function(){
       smoothTo(hdrAbsY - NAV - PAD);
-      if(id === 'projects') setTimeout(function(){ openCo('niras'); }, 120);
+      if(id === 'projects') setTimeout(function(){ openCo('niras'); }, 140);
     }, 20);
   }
 }
 
-// ── Nav: open section + scroll ──
-function navTo(id){
-  toggleSec(id);
-}
+function navTo(id){ toggleSec(id); }
 
-// ── Company toggle ──
+/* Company toggle */
 function openCo(name){
-  var hdr = document.getElementById('co-'+name+'-hdr');
+  var hdr  = document.getElementById('co-'+name+'-hdr');
   var body = document.getElementById('co-'+name+'-body');
   if(!hdr || hdr.classList.contains('open')) return;
   document.querySelectorAll('.co-hdr.open').forEach(function(h){
     h.classList.remove('open');
     var b = document.getElementById(h.id.replace('-hdr','-body'));
-    if(b){ b.classList.remove('open'); animClose(b, 380); }
+    if(b){ b.classList.remove('open'); animClose(b, 400); }
   });
   hdr.classList.add('open');
   body.classList.add('open');
-  animOpen(body, 800);
+  animOpen(body, 900);
 }
 function toggleCo(name, e){
   if(e && e.target.closest('a')) return;
-  var hdr = document.getElementById('co-'+name+'-hdr');
+  var hdr  = document.getElementById('co-'+name+'-hdr');
   var body = document.getElementById('co-'+name+'-body');
   var isOpen = hdr.classList.contains('open');
   document.querySelectorAll('.co-hdr.open').forEach(function(h){
     h.classList.remove('open');
     var b = document.getElementById(h.id.replace('-hdr','-body'));
-    if(b){ b.classList.remove('open'); animClose(b, 380); }
+    if(b){ b.classList.remove('open'); animClose(b, 400); }
   });
   if(!isOpen){
     var hdrAbsY = window.scrollY + hdr.getBoundingClientRect().top;
     hdr.classList.add('open');
     body.classList.add('open');
-    animOpen(body, 800);
+    animOpen(body, 900);
     setTimeout(function(){ smoothTo(hdrAbsY - NAV - PAD); }, 20);
   }
 }
 
-// ── Other Work toggle ──
+/* Other Work toggle */
 function toggleOw(name){
-  var hdr = document.getElementById('ow-'+name+'-hdr');
+  var hdr  = document.getElementById('ow-'+name+'-hdr');
   var body = document.getElementById('ow-'+name+'-body');
   var isOpen = hdr.classList.contains('open');
   document.querySelectorAll('.ow-hdr.open').forEach(function(h){
     h.classList.remove('open');
     var b = document.getElementById(h.id.replace('-hdr','-body'));
-    if(b){ b.classList.remove('open'); animClose(b, 320); }
+    if(b){ b.classList.remove('open'); animClose(b, 340); }
   });
   if(!isOpen){
     var hdrAbsY = window.scrollY + hdr.getBoundingClientRect().top;
     hdr.classList.add('open');
     body.classList.add('open');
-    animOpen(body, 640);
+    animOpen(body, 700);
     setTimeout(function(){ smoothTo(hdrAbsY - NAV - PAD); }, 20);
   }
 }
 
-// ── Gallery nav ──
+/* Gallery nav */
 function galleryNav(btn, dir){
   var card = btn.closest('[data-images]');
   var imgs = card.dataset.images.split(',').filter(Boolean);
@@ -1159,12 +1152,10 @@ function galleryNav(btn, dir){
 function gNext(btn){ galleryNav(btn, 1); }
 function gPrev(btn){ galleryNav(btn,-1); }
 
-// Touch swipe for gallery images (only on desktop; mobile carousel uses CSS scroll)
 document.querySelectorAll('.gallery-viewport').forEach(function(vp){
   var sx = 0;
   vp.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; }, {passive:true});
   vp.addEventListener('touchend', function(e){
-    // On mobile inside a .projects-grid, let CSS scroll handle it
     if(window.innerWidth <= 600 && vp.closest('.projects-grid')) return;
     var dx = e.changedTouches[0].clientX - sx;
     if(Math.abs(dx) < 40) return;
@@ -1174,7 +1165,7 @@ document.querySelectorAll('.gallery-viewport').forEach(function(vp){
   }, {passive:true});
 });
 
-// ── Lightbox ──
+/* Lightbox */
 var lbImgs = [], lbI = 0;
 function openLightbox(img){
   var card = img.closest('[data-images]');
@@ -1183,7 +1174,6 @@ function openLightbox(img){
   updateLb();
   document.getElementById('lightbox').classList.add('active');
   document.body.style.overflow = 'hidden';
-  // Push a history state so the browser back button closes the lightbox
   history.pushState({lightbox:true}, '');
 }
 function updateLb(){
@@ -1203,16 +1193,11 @@ function closeLightbox(){
   if(!lb.classList.contains('active')) return;
   lb.classList.remove('active');
   document.body.style.overflow = '';
-  // If we pushed a state, pop it (without triggering another popstate)
   if(history.state && history.state.lightbox) history.back();
 }
-// Back button handler
-window.addEventListener('popstate', function(e){
+window.addEventListener('popstate', function(){
   var lb = document.getElementById('lightbox');
-  if(lb.classList.contains('active')){
-    lb.classList.remove('active');
-    document.body.style.overflow = '';
-  }
+  if(lb.classList.contains('active')){ lb.classList.remove('active'); document.body.style.overflow = ''; }
 });
 document.addEventListener('keydown', function(e){
   if(!document.getElementById('lightbox').classList.contains('active')) return;
@@ -1231,21 +1216,19 @@ document.querySelectorAll('.gallery-viewport img').forEach(function(img){
   img.addEventListener('click',function(e){ e.stopPropagation(); openLightbox(this); });
 });
 
-// ── Scroll animations ──
+/* Scroll animations */
 var obs = new IntersectionObserver(function(entries){
   entries.forEach(function(x){ if(x.isIntersecting) x.target.classList.add('visible'); });
 },{threshold:0.07,rootMargin:'0px 0px -24px 0px'});
 document.querySelectorAll('.fade-in').forEach(function(el){ obs.observe(el); });
 
-// ── Language bar animations ──
+/* Language bars */
 var barObs = new IntersectionObserver(function(entries){
-  entries.forEach(function(x){
-    if(x.isIntersecting) x.target.style.width = x.target.dataset.w+'%';
-  });
+  entries.forEach(function(x){ if(x.isIntersecting) x.target.style.width = x.target.dataset.w+'%'; });
 },{threshold:0.5});
 document.querySelectorAll('.lang-bar-fill').forEach(function(el){ barObs.observe(el); });
 
-// ── FAB: scroll-top vs hero-arrow ──
+/* FAB */
 var stBtn = document.getElementById('scroll-top');
 var haBtn = document.getElementById('hero-arrow');
 var heroEl = document.getElementById('about');
@@ -1257,21 +1240,28 @@ function updateFabs(){
 window.addEventListener('scroll', updateFabs, {passive:true});
 updateFabs();
 
-// ── Active nav link on scroll ──
+/* Active nav highlight — desktop + mobile */
 var NAV_SECTIONS = ['about','skills','experience','projects','other'];
-var navAs = document.querySelectorAll('.nav-links a[data-section]');
+var desktopAs = document.querySelectorAll('.nav-links a[data-section]');
+var mobileAs  = document.querySelectorAll('.mobile-menu a[data-section]');
 function updateNavActive(){
-  var scrollY = window.scrollY;
+  var sy = window.scrollY;
   var active = null;
   NAV_SECTIONS.forEach(function(id){
     var el = document.getElementById(id);
     if(!el) return;
-    var top = el.getBoundingClientRect().top + scrollY;
-    if(scrollY + NAV + 30 >= top) active = id;
+    if(sy + NAV + 30 >= window.scrollY + el.getBoundingClientRect().top + sy - sy) active = id;
   });
-  navAs.forEach(function(a){
-    a.classList.toggle('nav-active', a.dataset.section === active);
+  /* simpler: check each section's offset from top */
+  active = null;
+  NAV_SECTIONS.forEach(function(id){
+    var el = document.getElementById(id);
+    if(!el) return;
+    var top = el.getBoundingClientRect().top;
+    if(top <= NAV + 40) active = id;
   });
+  desktopAs.forEach(function(a){ a.classList.toggle('nav-active', a.dataset.section === active); });
+  mobileAs.forEach(function(a){ a.classList.toggle('nav-active', a.dataset.section === active); });
 }
 window.addEventListener('scroll', updateNavActive, {passive:true});
 updateNavActive();
