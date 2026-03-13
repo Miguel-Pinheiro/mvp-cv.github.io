@@ -175,6 +175,10 @@ a.tag:hover{opacity:.7;color:var(--tag-text);border-color:var(--text-3);}
 
 /* ── CODE CARDS ── */
 .other-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+
+/* ── AUTO CARDS (pyRevit & automations carousel) ── */
+.auto-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+.auto-cards>.code-card:first-child,.auto-cards>.code-card:last-child{grid-column:1 / -1;}
 .code-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
 .code-body{padding:22px;}
 .code-title{font-family:var(--font-display);font-size:0.96rem;font-weight:600;margin-bottom:9px;color:var(--text);}
@@ -275,6 +279,25 @@ footer .links a:hover{color:var(--text);opacity:1;}
   .projects-grid>.gallery-card.full-width{
     grid-column:auto;
     flex:0 0 84%;
+  }
+  /* ── Mobile auto-cards carousel ── */
+  .auto-cards{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    gap:10px;
+    padding-bottom:10px;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+    touch-action:pan-y;
+  }
+  .auto-cards::-webkit-scrollbar{display:none;}
+  .auto-cards>.code-card{
+    flex:0 0 84%;
+    scroll-snap-align:start;
+    min-width:0;
+    grid-column:auto;
   }
 }
 </style>
@@ -671,53 +694,57 @@ footer .links a:hover{color:var(--text);opacity:1;}
         <div class="subsec-body" id="subsec-pyrevit-body">
           <div class="subsec-inner">
 
-            <div class="code-card fade-in" style="margin-bottom:18px;" data-images="images/pyrevit_1.svg,images/pyrevit_2.svg">
-              <div class="gallery-viewport h240"><img src="images/pyrevit_1.svg" alt="pyRevit"><span class="img-counter">1 / 2</span><div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
-              <div class="code-body">
-                <div class="code-title">pyRevit Extension Tab</div>
-                <div class="code-desc">Custom pyRevit tab deployed company-wide at NIRAS with 40+ tools built in Python using the Revit API. Designed to standardize workflows, reduce repetitive tasks, and enforce quality across all BIM projects.</div>
-                <ul class="code-bullets">
-                  <li><strong>Model Cleanup</strong> — automated purging of unused families, views, and line styles; bulk model health checks</li>
-                  <li><strong>QA Checks</strong> — 2D element audits, dimension and text validation, in-place family detection, view filter overview and cross-model copy</li>
-                  <li><strong>Reinforcement Tools</strong> — rebar location tagging, partition splitting, unobscured visibility cleanup, and RFT detailing automation</li>
-                  <li><strong>Multi-Export</strong> — batch export to IFC, NWC, PDF, and DWG with configurable settings per view/sheet set</li>
-                  <li><strong>Element Picker</strong> — advanced selection and filtering tool with multi-criteria search across categories, parameters, and worksets</li>
-                  <li><strong>Model Checker</strong> — comprehensive model audit generating reports on naming, parameters, warnings, and compliance</li>
-                  <li><strong>Productivity</strong> — coordinate setting, wall/floor type creation, parameter concatenation, sheet renumbering, project browser reorganization</li>
-                  <li><strong>Help &amp; Standards</strong> — integrated links to ACC, drawing standards, MOLIO, naming conventions, templates, and a changelog/feedback system</li>
-                </ul>
-                <div class="project-tags" style="margin-top:14px;"><a class="tag" href="https://www.python.org" target="_blank">Python</a><a class="tag" href="https://aps.autodesk.com/developer/overview/revit" target="_blank">Revit API</a></div>
-              </div>
-            </div>
+            <div class="auto-cards">
 
-            <div class="other-grid" style="margin-bottom:18px;">
+              <div class="code-card fade-in" data-images="images/pyrevit_1.svg,images/pyrevit_2.svg">
+                <div class="gallery-viewport h240"><img src="images/pyrevit_1.svg" alt="pyRevit"><span class="img-counter">1 / 2</span><div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
+                <div class="code-body">
+                  <div class="code-title">pyRevit Extension Tab</div>
+                  <div class="code-desc">Custom pyRevit tab deployed company-wide at NIRAS with 40+ tools built in Python using the Revit API. Designed to standardize workflows, reduce repetitive tasks, and enforce quality across all BIM projects.</div>
+                  <ul class="code-bullets">
+                    <li><strong>Model Cleanup</strong> — automated purging of unused families, views, and line styles; bulk model health checks</li>
+                    <li><strong>QA Checks</strong> — 2D element audits, dimension and text validation, in-place family detection, view filter overview and cross-model copy</li>
+                    <li><strong>Reinforcement Tools</strong> — rebar location tagging, partition splitting, unobscured visibility cleanup, and RFT detailing automation</li>
+                    <li><strong>Multi-Export</strong> — batch export to IFC, NWC, PDF, and DWG with configurable settings per view/sheet set</li>
+                    <li><strong>Element Picker</strong> — advanced selection and filtering tool with multi-criteria search across categories, parameters, and worksets</li>
+                    <li><strong>Model Checker</strong> — comprehensive model audit generating reports on naming, parameters, warnings, and compliance</li>
+                    <li><strong>Productivity</strong> — coordinate setting, wall/floor type creation, parameter concatenation, sheet renumbering, project browser reorganization</li>
+                    <li><strong>Help &amp; Standards</strong> — integrated links to ACC, drawing standards, MOLIO, naming conventions, templates, and a changelog/feedback system</li>
+                  </ul>
+                  <div class="project-tags" style="margin-top:14px;"><a class="tag" href="https://www.python.org" target="_blank">Python</a><a class="tag" href="https://aps.autodesk.com/developer/overview/revit" target="_blank">Revit API</a></div>
+                </div>
+              </div>
+
               <div class="code-card fade-in" data-images="images/revizto_exp_1.svg,images/revizto_exp_2.svg">
                 <div class="gallery-viewport h240"><img src="images/revizto_exp_1.svg" alt="Revizto Exporter"><span class="img-counter">1 / 2</span><div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
                 <div class="code-body"><div class="code-title">Revizto Issue Exporter</div><div class="code-desc">Desktop app that connects to the Revizto API, fetches project issues, and exports a styled Excel report with color-coded statuses, summary dashboards, and drawing review tracking.</div><div class="project-tags" style="margin-top:10px;"><a class="tag" href="https://www.python.org" target="_blank">Python</a><a class="tag" href="https://revizto.com" target="_blank">Revizto API</a></div></div>
               </div>
-              <div class="code-card fade-in fade-in-delay-1" data-images="images/launcher_1.svg,images/launcher_2.svg">
+
+              <div class="code-card fade-in" data-images="images/launcher_1.svg,images/launcher_2.svg">
                 <div class="gallery-viewport h240"><img src="images/launcher_1.svg" alt="Revit Launcher"><span class="img-counter">1 / 2</span><div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
                 <div class="code-body"><div class="code-title">Revit Launcher</div><div class="code-desc">Batch launcher for opening Revit cloud models from ACC/BIM360, with per-model options to skip links, trigger exports, and sync &amp; close automatically.</div><div class="project-tags" style="margin-top:10px;"><a class="tag" href="https://www.python.org" target="_blank">Python</a></div></div>
               </div>
-              <div class="code-card fade-in fade-in-delay-2" data-images="images/hours_1.svg,images/hours_2.svg">
+
+              <div class="code-card fade-in" data-images="images/hours_1.svg,images/hours_2.svg">
                 <div class="gallery-viewport h240"><img src="images/hours_1.svg" alt="Hours Tracker"><span class="img-counter">1 / 2</span><div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div></div>
                 <div class="code-body"><div class="code-title">Hours Tracker Automation</div><div class="code-desc">n8n workflow that extracts calendar events, categorizes them by project, and auto-updates an Excel spreadsheet with logged hours and task descriptions per project.</div><div class="project-tags" style="margin-top:10px;"><a class="tag" href="https://n8n.io" target="_blank">n8n</a></div></div>
               </div>
-            </div>
 
-            <div class="code-card fade-in">
-              <div class="code-body">
-                <div class="code-title">Development &amp; BIM Infrastructure</div>
-                <div class="code-desc">Foundational BIM delivery work built from scratch at NIRAS and Gabriel Couto, enabling consistent model quality and team scalability.</div>
-                <ul class="code-bullets">
-                  <li><strong>Revit Templates</strong> — built from scratch for Structural, MEP, and infrastructure disciplines at both companies</li>
-                  <li><strong>BIM Procedures</strong> — authored BIM execution plans, naming conventions, and data standards</li>
-                  <li><strong>Knowledge Platform</strong> — internal documentation website with guides, tutorials, and reference material for project teams</li>
-                  <li><strong>Training</strong> — onboarding sessions and workshops for engineers, modelers, and BIM users</li>
-                  <li><strong>QA Procedures</strong> — cross-project quality checklists, review workflows, and model audit reports</li>
-                </ul>
-                <div class="project-tags" style="margin-top:14px;"><a class="tag" href="https://www.niras.com/" target="_blank">NIRAS</a><a class="tag" href="https://www.gabrielcouto.pt/" target="_blank">Gabriel Couto</a></div>
+              <div class="code-card fade-in">
+                <div class="code-body">
+                  <div class="code-title">Development &amp; BIM Infrastructure</div>
+                  <div class="code-desc">Foundational BIM delivery work built from scratch at NIRAS and Gabriel Couto, enabling consistent model quality and team scalability.</div>
+                  <ul class="code-bullets">
+                    <li><strong>Revit Templates</strong> — built from scratch for Structural, MEP, and infrastructure disciplines at both companies</li>
+                    <li><strong>BIM Procedures</strong> — authored BIM execution plans, naming conventions, and data standards</li>
+                    <li><strong>Knowledge Platform</strong> — internal documentation website with guides, tutorials, and reference material for project teams</li>
+                    <li><strong>Training</strong> — onboarding sessions and workshops for engineers, modelers, and BIM users</li>
+                    <li><strong>QA Procedures</strong> — cross-project quality checklists, review workflows, and model audit reports</li>
+                  </ul>
+                  <div class="project-tags" style="margin-top:14px;"><a class="tag" href="https://www.niras.com/" target="_blank">NIRAS</a><a class="tag" href="https://www.gabrielcouto.pt/" target="_blank">Gabriel Couto</a></div>
+                </div>
               </div>
+
             </div>
 
           </div>
@@ -824,6 +851,12 @@ function toggleSec(hdr) {
       if (hdr.id === 'projects-hdr') {
         setTimeout(function() { openCoById('co-niras'); }, 80);
       }
+      if (hdr.id === 'other-hdr') {
+        setTimeout(function() {
+          var ac = body.querySelector('.auto-cards');
+          if (ac) initCarousel(ac);
+        }, 80);
+      }
     });
   }
 }
@@ -847,6 +880,12 @@ function navTo(sel) {
     if (id === 'projects') {
       setTimeout(function() { openCoById('co-niras'); }, 80);
     }
+    if (id === 'other') {
+      setTimeout(function() {
+        var ac = document.querySelector('.auto-cards');
+        if (ac) initCarousel(ac);
+      }, 80);
+    }
   }
   var t = document.getElementById(id);
   if (t) {
@@ -861,7 +900,7 @@ function initCarousel(grid) {
   // Clean up previous listeners
   if (grid._carouselCleanup) { grid._carouselCleanup(); delete grid._carouselCleanup; }
   grid.querySelectorAll('.carousel-clone').forEach(function(c) { c.remove(); });
-  var cards = Array.from(grid.querySelectorAll('.gallery-card:not(.carousel-clone)'));
+  var cards = Array.from(grid.children).filter(function(c) { return !c.classList.contains('carousel-clone'); });
   if (cards.length < 2) return;
 
   function nearestIdx() {
