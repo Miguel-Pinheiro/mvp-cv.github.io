@@ -254,6 +254,27 @@ footer .links a:hover{color:var(--text);opacity:1;}
   .gallery-viewport.h480{height:220px;}
   .gallery-viewport.h320{height:200px;}
   .gallery-viewport.h240{height:180px;}
+  /* ── Mobile project card carousel ── */
+  .projects-grid{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    gap:10px;
+    padding-bottom:10px;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+  }
+  .projects-grid::-webkit-scrollbar{display:none;}
+  .projects-grid>.gallery-card{
+    flex:0 0 84%;
+    scroll-snap-align:start;
+    min-width:0;
+  }
+  .projects-grid>.gallery-card.full-width{
+    grid-column:auto;
+    flex:0 0 84%;
+  }
 }
 </style>
 </head>
@@ -730,7 +751,7 @@ footer .links a:hover{color:var(--text);opacity:1;}
       <a href="https://www.linkedin.com/in/miguelpinheiro23" target="_blank">LinkedIn</a>
       <a href="tel:+351912322614">Phone</a>
     </div>
-    <p>Miguel Pinheiro · BIM Specialist &amp; Civil Engineer · MSc FEUP 2021</p>
+    <p>Miguel Pinheiro · BIM Specialist &amp; Civil Engineer</p>
   </div>
 </footer>
 
