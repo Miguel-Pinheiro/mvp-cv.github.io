@@ -30,7 +30,7 @@
   --bg:#111111;--bg-2:#171717;--bg-card:#1d1d1d;
   --border:#2c2c2c;--border-2:#222222;
   --text:#d4d4d4;--text-2:#727272;--text-3:#484848;
-  --accent:#6090b0;
+  --accent:#3a607e;
   --tag-bg:rgba(255,255,255,0.04);--tag-border:rgba(255,255,255,0.09);--tag-text:#595959;
   --shadow:0 1px 3px rgba(0,0,0,0.5);--shadow-lg:0 8px 28px rgba(0,0,0,0.6);
   --img-ph:#202020;--nav-bg:rgba(17,17,17,0.9);
@@ -497,9 +497,9 @@ footer p{font-size:0.71rem;color:var(--text-3);}
         <h1 class="fade-in">Miguel<br><span class="accent">Pinheiro</span></h1>
         <p class="hero-sub fade-in fd1">BIM Specialist & Civil Engineer with experience in infrastructure projects across Scandinavia, Africa and Southeast Asia. Bridging design intent and digital delivery — from BIM models to automated workflows and custom scripts.</p>
         <div class="hero-contacts fade-in fd2">
-          <a class="contact-btn" href="mailto:miguelcvp10@gmail.com">
+          <a class="contact-btn" href="/cdn-cgi/l/email-protection#167b7f7163737a756066272656717b777f7a3875797b">
             <svg viewBox="0 0 16 16"><rect x="1.5" y="3.5" width="13" height="9" rx="1.5"/><polyline points="1.5,3.5 8,9 14.5,3.5"/></svg>
-            miguelcvp10@gmail.com
+            <span class="__cf_email__" data-cfemail="f29f9b9587979e918482c3c2b2959f939b9edc919d9f">[email&#160;protected]</span>
           </a>
           <a class="contact-btn" href="tel:+351912322614">
             <svg viewBox="0 0 16 16"><path d="M3.2 2.5h2.8l1 2.5L5.5 6.5A8.5 8.5 0 009.5 10.5l1.5-1.5 2.5 1V13a1 1 0 01-1 1A12.5 12.5 0 012 2.5a1 1 0 011.2 0z" stroke-width="1.7"/></svg>
@@ -519,14 +519,6 @@ footer p{font-size:0.71rem;color:var(--text-3);}
         <a class="stat-card" onclick="navTo('other')">
           <div class="stat-num">40+</div>
           <div class="stat-label">Custom Scripts</div>
-        </a>
-        <a class="stat-card" onclick="navTo('experience')">
-          <div class="stat-num">4+</div>
-          <div class="stat-label">Years Experience</div>
-        </a>
-        <a class="stat-card" onclick="scrollToSection('about')">
-          <div class="stat-num">3</div>
-          <div class="stat-label">Continents</div>
         </a>
       </div>
     </div>
@@ -979,7 +971,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
 <footer>
   <div class="container">
     <div class="footer-links">
-      <a href="mailto:miguelcvp10@gmail.com">Email</a>
+      <a href="/cdn-cgi/l/email-protection#d5b8bcb2a0b0b9b6a3a5e4e595b2b8b4bcb9fbb6bab8">Email</a>
       <a href="https://www.linkedin.com/in/miguelpinheiro23" target="_blank">LinkedIn</a>
       <a href="tel:+351912322614">Phone</a>
     </div>
@@ -987,7 +979,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── Force light mode always on first load ──
 document.documentElement.setAttribute('data-theme','light');
 
@@ -1053,14 +1045,16 @@ function toggleSec(id){
   });
 
   if(!isOpen){
+    // Capture header's absolute Y before expansion changes layout
+    var hdrAbsY = window.scrollY + hdr.getBoundingClientRect().top;
     hdr.classList.add('open');
     body.classList.add('open');
-    var sec = hdr.closest('section');
-    requestAnimationFrame(function(){
-      if(sec) scrollToEl(sec);
+    // After a short settle let layout reflow, then scroll so header sits just below nav
+    setTimeout(function(){
+      smoothTo(hdrAbsY - NAV - PAD);
       // Auto-open NIRAS on projects
-      if(id === 'projects') setTimeout(function(){ openCo('niras'); }, 60);
-    });
+      if(id === 'projects') setTimeout(function(){ openCo('niras'); }, 80);
+    }, 20);
   }
 }
 
@@ -1093,9 +1087,10 @@ function toggleCo(name, e){
     if(b) b.classList.remove('open');
   });
   if(!isOpen){
+    var hdrAbsY = window.scrollY + hdr.getBoundingClientRect().top;
     hdr.classList.add('open');
     body.classList.add('open');
-    requestAnimationFrame(function(){ scrollToEl(hdr); });
+    setTimeout(function(){ smoothTo(hdrAbsY - NAV - PAD); }, 20);
   }
 }
 
@@ -1110,9 +1105,10 @@ function toggleOw(name){
     if(b) b.classList.remove('open');
   });
   if(!isOpen){
+    var hdrAbsY = window.scrollY + hdr.getBoundingClientRect().top;
     hdr.classList.add('open');
     body.classList.add('open');
-    requestAnimationFrame(function(){ scrollToEl(hdr); });
+    setTimeout(function(){ smoothTo(hdrAbsY - NAV - PAD); }, 20);
   }
 }
 
@@ -1159,6 +1155,8 @@ function openLightbox(img){
   updateLb();
   document.getElementById('lightbox').classList.add('active');
   document.body.style.overflow = 'hidden';
+  // Push a history state so the browser back button closes the lightbox
+  history.pushState({lightbox:true}, '');
 }
 function updateLb(){
   var img = document.getElementById('lightbox-img');
@@ -1173,9 +1171,21 @@ function updateLb(){
 function lbPrev(){ lbI = (lbI-1+lbImgs.length)%lbImgs.length; updateLb(); }
 function lbNext(){ lbI = (lbI+1)%lbImgs.length; updateLb(); }
 function closeLightbox(){
-  document.getElementById('lightbox').classList.remove('active');
+  var lb = document.getElementById('lightbox');
+  if(!lb.classList.contains('active')) return;
+  lb.classList.remove('active');
   document.body.style.overflow = '';
+  // If we pushed a state, pop it (without triggering another popstate)
+  if(history.state && history.state.lightbox) history.back();
 }
+// Back button handler
+window.addEventListener('popstate', function(e){
+  var lb = document.getElementById('lightbox');
+  if(lb.classList.contains('active')){
+    lb.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+});
 document.addEventListener('keydown', function(e){
   if(!document.getElementById('lightbox').classList.contains('active')) return;
   if(e.key==='Escape') closeLightbox();
