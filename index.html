@@ -18,87 +18,99 @@
   --gap:24px;
 }
 [data-theme="dark"]{
-  --bg:#0c0d11;--bg-2:#111318;--bg-card:#161820;--border:#23252d;
-  --text:#d2d2da;--text-2:#80808c;--text-3:#4e4e5a;
-  --accent:#6584a0;--accent-2:#88aac0;
-  --tag-bg:rgba(101,132,160,0.1);--tag-border:rgba(101,132,160,0.22);
-  --gradient-hero:linear-gradient(155deg,#0c0d11 0%,#0e1220 55%,#0c0d11 100%);
-  --shadow:0 1px 4px rgba(0,0,0,0.5);--shadow-lg:0 10px 36px rgba(0,0,0,0.6);
-  --img-placeholder:#191b23;--toggle-track:#23252d;--toggle-knob:#d2d2da;
+  --bg:#101010;--bg-2:#161616;--bg-card:#1c1c1c;--border:#2a2a2a;
+  --text:#cecece;--text-2:#767676;--text-3:#484848;
+  --accent:#5f8bab;
+  --tag-bg:rgba(255,255,255,0.05);--tag-border:rgba(255,255,255,0.1);--tag-text:#606060;
+  --gradient-hero:linear-gradient(155deg,#101010 0%,#141414 55%,#101010 100%);
+  --shadow:0 1px 4px rgba(0,0,0,0.6);--shadow-lg:0 10px 36px rgba(0,0,0,0.7);
+  --img-placeholder:#1e1e1e;--toggle-track:#2a2a2a;--toggle-knob:#cecece;
 }
 [data-theme="light"]{
-  --bg:#f3f2ef;--bg-2:#f8f7f5;--bg-card:#ffffff;--border:#dbd8d2;
-  --text:#1c1c24;--text-2:#58585e;--text-3:#94949a;
-  --accent:#2c4e70;--accent-2:#3d6490;
-  --tag-bg:rgba(44,78,112,0.07);--tag-border:rgba(44,78,112,0.18);
-  --gradient-hero:linear-gradient(155deg,#f3f2ef 0%,#e8eaf2 55%,#f3f2ef 100%);
+  --bg:#f4f4f2;--bg-2:#f9f9f7;--bg-card:#ffffff;--border:#e0e0de;
+  --text:#1a1a1a;--text-2:#606060;--text-3:#989898;
+  --accent:#2e5070;
+  --tag-bg:rgba(0,0,0,0.04);--tag-border:rgba(0,0,0,0.1);--tag-text:#686868;
+  --gradient-hero:linear-gradient(155deg,#f4f4f2 0%,#eeeeec 55%,#f4f4f2 100%);
   --shadow:0 1px 4px rgba(0,0,0,0.06);--shadow-lg:0 10px 36px rgba(0,0,0,0.1);
-  --img-placeholder:#e8e8ec;--toggle-track:#c4c4cc;--toggle-knob:#ffffff;
+  --img-placeholder:#e8e8e6;--toggle-track:#c8c8c6;--toggle-knob:#ffffff;
 }
 
 html{scroll-behavior:smooth;}
 body{font-family:var(--font-body);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;transition:background .4s var(--ease),color .4s var(--ease);}
 a{color:var(--accent);text-decoration:none;cursor:pointer;}
-a:hover{color:var(--accent-2);}
+a:hover{opacity:.75;}
 ::-webkit-scrollbar{width:5px;}
 ::-webkit-scrollbar-track{background:var(--bg);}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:900;backdrop-filter:blur(20px) saturate(1.3);-webkit-backdrop-filter:blur(20px) saturate(1.3);background:color-mix(in srgb,var(--bg) 84%,transparent);border-bottom:1px solid var(--border);transition:background .4s var(--ease);}
+nav{position:fixed;top:0;left:0;right:0;z-index:900;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);background:color-mix(in srgb,var(--bg) 86%,transparent);border-bottom:1px solid var(--border);transition:background .4s var(--ease);}
 .nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 var(--gap);display:flex;align-items:center;justify-content:space-between;height:56px;}
-.nav-logo{font-family:var(--font-display);font-weight:700;font-size:1rem;color:var(--text);letter-spacing:0;}
+.nav-logo{font-family:var(--font-display);font-weight:700;font-size:1rem;color:var(--text);}
 .nav-logo .accent{color:var(--accent);}
-.nav-right{display:flex;align-items:center;gap:28px;}
+.nav-right{display:flex;align-items:center;gap:24px;}
 .nav-links{display:flex;gap:22px;}
 .nav-links a{font-size:0.74rem;font-weight:500;color:var(--text-2);letter-spacing:0.07em;text-transform:uppercase;transition:color .2s;position:relative;cursor:pointer;}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width .3s var(--ease);}
-.nav-links a:hover{color:var(--text);}
+.nav-links a:hover{color:var(--text);opacity:1;}
 .nav-links a:hover::after{width:100%;}
 
-/* ── THEME TOGGLE ── */
-.theme-switch{display:flex;align-items:center;gap:7px;cursor:pointer;-webkit-user-select:none;user-select:none;}
-.theme-switch .ico{font-size:13px;line-height:1;}
-.switch-track{width:36px;height:19px;border-radius:10px;background:var(--toggle-track);position:relative;transition:background .3s;}
-.switch-knob{width:13px;height:13px;border-radius:50%;background:var(--toggle-knob);position:absolute;top:3px;left:3px;transition:transform .3s var(--ease);box-shadow:0 1px 3px rgba(0,0,0,0.25);}
-[data-theme="light"] .switch-knob{transform:translateX(17px);}
+/* ── THEME BUTTON ── */
+.theme-btn{background:transparent;border:1px solid var(--border);color:var(--text-2);width:30px;height:30px;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
+.theme-btn:hover{border-color:var(--text);color:var(--text);}
+.theme-btn svg{width:15px;height:15px;display:block;}
+[data-theme="dark"] .icon-sun{display:none;}
+[data-theme="dark"] .icon-moon{display:block;}
+[data-theme="light"] .icon-moon{display:none;}
+[data-theme="light"] .icon-sun{display:block;}
 
 /* ── SECTION BASE ── */
 section{padding:80px 0;}
 .container{max-width:var(--max-w);margin:0 auto;padding:0 var(--gap);}
-.section-label{font-family:var(--font-mono);font-size:0.65rem;font-weight:500;text-transform:uppercase;letter-spacing:0.18em;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+.section-label{font-family:var(--font-mono);font-size:0.64rem;font-weight:500;text-transform:uppercase;letter-spacing:0.18em;color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:10px;}
 .section-label::before{content:'';width:18px;height:1px;background:var(--accent);}
 .section-title{font-family:var(--font-display);font-size:clamp(1.6rem,3.2vw,2.4rem);font-weight:700;letter-spacing:0;line-height:1.2;}
 
 /* ── SECTION COLLAPSE HEADER ── */
-.sec-hdr{display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;padding-bottom:0;user-select:none;margin-bottom:0;}
+.sec-hdr{display:flex;align-items:flex-start;justify-content:space-between;cursor:pointer;user-select:none;}
 .sec-hdr-left{flex:1;}
-.coll-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--text-2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0;margin-top:4px;}
-.coll-btn svg{transition:transform .3s var(--ease);}
-.sec-hdr.open .coll-btn svg,.co-hdr.open .coll-btn svg,.subsec-hdr.open .coll-btn svg{transform:rotate(180deg);}
-.sec-hdr:hover .coll-btn{border-color:var(--accent);color:var(--accent);}
+.coll-btn{width:30px;height:30px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0;margin-top:4px;}
+.coll-btn svg{transition:transform .3s var(--ease);width:11px;height:11px;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none;}
+.sec-hdr.open .coll-btn svg{transform:rotate(180deg);}
+.sec-hdr:hover .coll-btn{border-color:var(--text-2);color:var(--text);}
 
 /* ── COLLAPSIBLE BODIES ── */
 .sec-body{overflow:hidden;max-height:0;transition:max-height .45s var(--ease);}
 .co-body{overflow:hidden;max-height:0;transition:max-height .4s var(--ease);}
-.proj-body{overflow:hidden;max-height:0;transition:max-height .35s var(--ease);}
 .subsec-body{overflow:hidden;max-height:0;transition:max-height .4s var(--ease);}
 .sec-inner{padding-top:36px;}
-.co-inner{padding-top:18px;}
-.subsec-inner{padding-top:20px;}
+.co-inner{padding-top:16px;}
+.subsec-inner{padding-top:18px;}
+
+/* Desktop: company always expanded */
+@media(min-width:601px){
+  .co-body{max-height:none!important;overflow:visible!important;transition:none!important;}
+  .co-hdr{cursor:default!important;pointer-events:none;}
+  .co-hdr .coll-btn{display:none!important;}
+  .co-hdr h3 a{pointer-events:all;}
+}
+@media(max-width:600px){
+  .co-hdr h3 a{pointer-events:none;}
+}
 
 /* ── HERO ── */
 .hero{min-height:100vh;display:flex;align-items:center;background:var(--gradient-hero);position:relative;overflow:hidden;padding-top:56px;}
 .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
 .hero h1{font-family:var(--font-display);font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:700;letter-spacing:-0.01em;line-height:1.1;margin-bottom:20px;}
 .hero h1 .accent{color:var(--accent);}
-.hero-sub{font-size:0.96rem;color:var(--text-2);line-height:1.8;max-width:520px;margin-bottom:30px;}
+.hero-sub{font-size:0.95rem;color:var(--text-2);line-height:1.82;max-width:520px;margin-bottom:30px;}
 .hero-contacts{display:flex;flex-wrap:wrap;gap:10px;}
-.hero-contacts a{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:var(--radius-sm);font-size:0.76rem;font-weight:500;border:1px solid var(--border);color:var(--text-2);background:var(--bg-2);transition:all .22s var(--ease);}
-.hero-contacts a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px);box-shadow:var(--shadow-lg);}
+.hero-contacts a{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:var(--radius-sm);font-size:0.76rem;font-weight:500;border:1px solid var(--border);color:var(--text-2);background:var(--bg-2);transition:all .2s;opacity:1;}
+.hero-contacts a:hover{border-color:var(--text-2);color:var(--text);opacity:1;transform:translateY(-1px);box-shadow:var(--shadow-lg);}
 .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:26px 22px;display:block;text-decoration:none;transition:border-color .22s,transform .22s;}
-.stat-card:hover{border-color:var(--accent);transform:translateY(-2px);}
+.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:26px 22px;display:block;text-decoration:none;transition:border-color .2s,transform .2s;opacity:1;}
+.stat-card:hover{border-color:var(--text-3);transform:translateY(-2px);opacity:1;}
 .stat-num{font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--accent);letter-spacing:-0.01em;line-height:1;}
 .stat-label{font-size:0.76rem;color:var(--text-2);margin-top:6px;font-weight:400;}
 
@@ -106,10 +118,9 @@ section{padding:80px 0;}
 .skills-section{background:var(--bg-2);}
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;}
 .skill-group{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;}
-.skill-group-title{font-family:var(--font-display);font-size:0.9rem;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
-.skill-group-title .icon{width:28px;height:28px;border-radius:6px;background:var(--tag-bg);display:flex;align-items:center;justify-content:center;font-size:14px;}
+.skill-group-title{font-family:var(--font-display);font-size:0.9rem;font-weight:600;margin-bottom:14px;color:var(--text);}
 .skill-tags{display:flex;flex-wrap:wrap;gap:6px;}
-.tag{padding:4px 11px;border-radius:100px;font-size:0.7rem;font-weight:500;background:var(--tag-bg);border:1px solid var(--tag-border);color:var(--accent);}
+.tag{padding:4px 11px;border-radius:4px;font-size:0.7rem;font-weight:500;background:var(--tag-bg);border:1px solid var(--tag-border);color:var(--tag-text);}
 
 /* ── EXPERIENCE ── */
 .exp-list{display:flex;flex-direction:column;}
@@ -117,38 +128,28 @@ section{padding:80px 0;}
 .exp-item:last-child{border-bottom:none;}
 .exp-date{font-family:var(--font-mono);font-size:0.72rem;color:var(--text-3);padding-top:4px;letter-spacing:0.04em;}
 .exp-company{font-family:var(--font-display);font-size:1.15rem;font-weight:600;margin-bottom:4px;}
-.exp-company a{color:inherit;}
-.exp-company a:hover{color:var(--accent);}
+.exp-company a{color:inherit;text-decoration:none;}
+.exp-company a:hover{opacity:.65;}
 .exp-role{font-size:0.8rem;color:var(--accent);font-weight:500;margin-bottom:10px;letter-spacing:0.01em;}
 .exp-desc{font-size:0.82rem;color:var(--text-2);line-height:1.78;max-width:640px;}
-
-/* ── PROJECTS FILTER BAR ── */
-.filter-bar{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:28px;}
-.filter-btn{padding:5px 14px;border-radius:100px;font-size:0.72rem;font-weight:500;border:1px solid var(--border);background:transparent;color:var(--text-2);cursor:pointer;transition:all .18s;font-family:var(--font-body);letter-spacing:0.02em;}
-.filter-btn:hover{border-color:var(--accent);color:var(--accent);}
-.filter-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
-[data-theme="light"] .filter-btn.active{color:#fff;}
+.thesis-link{color:inherit;text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px;}
+.thesis-link:hover{opacity:.65;color:inherit;}
 
 /* ── COMPANY SECTION ── */
-.company-section{margin-bottom:36px;}
+.company-section{margin-bottom:40px;}
 .company-section:last-child{margin-bottom:0;}
-.co-hdr{display:flex;align-items:center;gap:12px;cursor:pointer;padding:14px 0;user-select:none;border-bottom:1px solid var(--border);}
-.co-hdr:hover h3{color:var(--accent);}
-.co-hdr h3{font-family:var(--font-display);font-size:1.1rem;font-weight:600;flex:1;transition:color .2s;}
-.co-hdr h3 a{color:inherit;pointer-events:none;}
+.co-hdr{display:flex;align-items:center;gap:14px;cursor:pointer;padding:14px 0;user-select:none;border-bottom:1px solid var(--border);}
+.co-hdr h3{font-family:var(--font-display);font-size:1.1rem;font-weight:600;flex:1;color:var(--text);}
+.co-hdr h3 a{color:inherit;text-decoration:none;}
+@media(min-width:601px){.co-hdr:hover h3 a{opacity:.65;}}
+.co-years{font-family:var(--font-mono);font-size:0.68rem;color:var(--text-3);font-weight:400;margin-left:10px;letter-spacing:0.02em;}
 
 /* ── PROJECTS GRID ── */
 .projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
 .gallery-card.full-width{grid-column:1 / -1;}
-.gallery-card.filtered-out{display:none;}
 
-/* ── PROJECT CARD COLLAPSE ── */
+/* ── GALLERY CARD ── */
 .gallery-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
-.proj-hdr{padding:16px 18px;cursor:pointer;user-select:none;transition:background .18s;}
-.proj-hdr:hover{background:color-mix(in srgb,var(--accent) 5%,transparent);}
-.proj-hdr-row{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;}
-.proj-hdr-row .project-name{margin-bottom:0;}
-.proj-hdr .project-tags{margin-top:8px;}
 
 /* ── GALLERY VIEWPORT ── */
 .gallery-viewport{position:relative;overflow:hidden;background:var(--img-placeholder);touch-action:pan-y;}
@@ -157,39 +158,36 @@ section{padding:80px 0;}
 .gallery-viewport.h320{height:320px;}
 .gallery-viewport.h480{height:480px;}
 .gal-arrows{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 8px;pointer-events:none;}
-.gal-arrows button{pointer-events:all;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,0.22);background:rgba(0,0,0,0.46);color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .18s,border-color .18s;line-height:1;padding:0;}
-.gal-arrows button:hover{background:var(--accent);border-color:var(--accent);}
+.gal-arrows button{pointer-events:all;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,0.2);background:rgba(0,0,0,0.45);color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .18s;line-height:1;padding:0;}
+.gal-arrows button:hover{background:rgba(0,0,0,0.7);}
 .img-counter{position:absolute;top:10px;right:10px;padding:3px 8px;border-radius:100px;font-size:0.62rem;font-weight:600;background:rgba(0,0,0,0.52);color:#fff;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);letter-spacing:0.05em;}
 .gallery-body{padding:18px 18px 20px;}
 .img-placeholder-box{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:8px;color:var(--text-3);font-size:0.74rem;}
 
 /* ── PROJECT META ── */
 .project-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;}
-.project-type{font-family:var(--font-mono);font-size:0.62rem;text-transform:uppercase;letter-spacing:0.13em;color:var(--accent);font-weight:500;}
+.project-type{font-family:var(--font-mono);font-size:0.62rem;text-transform:uppercase;letter-spacing:0.13em;color:var(--text-3);font-weight:500;}
 .project-year{font-size:0.66rem;color:var(--text-3);}
-.project-company-tag{margin-left:auto;padding:2px 9px;border-radius:100px;font-size:0.62rem;font-weight:600;background:var(--tag-bg);border:1px solid var(--tag-border);color:var(--accent);}
-.project-name{font-family:var(--font-display);font-size:1rem;font-weight:600;letter-spacing:0;margin-bottom:4px;}
-.project-name a{color:inherit;}
-.project-name a:hover{color:var(--accent);}
+.project-name{font-family:var(--font-display);font-size:1rem;font-weight:600;letter-spacing:0;margin-bottom:6px;color:var(--text);}
 .project-desc{font-size:0.79rem;color:var(--text-2);line-height:1.72;margin-bottom:10px;}
 .project-role-label{font-size:0.62rem;font-weight:600;text-transform:uppercase;letter-spacing:0.12em;color:var(--text-3);margin:10px 0 4px;}
-.project-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.project-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px;}
 .project-tags .tag{font-size:0.62rem;padding:3px 9px;}
 
 /* ── CODE CARDS ── */
 .other-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
 .code-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
 .code-body{padding:22px;}
-.code-title{font-family:var(--font-display);font-size:0.96rem;font-weight:600;margin-bottom:9px;}
+.code-title{font-family:var(--font-display);font-size:0.96rem;font-weight:600;margin-bottom:9px;color:var(--text);}
 .code-desc{font-size:0.79rem;color:var(--text-2);line-height:1.68;}
 .code-bullets{margin:12px 0 0;padding:0 0 0 16px;font-size:0.79rem;color:var(--text-2);line-height:1.9;list-style:disc;}
 .code-bullets strong{color:var(--text);font-weight:600;}
 
 /* ── SUB-SECTION HEADER (Other Work) ── */
-.subsec-hdr{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:10px 0;user-select:none;border-bottom:1px solid var(--border);margin-bottom:0;}
+.subsec-hdr{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:10px 0;user-select:none;border-bottom:1px solid var(--border);}
 .subsec-hdr h3{font-family:var(--font-display);font-size:1rem;font-weight:600;color:var(--text-2);transition:color .2s;}
 .subsec-hdr:hover h3{color:var(--text);}
-.subsec-hdr:hover .coll-btn{border-color:var(--accent);color:var(--accent);}
+.subsec-hdr.open .coll-btn svg{transform:rotate(180deg);}
 
 /* ── LANGUAGES ── */
 .lang-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px;}
@@ -203,40 +201,32 @@ section{padding:80px 0;}
 footer{padding:44px 0;border-top:1px solid var(--border);text-align:center;}
 footer p{font-size:0.74rem;color:var(--text-3);}
 footer .links{display:flex;justify-content:center;gap:18px;margin-bottom:12px;}
-footer .links a{color:var(--text-2);font-size:0.78rem;font-weight:500;}
-footer .links a:hover{color:var(--accent);}
+footer .links a{color:var(--text-2);font-size:0.78rem;font-weight:500;opacity:1;}
+footer .links a:hover{color:var(--text);opacity:1;}
 
 /* ── LIGHTBOX ── */
-#lightbox{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.93);align-items:center;justify-content:center;flex-direction:column;}
+#lightbox{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.94);align-items:center;justify-content:center;}
 #lightbox.active{display:flex;}
-#lightbox-img{max-width:86vw;max-height:84vh;object-fit:contain;border-radius:var(--radius);cursor:default;display:block;}
-#lightbox-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);color:#fff;width:38px;height:38px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1;transition:background .18s;}
-#lightbox-close:hover{background:rgba(255,255,255,0.2);}
+#lightbox-img{max-width:88vw;max-height:88vh;object-fit:contain;border-radius:var(--radius);cursor:default;display:block;}
+#lightbox-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#fff;width:36px;height:36px;border-radius:6px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1;transition:background .18s;}
+#lightbox-close:hover{background:rgba(255,255,255,0.18);}
 #lb-counter{position:absolute;top:14px;left:50%;transform:translateX(-50%);padding:4px 12px;border-radius:100px;font-size:0.68rem;font-weight:600;background:rgba(255,255,255,0.1);color:#fff;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);letter-spacing:0.05em;pointer-events:none;}
-.lb-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background .18s;z-index:1;padding:0;}
+.lb-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.08);color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background .18s;z-index:1;padding:0;}
 .lb-arrow:hover{background:rgba(255,255,255,0.18);}
 #lb-prev{left:16px;}
 #lb-next{right:16px;}
 .lb-arrow.hidden{opacity:0;pointer-events:none;}
+/* No arrows in lightbox on mobile */
+@media(max-width:600px){.lb-arrow{display:none!important;}}
 
-/* ── MOBILE SIDEBAR ── */
-.mobile-sidebar{display:none;position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:850;flex-direction:column;background:color-mix(in srgb,var(--bg-card) 92%,transparent);border:1px solid var(--border);border-right:none;border-radius:8px 0 0 8px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);overflow:hidden;box-shadow:var(--shadow-lg);}
-.sb-item{display:flex;align-items:center;gap:8px;padding:9px 12px;cursor:pointer;border:none;border-bottom:1px solid var(--border);background:transparent;text-align:left;transition:background .18s;width:100%;}
-.sb-item:last-child{border-bottom:none;}
-.sb-item:hover{background:color-mix(in srgb,var(--accent) 8%,transparent);}
-.sb-item.active{background:color-mix(in srgb,var(--accent) 12%,transparent);}
-.sb-dot{width:6px;height:6px;border-radius:50%;background:var(--border);flex-shrink:0;transition:background .2s,transform .2s;}
-.sb-item.active .sb-dot{background:var(--accent);transform:scale(1.4);}
-.sb-label{font-size:0.6rem;font-weight:500;color:var(--text-2);letter-spacing:0.08em;text-transform:uppercase;white-space:nowrap;font-family:var(--font-body);}
-.sb-item.active .sb-label{color:var(--accent);}
-.sb-top{display:none;align-items:center;justify-content:center;padding:8px 12px;border:none;border-top:1px solid var(--border);background:transparent;color:var(--text-2);font-size:0.62rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;font-family:var(--font-body);transition:all .18s;width:100%;}
-.sb-top:hover{background:color-mix(in srgb,var(--accent) 8%,transparent);color:var(--accent);}
-.sb-top.visible{display:flex;}
-
-/* ── BACK TO TOP (desktop) ── */
-.back-to-top{position:fixed;bottom:24px;right:24px;z-index:800;width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:var(--bg-card);color:var(--text-2);font-size:18px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);transition:all .2s;}
-.back-to-top:hover{border-color:var(--accent);color:var(--accent);}
-.back-to-top.visible{display:flex;}
+/* ── SCROLL-TO-TOP BUTTON ── */
+.scroll-top{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:800;width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:var(--bg-card);color:var(--text-2);cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);transition:all .2s;}
+.scroll-top svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none;}
+.scroll-top:hover{border-color:var(--text-2);color:var(--text);}
+.scroll-top.visible{display:flex;}
+@media(min-width:601px){
+  .scroll-top{left:auto;right:24px;transform:none;bottom:24px;}
+}
 
 /* ── ANIMATIONS ── */
 .fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease),transform .6s var(--ease);}
@@ -244,9 +234,6 @@ footer .links a:hover{color:var(--accent);}
 .fade-in-delay-1{transition-delay:.1s;}
 .fade-in-delay-2{transition-delay:.2s;}
 .fade-in-delay-3{transition-delay:.3s;}
-
-/* ── CHEVRON SVG ── */
-.chevron{width:11px;height:11px;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none;flex-shrink:0;}
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
@@ -259,8 +246,6 @@ footer .links a:hover{color:var(--accent);}
   .gallery-viewport.h480{height:300px;}
 }
 @media(max-width:600px){
-  .mobile-sidebar{display:flex;}
-  .back-to-top{display:none!important;}
   .nav-links{display:none;}
   .other-grid{grid-template-columns:1fr;}
   .skills-grid{grid-template-columns:1fr;}
@@ -268,12 +253,8 @@ footer .links a:hover{color:var(--accent);}
   .gallery-viewport.h480{height:220px;}
   .gallery-viewport.h320{height:200px;}
   .gallery-viewport.h240{height:180px;}
-  #lb-prev{left:8px;}
-  #lb-next{right:8px;}
-  .lb-arrow{width:36px;height:36px;font-size:18px;}
-}
-@media(min-width:601px){
-  .back-to-top.visible{display:flex;}
+  .co-hdr{cursor:pointer;}
+  .co-hdr .coll-btn{display:flex!important;}
 }
 </style>
 </head>
@@ -288,28 +269,10 @@ footer .links a:hover{color:var(--accent);}
   <button class="lb-arrow" id="lb-next" onclick="lbNext();event.stopPropagation()">›</button>
 </div>
 
-<!-- ── MOBILE SIDEBAR ── -->
-<div class="mobile-sidebar" id="mobile-sidebar">
-  <button class="sb-item active" data-target="about" onclick="sbNav('about')">
-    <span class="sb-dot"></span><span class="sb-label">About</span>
-  </button>
-  <button class="sb-item" data-target="skills" onclick="sbNav('skills')">
-    <span class="sb-dot"></span><span class="sb-label">Skills</span>
-  </button>
-  <button class="sb-item" data-target="experience" onclick="sbNav('experience')">
-    <span class="sb-dot"></span><span class="sb-label">Exp.</span>
-  </button>
-  <button class="sb-item" data-target="projects" onclick="sbNav('projects')">
-    <span class="sb-dot"></span><span class="sb-label">Projects</span>
-  </button>
-  <button class="sb-item" data-target="other" onclick="sbNav('other')">
-    <span class="sb-dot"></span><span class="sb-label">Other</span>
-  </button>
-  <button class="sb-top" id="sb-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
-</div>
-
-<!-- ── BACK TO TOP (desktop) ── -->
-<button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<!-- ── SCROLL TO TOP ── -->
+<button class="scroll-top" id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 14 14"><polyline points="2,10 7,4 12,10"/></svg>
+</button>
 
 <!-- ── NAV ── -->
 <nav>
@@ -323,11 +286,22 @@ footer .links a:hover{color:var(--accent);}
         <a onclick="navTo('#projects')">Projects</a>
         <a onclick="navTo('#other')">Other Work</a>
       </div>
-      <div class="theme-switch" onclick="toggleTheme()" role="button" aria-label="Toggle theme">
-        <span class="ico">🌙</span>
-        <div class="switch-track"><div class="switch-knob"></div></div>
-        <span class="ico">☀️</span>
-      </div>
+      <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+        <!-- Moon: shown in dark mode -->
+        <svg class="icon-moon" viewBox="0 0 20 20" fill="currentColor"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+        <!-- Sun: shown in light mode -->
+        <svg class="icon-sun" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <circle cx="10" cy="10" r="3.5"/>
+          <line x1="10" y1="1.5" x2="10" y2="3.5"/>
+          <line x1="10" y1="16.5" x2="10" y2="18.5"/>
+          <line x1="1.5" y1="10" x2="3.5" y2="10"/>
+          <line x1="16.5" y1="10" x2="18.5" y2="10"/>
+          <line x1="4.1" y1="4.1" x2="5.5" y2="5.5"/>
+          <line x1="14.5" y1="14.5" x2="15.9" y2="15.9"/>
+          <line x1="4.1" y1="15.9" x2="5.5" y2="14.5"/>
+          <line x1="14.5" y1="5.5" x2="15.9" y2="4.1"/>
+        </svg>
+      </button>
     </div>
   </div>
 </nav>
@@ -346,8 +320,8 @@ footer .links a:hover{color:var(--accent);}
         </div>
       </div>
       <div class="hero-stats fade-in fade-in-delay-2">
-        <a class="stat-card" href="#projects" onclick="navTo('#projects')"><div class="stat-num">15+</div><div class="stat-label">Projects Delivered</div></a>
-        <a class="stat-card" href="#other" onclick="navTo('#other')"><div class="stat-num">40+</div><div class="stat-label">Custom Scripts Built</div></a>
+        <a class="stat-card" onclick="navTo('#projects')"><div class="stat-num">15+</div><div class="stat-label">Projects Delivered</div></a>
+        <a class="stat-card" onclick="navTo('#other')"><div class="stat-num">40+</div><div class="stat-label">Custom Scripts Built</div></a>
       </div>
     </div>
   </div>
@@ -358,28 +332,28 @@ footer .links a:hover{color:var(--accent);}
   <div class="container">
     <div class="sec-hdr" id="skills-hdr" onclick="toggleSec(this)">
       <div class="sec-hdr-left">
-        <div class="section-label fade-in">Capabilities</div>
-        <h2 class="section-title fade-in">Skills &amp; Software</h2>
+        <div class="section-label">Capabilities</div>
+        <h2 class="section-title">Skills &amp; Software</h2>
       </div>
-      <button class="coll-btn" tabindex="-1"><svg class="chevron" viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
+      <button class="coll-btn" tabindex="-1"><svg viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
     </div>
     <div class="sec-body" id="skills-body">
       <div class="sec-inner">
         <div class="skills-grid">
           <div class="skill-group fade-in">
-            <div class="skill-group-title"><span class="icon">🏗</span> BIM</div>
+            <div class="skill-group-title">BIM</div>
             <div class="skill-tags">
               <span class="tag">Revit</span><span class="tag">Revizto</span><span class="tag">Revizto API</span><span class="tag">ACC / BIM360</span><span class="tag">Navisworks</span><span class="tag">ProjectWise</span><span class="tag">Trimble Connect</span><span class="tag">Rhino</span><span class="tag">Enscape</span><span class="tag">Lumion</span><span class="tag">Structural Modeling</span><span class="tag">3D Reinforcement</span><span class="tag">MEP Coordination</span><span class="tag">Quantity Take-Off</span><span class="tag">Drawing Production</span><span class="tag">AutoCAD</span><span class="tag">CYPE</span>
             </div>
           </div>
           <div class="skill-group fade-in fade-in-delay-1">
-            <div class="skill-group-title"><span class="icon">⚙️</span> Automation &amp; Scripting</div>
+            <div class="skill-group-title">Automation &amp; Scripting</div>
             <div class="skill-tags">
               <span class="tag">Python</span><span class="tag">pyRevit</span><span class="tag">Revit API</span><span class="tag">Dynamo</span><span class="tag">Grasshopper</span><span class="tag">C#</span><span class="tag">n8n</span><span class="tag">Virtual Machines</span>
             </div>
           </div>
           <div class="skill-group fade-in fade-in-delay-2">
-            <div class="skill-group-title"><span class="icon">📋</span> Coordination &amp; Management</div>
+            <div class="skill-group-title">Coordination &amp; Management</div>
             <div class="skill-tags">
               <span class="tag">BIM Coordination</span><span class="tag">BIM Management</span><span class="tag">Clash Detection</span><span class="tag">Quality Assurance</span><span class="tag">CDE Management</span><span class="tag">Deliveries Supervision</span><span class="tag">Team Mentoring</span><span class="tag">Excel</span>
             </div>
@@ -402,10 +376,10 @@ footer .links a:hover{color:var(--accent);}
   <div class="container">
     <div class="sec-hdr" id="experience-hdr" onclick="toggleSec(this)">
       <div class="sec-hdr-left">
-        <div class="section-label fade-in">Career</div>
-        <h2 class="section-title fade-in">Professional Experience</h2>
+        <div class="section-label">Career</div>
+        <h2 class="section-title">Professional Experience</h2>
       </div>
-      <button class="coll-btn" tabindex="-1"><svg class="chevron" viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
+      <button class="coll-btn" tabindex="-1"><svg viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
     </div>
     <div class="sec-body" id="experience-body">
       <div class="sec-inner">
@@ -431,7 +405,7 @@ footer .links a:hover{color:var(--accent);}
             <div>
               <div class="exp-company"><a href="https://www.garcia.pt/en/" target="_blank">Garcia, Garcia S.A.</a></div>
               <div class="exp-role">Master Thesis Internship</div>
-              <div class="exp-desc">Developed thesis on "Automatic Estimation of Quantities of Reinforced Concrete using BIM" — comparing traditional QTO workflows with BIM-driven approaches using Revit for rebar modeling and automated quantity extraction.</div>
+              <div class="exp-desc">Developed thesis on <a href="https://repositorio-aberto.up.pt/handle/10216/135079" target="_blank" class="thesis-link">Automatic Estimation of Quantities of Reinforced Concrete using BIM</a> — comparing traditional QTO workflows with BIM-driven approaches using Revit for rebar modeling and automated quantity extraction.</div>
             </div>
           </div>
           <div class="exp-item fade-in">
@@ -461,187 +435,125 @@ footer .links a:hover{color:var(--accent);}
   <div class="container">
     <div class="sec-hdr" id="projects-hdr" onclick="toggleSec(this)">
       <div class="sec-hdr-left">
-        <div class="section-label fade-in">Portfolio</div>
-        <h2 class="section-title fade-in">Key Projects</h2>
+        <div class="section-label">Portfolio</div>
+        <h2 class="section-title">Key Projects</h2>
       </div>
-      <button class="coll-btn" tabindex="-1"><svg class="chevron" viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
+      <button class="coll-btn" tabindex="-1"><svg viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
     </div>
     <div class="sec-body" id="projects-body">
       <div class="sec-inner">
 
-        <!-- Filter bar -->
-        <div class="filter-bar fade-in">
-          <button class="filter-btn active" data-filter="all" onclick="setFilter(this)">All</button>
-          <button class="filter-btn" data-filter="infrastructure" onclick="setFilter(this)">Infrastructure</button>
-          <button class="filter-btn" data-filter="housing" onclick="setFilter(this)">Housing</button>
-          <button class="filter-btn" data-filter="railway" onclick="setFilter(this)">Railway</button>
-          <button class="filter-btn" data-filter="port" onclick="setFilter(this)">Port</button>
-          <button class="filter-btn" data-filter="rebar" onclick="setFilter(this)">3D Reinforcement</button>
-          <button class="filter-btn" data-filter="automation" onclick="setFilter(this)">Automation</button>
-          <button class="filter-btn" data-filter="research" onclick="setFilter(this)">Research</button>
-        </div>
-
         <!-- NIRAS -->
         <div class="company-section">
           <div class="co-hdr" id="co-niras-hdr" onclick="toggleCo(this)">
-            <h3><a href="https://www.niras.com/" target="_blank">NIRAS A/S</a></h3>
-            <button class="coll-btn" tabindex="-1"><svg class="chevron" viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
+            <h3><a href="https://www.niras.com/" target="_blank">NIRAS A/S</a><span class="co-years">2022–Present</span></h3>
+            <button class="coll-btn" tabindex="-1"><svg viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
           </div>
           <div class="co-body" id="co-niras-body">
             <div class="co-inner">
               <div class="projects-grid">
 
-                <!-- Nordhavnstunnel -->
-                <div class="gallery-card full-width fade-in" data-images="images/nordhavn_1.svg,images/nordhavn_2.svg,images/nordhavn_3.svg" data-filter-tags="infrastructure bim-coordinator automation">
-                  <div class="proj-hdr" onclick="toggleProj(this)">
-                    <div class="proj-hdr-row">
-                      <div>
-                        <div class="project-meta"><span class="project-type">Infrastructure</span><span class="project-year">2022–Present</span><span class="project-company-tag">NIRAS</span></div>
-                        <div class="project-name">Nordhavnstunnel — Copenhagen</div>
-                      </div>
-                      <button class="coll-btn" tabindex="-1"><svg class="chevron" viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
-                    </div>
+                <div class="gallery-card full-width fade-in" data-images="images/nordhavn_1.svg,images/nordhavn_2.svg,images/nordhavn_3.svg">
+                  <div class="gallery-viewport h320">
+                    <img src="images/nordhavn_1.svg" alt="Nordhavnstunnel">
+                    <span class="img-counter">1 / 3</span>
+                    <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
+                  </div>
+                  <div class="gallery-body">
+                    <div class="project-meta"><span class="project-type">Infrastructure</span><span class="project-year">2022–Present</span></div>
+                    <div class="project-name">Nordhavnstunnel — Copenhagen</div>
+                    <div class="project-desc">1.4 km cut &amp; cover tunnel for the Danish Road Directorate. Client: BESIX-MTH JV.</div>
+                    <div class="project-role-label">Role / Tasks</div>
+                    <ul class="code-bullets" style="margin-top:4px;">
+                      <li>BIM Coordinator — Revit model management across disciplines</li>
+                      <li>Multi-discipline coordination via Revizto</li>
+                      <li>Drawing production and QA</li>
+                      <li>Python-based export automation (IFC, NWC) via virtual machines</li>
+                    </ul>
                     <div class="project-tags"><span class="tag">BIM Coordinator</span><span class="tag">Revit</span><span class="tag">Revizto</span><span class="tag">Python Automation</span></div>
                   </div>
-                  <div class="proj-body">
-                    <div class="gallery-viewport h320">
-                      <img src="images/nordhavn_1.svg" alt="Nordhavnstunnel">
-                      <span class="img-counter">1 / 3</span>
-                      <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
-                    </div>
-                    <div class="gallery-body">
-                      <div class="project-desc">1.4 km cut &amp; cover tunnel for the Danish Road Directorate. Client: BESIX-MTH JV.</div>
-                      <div class="project-role-label">Role / Tasks</div>
-                      <ul class="code-bullets" style="margin-top:4px;">
-                        <li>BIM Coordinator — Revit model management across disciplines</li>
-                        <li>Multi-discipline coordination via Revizto</li>
-                        <li>Drawing production and QA</li>
-                        <li>Python-based export automation (IFC, NWC) via virtual machines</li>
-                      </ul>
-                    </div>
-                  </div>
                 </div>
 
-                <!-- Valby -->
-                <div class="gallery-card fade-in" data-images="images/valby_1.svg,images/valby_2.svg,images/valby_3.svg" data-filter-tags="infrastructure rebar bim-manager">
-                  <div class="proj-hdr" onclick="toggleProj(this)">
-                    <div class="proj-hdr-row">
-                      <div>
-                        <div class="project-meta"><span class="project-type">Infrastructure</span><span class="project-year">2022–Present</span><span class="project-company-tag">NIRAS</span></div>
-                        <div class="project-name">Valby Skybrudstunnel — Copenhagen</div>
-                      </div>
-                      <button class="coll-btn" tabindex="-1"><svg class="chevron" viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
-                    </div>
+                <div class="gallery-card fade-in" data-images="images/valby_1.svg,images/valby_2.svg,images/valby_3.svg">
+                  <div class="gallery-viewport h240">
+                    <img src="images/valby_1.svg" alt="Valby">
+                    <span class="img-counter">1 / 3</span>
+                    <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
+                  </div>
+                  <div class="gallery-body">
+                    <div class="project-meta"><span class="project-type">Infrastructure</span><span class="project-year">2022–Present</span></div>
+                    <div class="project-name">Valby Skybrudstunnel — Copenhagen</div>
+                    <div class="project-desc">Cloudburst tunnel for HOFOR.</div>
+                    <div class="project-role-label">Role / Tasks</div>
+                    <ul class="code-bullets" style="margin-top:4px;">
+                      <li>3D reinforcement modeling (Dynamo)</li>
+                      <li>BIM coordination and drawing production</li>
+                      <li>QA and process automation</li>
+                      <li>Acting BIM Manager during manager leave</li>
+                    </ul>
                     <div class="project-tags"><span class="tag">BIM Manager</span><span class="tag">3D Rebar</span><span class="tag">Dynamo</span></div>
                   </div>
-                  <div class="proj-body">
-                    <div class="gallery-viewport h240">
-                      <img src="images/valby_1.svg" alt="Valby">
-                      <span class="img-counter">1 / 3</span>
-                      <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
-                    </div>
-                    <div class="gallery-body">
-                      <div class="project-desc">Cloudburst tunnel for HOFOR.</div>
-                      <div class="project-role-label">Role / Tasks</div>
-                      <ul class="code-bullets" style="margin-top:4px;">
-                        <li>3D reinforcement modeling (Dynamo)</li>
-                        <li>BIM coordination and drawing production</li>
-                        <li>QA and process automation</li>
-                        <li>Acting BIM Manager during manager leave</li>
-                      </ul>
-                    </div>
-                  </div>
                 </div>
 
-                <!-- Kalvebod -->
-                <div class="gallery-card fade-in" data-images="images/kalvebod_1.svg,images/kalvebod_2.svg,images/kalvebod_3.svg" data-filter-tags="infrastructure rebar bim-specialist">
-                  <div class="proj-hdr" onclick="toggleProj(this)">
-                    <div class="proj-hdr-row">
-                      <div>
-                        <div class="project-meta"><span class="project-type">Infrastructure</span><span class="project-year">2017–Present</span><span class="project-company-tag">NIRAS</span></div>
-                        <div class="project-name">Kalvebod Brygge — Copenhagen</div>
-                      </div>
-                      <button class="coll-btn" tabindex="-1"><svg class="chevron" viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
-                    </div>
+                <div class="gallery-card fade-in" data-images="images/kalvebod_1.svg,images/kalvebod_2.svg,images/kalvebod_3.svg">
+                  <div class="gallery-viewport h240">
+                    <img src="images/kalvebod_1.svg" alt="Kalvebod">
+                    <span class="img-counter">1 / 3</span>
+                    <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
+                  </div>
+                  <div class="gallery-body">
+                    <div class="project-meta"><span class="project-type">Infrastructure</span><span class="project-year">2017–Present</span></div>
+                    <div class="project-name">Kalvebod Brygge — Copenhagen</div>
+                    <div class="project-desc">1250m cloudburst tunnel through dense urban areas for HOFOR.</div>
+                    <div class="project-role-label">Role / Tasks</div>
+                    <ul class="code-bullets" style="margin-top:4px;">
+                      <li>Model development and 3D reinforcement</li>
+                      <li>Drawing production and QA</li>
+                      <li>Revizto coordination</li>
+                      <li>BIM management</li>
+                    </ul>
                     <div class="project-tags"><span class="tag">BIM Specialist</span><span class="tag">Reinforcement</span><span class="tag">Revizto</span></div>
                   </div>
-                  <div class="proj-body">
-                    <div class="gallery-viewport h240">
-                      <img src="images/kalvebod_1.svg" alt="Kalvebod">
-                      <span class="img-counter">1 / 3</span>
-                      <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
-                    </div>
-                    <div class="gallery-body">
-                      <div class="project-desc">1250m cloudburst tunnel through dense urban areas for HOFOR.</div>
-                      <div class="project-role-label">Role / Tasks</div>
-                      <ul class="code-bullets" style="margin-top:4px;">
-                        <li>Model development and 3D reinforcement</li>
-                        <li>Drawing production and QA</li>
-                        <li>Revizto coordination</li>
-                        <li>BIM management</li>
-                      </ul>
-                    </div>
-                  </div>
                 </div>
 
-                <!-- Snake Island -->
-                <div class="gallery-card fade-in" data-images="images/snake_1.svg,images/snake_2.svg,images/snake_3.svg" data-filter-tags="port bim-advisor">
-                  <div class="proj-hdr" onclick="toggleProj(this)">
-                    <div class="proj-hdr-row">
-                      <div>
-                        <div class="project-meta"><span class="project-type">Port / Logistics</span><span class="project-year">2022–Present</span><span class="project-company-tag">NIRAS</span></div>
-                        <div class="project-name">Snake Island CT — Nigeria</div>
-                      </div>
-                      <button class="coll-btn" tabindex="-1"><svg class="chevron" viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
-                    </div>
+                <div class="gallery-card fade-in" data-images="images/snake_1.svg,images/snake_2.svg,images/snake_3.svg">
+                  <div class="gallery-viewport h240">
+                    <img src="images/snake_1.svg" alt="Snake Island">
+                    <span class="img-counter">1 / 3</span>
+                    <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
+                  </div>
+                  <div class="gallery-body">
+                    <div class="project-meta"><span class="project-type">Port / Logistics</span><span class="project-year">2022–Present</span></div>
+                    <div class="project-name">Snake Island CT — Nigeria</div>
+                    <div class="project-desc">T7S smart port terminal with MSC and Nigerdock.</div>
+                    <div class="project-role-label">Role / Tasks</div>
+                    <ul class="code-bullets" style="margin-top:4px;">
+                      <li>CDE setup in ACC</li>
+                      <li>Revit template preparation</li>
+                      <li>Model and drawing coordination</li>
+                      <li>Workflow optimization</li>
+                    </ul>
                     <div class="project-tags"><span class="tag">BIM Advisor</span><span class="tag">ACC</span><span class="tag">Templates</span></div>
                   </div>
-                  <div class="proj-body">
-                    <div class="gallery-viewport h240">
-                      <img src="images/snake_1.svg" alt="Snake Island">
-                      <span class="img-counter">1 / 3</span>
-                      <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
-                    </div>
-                    <div class="gallery-body">
-                      <div class="project-desc">T7S smart port terminal with MSC and Nigerdock.</div>
-                      <div class="project-role-label">Role / Tasks</div>
-                      <ul class="code-bullets" style="margin-top:4px;">
-                        <li>CDE setup in ACC</li>
-                        <li>Revit template preparation</li>
-                        <li>Model and drawing coordination</li>
-                        <li>Workflow optimization</li>
-                      </ul>
-                    </div>
-                  </div>
                 </div>
 
-                <!-- KTT Nord -->
-                <div class="gallery-card fade-in" data-images="images/ktt_1.svg,images/ktt_2.svg,images/ktt_3.svg" data-filter-tags="railway bim-coordinator">
-                  <div class="proj-hdr" onclick="toggleProj(this)">
-                    <div class="proj-hdr-row">
-                      <div>
-                        <div class="project-meta"><span class="project-type">Railway</span><span class="project-year">2023–Present</span><span class="project-company-tag">NIRAS</span></div>
-                        <div class="project-name">KTT Nord — Trondheim, Norway</div>
-                      </div>
-                      <button class="coll-btn" tabindex="-1"><svg class="chevron" viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
-                    </div>
-                    <div class="project-tags"><span class="tag">BIM Coordinator</span><span class="tag">Trimble Connect</span></div>
+                <div class="gallery-card fade-in" data-images="images/ktt_1.svg,images/ktt_2.svg,images/ktt_3.svg">
+                  <div class="gallery-viewport h240">
+                    <img src="images/ktt_1.svg" alt="KTT Nord">
+                    <span class="img-counter">1 / 3</span>
+                    <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
                   </div>
-                  <div class="proj-body">
-                    <div class="gallery-viewport h240">
-                      <img src="images/ktt_1.svg" alt="KTT Nord">
-                      <span class="img-counter">1 / 3</span>
-                      <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
-                    </div>
-                    <div class="gallery-body">
-                      <div class="project-desc">Railway project for Bane NOR.</div>
-                      <div class="project-role-label">Role / Tasks</div>
-                      <ul class="code-bullets" style="margin-top:4px;">
-                        <li>BIM model integrity per BPE standards</li>
-                        <li>Delivery schedule control</li>
-                        <li>Multi-discipline coordination in Trimble Connect</li>
-                      </ul>
-                    </div>
+                  <div class="gallery-body">
+                    <div class="project-meta"><span class="project-type">Railway</span><span class="project-year">2023–Present</span></div>
+                    <div class="project-name">KTT Nord — Trondheim, Norway</div>
+                    <div class="project-desc">Railway project for Bane NOR.</div>
+                    <div class="project-role-label">Role / Tasks</div>
+                    <ul class="code-bullets" style="margin-top:4px;">
+                      <li>BIM model integrity per BPE standards</li>
+                      <li>Delivery schedule control</li>
+                      <li>Multi-discipline coordination in Trimble Connect</li>
+                    </ul>
+                    <div class="project-tags"><span class="tag">BIM Coordinator</span><span class="tag">Trimble Connect</span></div>
                   </div>
                 </div>
 
@@ -653,121 +565,53 @@ footer .links a:hover{color:var(--accent);}
         <!-- Gabriel Couto -->
         <div class="company-section">
           <div class="co-hdr" id="co-couto-hdr" onclick="toggleCo(this)">
-            <h3><a href="https://www.gabrielcouto.pt/" target="_blank">Gabriel A.S. Couto S.A.</a></h3>
-            <button class="coll-btn" tabindex="-1"><svg class="chevron" viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
+            <h3><a href="https://www.gabrielcouto.pt/" target="_blank">Gabriel A.S. Couto S.A.</a><span class="co-years">2021–2022</span></h3>
+            <button class="coll-btn" tabindex="-1"><svg viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
           </div>
           <div class="co-body" id="co-couto-body">
             <div class="co-inner">
               <div class="projects-grid">
 
-                <!-- Boavista -->
                 <div class="gallery-card fade-in" id="boavista-card"
-                     data-images="images/BBoavista/BBoavista_Completo.jpg,images/BBoavista/BBoavista_L4.png,images/BBoavista/EST/Boavista_L4_EST_Pormenor3.png,images/BBoavista/EST/Boavista_L4_EST_Pormenor4.png,images/BBoavista/EST/Concrete.png,images/BBoavista/EST/Concrete_2.png,images/BBoavista/EST/Rebar.png,images/BBoavista/EST/Rebar_2.png,images/BBoavista/MEP/DAR.png,images/BBoavista/MEP/DAP.png,images/BBoavista/MEP/HID.png,images/BBoavista/MEP/ELE.png,images/BBoavista/MEP/MEC.png,images/BBoavista/MEP/MEP.png,images/BBoavista/MEP/ABA.png,images/BBoavista/NAVIS/EST-HID.jpg,images/BBoavista/NAVIS/HID-MEC.jpg"
-                     data-filter-tags="housing rebar mep bim-coordinator">
-                  <div class="proj-hdr" onclick="toggleProj(this)">
-                    <div class="proj-hdr-row">
-                      <div>
-                        <div class="project-meta"><span class="project-type">Social Housing</span><span class="project-year">2021–2022</span><span class="project-company-tag">Gabriel Couto</span></div>
-                        <div class="project-name">Bairro da Boavista — Lisbon</div>
-                      </div>
-                      <button class="coll-btn" tabindex="-1"><svg class="chevron" viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
-                    </div>
+                     data-images="images/BBoavista/BBoavista_Completo.jpg,images/BBoavista/BBoavista_L4.png,images/BBoavista/EST/Boavista_L4_EST_Pormenor3.png,images/BBoavista/EST/Boavista_L4_EST_Pormenor4.png,images/BBoavista/EST/Concrete.png,images/BBoavista/EST/Concrete_2.png,images/BBoavista/EST/Rebar.png,images/BBoavista/EST/Rebar_2.png,images/BBoavista/MEP/DAR.png,images/BBoavista/MEP/DAP.png,images/BBoavista/MEP/HID.png,images/BBoavista/MEP/ELE.png,images/BBoavista/MEP/MEC.png,images/BBoavista/MEP/MEP.png,images/BBoavista/MEP/ABA.png,images/BBoavista/NAVIS/EST-HID.jpg,images/BBoavista/NAVIS/HID-MEC.jpg">
+                  <div class="gallery-viewport h240">
+                    <img src="images/BBoavista/BBoavista_Completo.jpg" alt="Bairro da Boavista">
+                    <span class="img-counter">1 / 17</span>
+                    <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
+                  </div>
+                  <div class="gallery-body">
+                    <div class="project-meta"><span class="project-type">Social Housing</span><span class="project-year">2021–2022</span></div>
+                    <div class="project-name">Bairro da Boavista — Lisbon</div>
+                    <div class="project-desc">Social housing complex for C.M. Lisboa.</div>
+                    <div class="project-role-label">Role / Tasks</div>
+                    <ul class="code-bullets" style="margin-top:4px;">
+                      <li>Full BIM models for Structural and MEP disciplines</li>
+                      <li>3D concrete reinforcement via Dynamo scripting</li>
+                      <li>Clash detection and QTO extraction</li>
+                      <li>Drawing generation for on-site use</li>
+                    </ul>
                     <div class="project-tags"><span class="tag">BIM Coordinator</span><span class="tag">3D Rebar</span><span class="tag">MEP</span><span class="tag">Dynamo</span></div>
                   </div>
-                  <div class="proj-body">
-                    <div class="gallery-viewport h240">
-                      <img src="images/BBoavista/BBoavista_Completo.jpg" alt="Bairro da Boavista">
-                      <span class="img-counter">1 / 17</span>
-                      <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
-                    </div>
-                    <div class="gallery-body">
-                      <div class="project-desc">Social housing complex for C.M. Lisboa.</div>
-                      <div class="project-role-label">Role / Tasks</div>
-                      <ul class="code-bullets" style="margin-top:4px;">
-                        <li>Full BIM models for Structural and MEP disciplines</li>
-                        <li>3D concrete reinforcement via Dynamo scripting</li>
-                        <li>Clash detection and QTO extraction</li>
-                        <li>Drawing generation for on-site use</li>
-                      </ul>
-                    </div>
-                  </div>
                 </div>
 
-                <!-- EDP -->
                 <div class="gallery-card fade-in" id="edp-card"
-                     data-images="images/EDP/EST/EDP_EST.png,images/EDP/EST/EDP_EST2.png,images/EDP/DES/H310.png,images/EDP/DES/S099.png,images/EDP/HID/ABA.png,images/EDP/HID/ABA2.png,images/EDP/HID/DAP.png,images/EDP/HID/DAR.png,images/EDP/HID/DAR2.png,images/EDP/HID/HID.png,images/EDP/NAVIS/DAP-ELE.jpg,images/EDP/NAVIS/DAP-ELE2.jpg,images/EDP/NAVIS/DAR-MEC.jpg"
-                     data-filter-tags="commercial structural mep rebar">
-                  <div class="proj-hdr" onclick="toggleProj(this)">
-                    <div class="proj-hdr-row">
-                      <div>
-                        <div class="project-meta"><span class="project-type">Commercial</span><span class="project-year">2021–2022</span><span class="project-company-tag">Gabriel Couto</span></div>
-                        <div class="project-name">EDP LABELEC — Lisbon</div>
-                      </div>
-                      <button class="coll-btn" tabindex="-1"><svg class="chevron" viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
-                    </div>
+                     data-images="images/EDP/EST/EDP_EST.png,images/EDP/EST/EDP_EST2.png,images/EDP/DES/H310.png,images/EDP/DES/S099.png,images/EDP/HID/ABA.png,images/EDP/HID/ABA2.png,images/EDP/HID/DAP.png,images/EDP/HID/DAR.png,images/EDP/HID/DAR2.png,images/EDP/HID/HID.png,images/EDP/NAVIS/DAP-ELE.jpg,images/EDP/NAVIS/DAP-ELE2.jpg,images/EDP/NAVIS/DAR-MEC.jpg">
+                  <div class="gallery-viewport h240">
+                    <img src="images/EDP/EST/EDP_EST.png" alt="EDP Labelec">
+                    <span class="img-counter">1 / 13</span>
+                    <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
+                  </div>
+                  <div class="gallery-body">
+                    <div class="project-meta"><span class="project-type">Commercial</span><span class="project-year">2021–2022</span></div>
+                    <div class="project-name">EDP LABELEC — Lisbon</div>
+                    <div class="project-desc">As-built BIM models for EDP Labelec facilities.</div>
+                    <div class="project-role-label">Role / Tasks</div>
+                    <ul class="code-bullets" style="margin-top:4px;">
+                      <li>Concrete structural as-built modeling</li>
+                      <li>Plumbing system models</li>
+                      <li>Quantity take-off</li>
+                    </ul>
                     <div class="project-tags"><span class="tag">As-Built</span><span class="tag">Structural</span><span class="tag">QTO</span></div>
-                  </div>
-                  <div class="proj-body">
-                    <div class="gallery-viewport h240">
-                      <img src="images/EDP/EST/EDP_EST.png" alt="EDP Labelec">
-                      <span class="img-counter">1 / 13</span>
-                      <div class="gal-arrows"><button onclick="gPrev(this)">‹</button><button onclick="gNext(this)">›</button></div>
-                    </div>
-                    <div class="gallery-body">
-                      <div class="project-desc">As-built BIM models for EDP Labelec facilities.</div>
-                      <div class="project-role-label">Role / Tasks</div>
-                      <ul class="code-bullets" style="margin-top:4px;">
-                        <li>Concrete structural as-built modeling</li>
-                        <li>Plumbing system models</li>
-                        <li>Quantity take-off</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Garcia -->
-        <div class="company-section">
-          <div class="co-hdr" id="co-garcia-hdr" onclick="toggleCo(this)">
-            <h3><a href="https://www.garcia.pt/en/" target="_blank">Garcia, Garcia S.A.</a></h3>
-            <button class="coll-btn" tabindex="-1"><svg class="chevron" viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
-          </div>
-          <div class="co-body" id="co-garcia-body">
-            <div class="co-inner">
-              <div class="projects-grid">
-
-                <!-- Hotel B&B -->
-                <div class="gallery-card fade-in" data-filter-tags="research rebar">
-                  <div class="proj-hdr" onclick="toggleProj(this)">
-                    <div class="proj-hdr-row">
-                      <div>
-                        <div class="project-meta"><span class="project-type">Hospitality</span><span class="project-year">2021</span><span class="project-company-tag">Garcia, Garcia</span></div>
-                        <div class="project-name">Hotel B&amp;B Famalicão — <a href="https://repositorio-aberto.up.pt/handle/10216/135079" target="_blank" onclick="event.stopPropagation()">Master Thesis</a></div>
-                      </div>
-                      <button class="coll-btn" tabindex="-1"><svg class="chevron" viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
-                    </div>
-                    <div class="project-tags"><span class="tag">Research</span><span class="tag">Rebar Modeling</span><span class="tag">QTO</span></div>
-                  </div>
-                  <div class="proj-body">
-                    <div class="gallery-viewport h240">
-                      <div class="img-placeholder-box">
-                        <svg width="38" height="38" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"/></svg>
-                        <span>No images</span>
-                      </div>
-                    </div>
-                    <div class="gallery-body">
-                      <div class="project-desc">Case study for MSc thesis: "Automatic Estimation of Quantities of Reinforced Concrete using BIM".</div>
-                      <div class="project-role-label">Role / Tasks</div>
-                      <ul class="code-bullets" style="margin-top:4px;">
-                        <li>Rebar modeling in Revit</li>
-                        <li>Automated QTO workflow development</li>
-                        <li>Comparison: traditional vs. BIM-driven quantity extraction</li>
-                      </ul>
-                    </div>
                   </div>
                 </div>
 
@@ -786,18 +630,18 @@ footer .links a:hover{color:var(--accent);}
   <div class="container">
     <div class="sec-hdr" id="other-hdr" onclick="toggleSec(this)">
       <div class="sec-hdr-left">
-        <div class="section-label fade-in">Beyond Projects</div>
-        <h2 class="section-title fade-in">Other Work</h2>
+        <div class="section-label">Beyond Projects</div>
+        <h2 class="section-title">Other Work</h2>
       </div>
-      <button class="coll-btn" tabindex="-1"><svg class="chevron" viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
+      <button class="coll-btn" tabindex="-1"><svg viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
     </div>
     <div class="sec-body" id="other-body">
       <div class="sec-inner">
 
         <!-- pyRevit sub-section -->
-        <div class="subsec-hdr" id="subsec-pyrevit-hdr" onclick="toggleSubsec(this)" style="margin-bottom:0;">
+        <div class="subsec-hdr" id="subsec-pyrevit-hdr" onclick="toggleSubsec(this)">
           <h3>pyRevit, Automations &amp; Development Work</h3>
-          <button class="coll-btn" tabindex="-1"><svg class="chevron" viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
+          <button class="coll-btn" tabindex="-1"><svg viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
         </div>
         <div class="subsec-body" id="subsec-pyrevit-body">
           <div class="subsec-inner">
@@ -857,7 +701,7 @@ footer .links a:hover{color:var(--accent);}
         <!-- 3D Renders sub-section -->
         <div class="subsec-hdr" id="subsec-renders-hdr" onclick="toggleSubsec(this)" style="margin-top:32px;">
           <h3>3D Renders — Family House Project (2020)</h3>
-          <button class="coll-btn" tabindex="-1"><svg class="chevron" viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
+          <button class="coll-btn" tabindex="-1"><svg viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
         </div>
         <div class="subsec-body" id="subsec-renders-body">
           <div class="subsec-inner">
@@ -893,104 +737,88 @@ footer .links a:hover{color:var(--accent);}
 function toggleTheme(){var h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);}
 (function(){var s=localStorage.getItem('theme');if(s)document.documentElement.setAttribute('data-theme',s);})();
 
-// ── Smooth nav ──
-function navTo(sel){var t=document.querySelector(sel);if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}
+// ── Collapsible helpers ──
+function openEl(el) {
+  el.style.maxHeight = el.scrollHeight + 'px';
+  el.addEventListener('transitionend', function h() {
+    el.style.maxHeight = 'none';
+    el.removeEventListener('transitionend', h);
+  });
+}
+function closeEl(el) {
+  if (!el.style.maxHeight || el.style.maxHeight === 'none') {
+    el.style.maxHeight = el.scrollHeight + 'px';
+    el.offsetHeight; // reflow
+  }
+  requestAnimationFrame(function() { el.style.maxHeight = '0'; });
+}
 
-// ── Section collapse ──
+// ── Section toggle (accordion) ──
 function toggleSec(hdr) {
+  var isOpen = hdr.classList.contains('open');
   var bodyId = hdr.id.replace('-hdr', '-body');
   var body = document.getElementById(bodyId);
-  var opening = !hdr.classList.contains('open');
-  hdr.classList.toggle('open');
-  if (opening) {
-    body.style.maxHeight = body.scrollHeight + 'px';
-    body.addEventListener('transitionend', function h() {
-      body.style.maxHeight = 'none';
-      body.removeEventListener('transitionend', h);
-    });
-  } else {
-    if (body.style.maxHeight === 'none' || body.style.maxHeight === '') {
-      body.style.maxHeight = body.scrollHeight + 'px';
-      body.offsetHeight;
-    }
-    requestAnimationFrame(function(){ body.style.maxHeight = '0'; });
+  // Close all other sections
+  document.querySelectorAll('.sec-hdr.open').forEach(function(h) {
+    h.classList.remove('open');
+    var b = document.getElementById(h.id.replace('-hdr', '-body'));
+    if (b) closeEl(b);
+  });
+  // Open this one if it was closed
+  if (!isOpen) {
+    hdr.classList.add('open');
+    openEl(body);
   }
 }
 
-// ── Company collapse ──
+// ── Nav: jump to section + expand ──
+function navTo(sel) {
+  var id = sel.replace('#', '');
+  var hdrId = id + '-hdr';
+  var hdr = document.getElementById(hdrId);
+  if (hdr) {
+    // Close all, open target
+    document.querySelectorAll('.sec-hdr.open').forEach(function(h) {
+      h.classList.remove('open');
+      var b = document.getElementById(h.id.replace('-hdr', '-body'));
+      if (b) closeEl(b);
+    });
+    hdr.classList.add('open');
+    var body = document.getElementById(id + '-body');
+    if (body) openEl(body);
+  }
+  var t = document.getElementById(id);
+  if (t) {
+    var delay = hdr ? 80 : 0;
+    setTimeout(function() { t.scrollIntoView({behavior:'smooth', block:'start'}); }, delay);
+  }
+}
+
+// ── Company toggle (mobile only) ──
 function toggleCo(hdr) {
+  if (window.innerWidth > 600) return;
   var body = hdr.nextElementSibling;
-  var opening = !hdr.classList.contains('open');
-  hdr.classList.toggle('open');
-  if (opening) {
-    body.style.maxHeight = body.scrollHeight + 'px';
-    body.addEventListener('transitionend', function h() {
-      body.style.maxHeight = 'none';
-      body.removeEventListener('transitionend', h);
-    });
+  var isOpen = hdr.classList.contains('open');
+  if (isOpen) {
+    hdr.classList.remove('open');
+    closeEl(body);
   } else {
-    if (body.style.maxHeight === 'none' || body.style.maxHeight === '') {
-      body.style.maxHeight = body.scrollHeight + 'px';
-      body.offsetHeight;
-    }
-    requestAnimationFrame(function(){ body.style.maxHeight = '0'; });
+    hdr.classList.add('open');
+    openEl(body);
   }
 }
 
-// ── Project card collapse ──
-function toggleProj(hdr) {
-  var body = hdr.nextElementSibling;
-  var card = hdr.parentElement;
-  var opening = !card.classList.contains('proj-open');
-  card.classList.toggle('proj-open');
-  // rotate chevron in header
-  var btn = hdr.querySelector('.coll-btn svg');
-  if (btn) btn.style.transform = opening ? 'rotate(180deg)' : '';
-  if (opening) {
-    body.style.maxHeight = body.scrollHeight + 'px';
-    body.addEventListener('transitionend', function h() {
-      body.style.maxHeight = 'none';
-      body.removeEventListener('transitionend', h);
-    });
-  } else {
-    if (body.style.maxHeight === 'none' || body.style.maxHeight === '') {
-      body.style.maxHeight = body.scrollHeight + 'px';
-      body.offsetHeight;
-    }
-    requestAnimationFrame(function(){ body.style.maxHeight = '0'; });
-  }
-}
-
-// ── Sub-section collapse ──
+// ── Sub-section toggle ──
 function toggleSubsec(hdr) {
   var body = hdr.nextElementSibling;
-  var opening = !hdr.classList.contains('open');
-  hdr.classList.toggle('open');
-  if (opening) {
-    body.style.maxHeight = body.scrollHeight + 'px';
-    body.addEventListener('transitionend', function h() {
-      body.style.maxHeight = 'none';
-      body.removeEventListener('transitionend', h);
-    });
+  var isOpen = hdr.classList.contains('open');
+  if (isOpen) {
+    hdr.classList.remove('open');
+    closeEl(body);
   } else {
-    if (body.style.maxHeight === 'none' || body.style.maxHeight === '') {
-      body.style.maxHeight = body.scrollHeight + 'px';
-      body.offsetHeight;
-    }
-    requestAnimationFrame(function(){ body.style.maxHeight = '0'; });
+    hdr.classList.add('open');
+    openEl(body);
   }
-}
-
-// ── Tag filter ──
-var currentFilter = 'all';
-function setFilter(btn) {
-  currentFilter = btn.dataset.filter;
-  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
-  btn.classList.add('active');
-  document.querySelectorAll('.gallery-card[data-filter-tags]').forEach(function(card) {
-    var tags = card.dataset.filterTags || '';
-    card.classList.toggle('filtered-out', currentFilter !== 'all' && !tags.includes(currentFilter));
-  });
 }
 
 // ── Generic gallery nav ──
@@ -1026,8 +854,7 @@ document.querySelectorAll('.gallery-viewport').forEach(function(vp) {
 });
 
 // ── Lightbox ──
-var lbImages = [];
-var lbIdx = 0;
+var lbImages = [], lbIdx = 0;
 
 function openLightbox(imgEl) {
   var card = imgEl.closest('[data-images]');
@@ -1035,31 +862,24 @@ function openLightbox(imgEl) {
     lbImages = card.dataset.images.split(',').filter(Boolean);
     lbIdx = card._idx || 0;
   } else {
-    lbImages = [imgEl.src];
-    lbIdx = 0;
+    lbImages = [imgEl.src]; lbIdx = 0;
   }
   updateLightbox();
   document.getElementById('lightbox').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
-
 function updateLightbox() {
   var img = document.getElementById('lightbox-img');
   var counter = document.getElementById('lb-counter');
   img.style.opacity = 0;
-  setTimeout(function() {
-    img.src = lbImages[lbIdx];
-    img.style.opacity = 1;
-  }, 100);
+  setTimeout(function() { img.src = lbImages[lbIdx]; img.style.opacity = 1; }, 100);
   counter.textContent = (lbIdx + 1) + ' / ' + lbImages.length;
   var single = lbImages.length <= 1;
   document.getElementById('lb-prev').classList.toggle('hidden', single);
   document.getElementById('lb-next').classList.toggle('hidden', single);
 }
-
 function lbPrev() { lbIdx = (lbIdx - 1 + lbImages.length) % lbImages.length; updateLightbox(); }
 function lbNext() { lbIdx = (lbIdx + 1) % lbImages.length; updateLightbox(); }
-
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('active');
   document.body.style.overflow = '';
@@ -1074,16 +894,14 @@ document.addEventListener('keydown', function(e) {
 
 // Touch swipe in lightbox
 var lbTouchX = 0;
-document.getElementById('lightbox').addEventListener('touchstart', function(e) {
-  lbTouchX = e.touches[0].clientX;
-}, { passive: true });
+document.getElementById('lightbox').addEventListener('touchstart', function(e) { lbTouchX = e.touches[0].clientX; }, { passive: true });
 document.getElementById('lightbox').addEventListener('touchend', function(e) {
   var dx = e.changedTouches[0].clientX - lbTouchX;
   if (Math.abs(dx) < 50) return;
   if (dx < 0) lbNext(); else lbPrev();
 }, { passive: true });
 
-// Attach lightbox to all gallery images
+// Attach lightbox click to all gallery images
 document.querySelectorAll('.gallery-viewport img').forEach(function(img) {
   img.addEventListener('click', function(e) { e.stopPropagation(); openLightbox(this); });
 });
@@ -1100,42 +918,13 @@ var barObs = new IntersectionObserver(function(entries) {
 }, { threshold: 0.5 });
 document.querySelectorAll('.lang-bar-fill').forEach(function(el) { el.style.width = '0%'; barObs.observe(el); });
 
-// ── Mobile sidebar + Back to top ──
-var sections = ['about','skills','experience','projects','other'];
-var sbItems = document.querySelectorAll('.sb-item[data-target]');
-var sbTop = document.getElementById('sb-top');
-var bttDesktop = document.getElementById('back-to-top');
-var heroSection = document.getElementById('about');
-
-function updateSidebar() {
-  var scrollY = window.scrollY;
-  var heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-
-  // Show/hide back-to-top after hero
-  var pastHero = scrollY > heroBottom * 0.7;
-  if (sbTop) sbTop.classList.toggle('visible', pastHero);
-  if (bttDesktop) bttDesktop.classList.toggle('visible', pastHero);
-
-  // Determine active section
-  var active = 'about';
-  sections.forEach(function(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    if (scrollY >= el.offsetTop - 120) active = id;
-  });
-
-  sbItems.forEach(function(item) {
-    item.classList.toggle('active', item.dataset.target === active);
-  });
-}
-
-window.addEventListener('scroll', updateSidebar, { passive: true });
-updateSidebar();
-
-function sbNav(id) {
-  var el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
+// ── Scroll to top button ──
+var scrollTopBtn = document.getElementById('scroll-top');
+var heroEl = document.getElementById('about');
+window.addEventListener('scroll', function() {
+  var pastHero = window.scrollY > heroEl.offsetHeight * 0.6;
+  scrollTopBtn.classList.toggle('visible', pastHero);
+}, { passive: true });
 </script>
 </body>
 </html>
