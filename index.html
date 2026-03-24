@@ -513,7 +513,7 @@ footer p{font-size:0.71rem;color:var(--text-3);}
           <div class="stat-num">15+</div>
           <div class="stat-label">Key Projects</div>
         </a>
-        <a class="stat-card" onclick="navTo('other')">
+        <a class="stat-card" onclick="navToOw('pyrevit')">
           <div class="stat-num">40+</div>
           <div class="stat-label">Custom Scripts</div>
         </a>
@@ -577,6 +577,11 @@ footer p{font-size:0.71rem;color:var(--text-3);}
               <span class="tag">TypeScript</span>
               <span class="tag">HTML</span>
               <span class="tag">SQL</span>
+              <a class="tag" href="https://reactnative.dev" target="_blank">React Native</a>
+              <a class="tag" href="https://expo.dev" target="_blank">Expo</a>
+              <a class="tag" href="https://www.sqlite.org" target="_blank">SQLite</a>
+              <a class="tag" href="https://supabase.com" target="_blank">Supabase</a>
+              <a class="tag" href="https://www.anthropic.com/api" target="_blank">Claude API</a>
             </div>
           </div>
           <div class="skill-group fade-in fd2">
@@ -953,18 +958,37 @@ footer p{font-size:0.71rem;color:var(--text-3);}
           </div>
         </div>
 
+        <div class="ow-hdr" id="ow-android-hdr" onclick="toggleOw('android')">
+          <h3>Android App — Cooking &amp; Nutrition</h3>
+          <button class="coll-btn" tabindex="-1"><svg viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
+        </div>
+        <div class="ow-body" id="ow-android-body">
+          <div class="co-inner">
+            <p style="font-size:0.79rem;color:var(--text-2);line-height:1.82;margin-bottom:12px;">A personal cooking and nutrition app built offline-first for Android, with full recipe management, macro tracking, weekly meal planning, and optional AI integration. No templates, no UI library lock-in — designed from a full spec, built from scratch.</p>
+            <ul class="code-bullets">
+              <li><strong>Recipe Vault</strong> — CRUD with ingredients, step-by-step cook mode, serving scaler, photo gallery, and Obsidian-style tappable links between ingredients, tags, and recipes</li>
+              <li><strong>Meal Planner</strong> — 7-day × 4-slot weekly grid with drag-and-drop, auto-suggestions based on remaining macros, and auto-generated shopping lists</li>
+              <li><strong>Macros Dashboard</strong> — per-day circular progress rings, traffic-light indicators, weekly trend charts, and per-day targets synced to your training schedule</li>
+              <li><strong>Nutrition APIs</strong> — dual search across Open Food Facts + USDA FoodData Central; barcode scanner via device camera; results merged with optional Claude AI best-match picking</li>
+              <li><strong>AI Features</strong> — optional Claude integration for meal suggestions, recipe improvements, daily scoring, and micronutrient gap analysis; app is fully functional without it</li>
+              <li><strong>Sync</strong> — SQLite local-first (always works), mirrored to Supabase Postgres for cross-device; offline queue with last-write-wins conflict resolution</li>
+            </ul>
+            <div class="project-tags" style="margin-top:14px;"><a class="tag" href="https://reactnative.dev" target="_blank">React Native</a><a class="tag" href="https://expo.dev" target="_blank">Expo</a><a class="tag" href="https://www.typescriptlang.org" target="_blank">TypeScript</a><a class="tag" href="https://www.sqlite.org" target="_blank">SQLite</a><a class="tag" href="https://supabase.com" target="_blank">Supabase</a><a class="tag" href="https://www.anthropic.com/api" target="_blank">Claude API</a></div>
+          </div>
+        </div>
+
         <div class="ow-hdr" id="ow-website-hdr" onclick="toggleOw('website')">
           <h3>This Website</h3>
           <button class="coll-btn" tabindex="-1"><svg viewBox="0 0 12 8"><polyline points="1,1 6,7 11,1"/></svg></button>
         </div>
         <div class="ow-body" id="ow-website-body">
           <div class="co-inner">
-            <p style="font-size:0.79rem;color:var(--text-2);line-height:1.82;margin-bottom:12px;">This portfolio was designed and built from scratch — no templates, no frameworks. A single self-contained HTML file with hand-written CSS and vanilla JavaScript.</p>
+            <p style="font-size:0.79rem;color:var(--text-2);line-height:1.82;margin-bottom:12px;">This portfolio was designed and built from scratch — no templates, no frameworks.</p>
             <ul class="code-bullets">
               <li><strong>Design</strong> — custom layout with light/dark mode, responsive grid, and smooth collapsible sections</li>
-              <li><strong>Gallery system</strong> — per-card image carousels with lightbox, swipe support, and keyboard navigation</li>
+              <li><strong>Gallery system</strong> — per-card image carousels, swipe support, and keyboard navigation</li>
               <li><strong>Animations</strong> — scroll-triggered fade-ins, language bars, and JS-measured height transitions</li>
-              <li><strong>Performance</strong> — zero dependencies, no build step, single HTTP request for the full page</li>
+              <li><strong>Performance</strong> — zero dependencies, single HTTP request for the full page</li>
             </ul>
             <div class="project-tags" style="margin-top:14px;"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
           </div>
@@ -1125,6 +1149,46 @@ function toggleSec(id){
 }
 
 function navTo(id){ toggleSec(id); }
+
+/* Navigate to a specific Other Work subsection */
+function navToOw(owName){
+  /* First open the 'other' section if not already open */
+  var secHdr  = document.getElementById('other-hdr');
+  var secBody = document.getElementById('other-body');
+  var secOpen = secHdr.classList.contains('open');
+  if(!secOpen){
+    document.querySelectorAll('.sec-hdr.open').forEach(function(h){
+      h.classList.remove('open');
+      var b = document.getElementById(h.id.replace('-hdr','-body'));
+      if(b){ b.classList.remove('open'); animClose(b, 560); }
+    });
+    var hdrAbsY = window.scrollY + secHdr.getBoundingClientRect().top;
+    secHdr.classList.add('open');
+    secBody.classList.add('open');
+    animOpen(secBody, 1500);
+    setTimeout(function(){
+      smoothTo(hdrAbsY - NAV - PAD);
+      setTimeout(function(){ openOw(owName); }, 260);
+    }, 20);
+  } else {
+    openOw(owName);
+  }
+}
+function openOw(name){
+  var hdr  = document.getElementById('ow-'+name+'-hdr');
+  var body = document.getElementById('ow-'+name+'-body');
+  if(!hdr || hdr.classList.contains('open')) return;
+  document.querySelectorAll('.ow-hdr.open').forEach(function(h){
+    h.classList.remove('open');
+    var b = document.getElementById(h.id.replace('-hdr','-body'));
+    if(b){ b.classList.remove('open'); animClose(b, 340); }
+  });
+  var hdrAbsY = window.scrollY + hdr.getBoundingClientRect().top;
+  hdr.classList.add('open');
+  body.classList.add('open');
+  animOpen(body, 700);
+  setTimeout(function(){ smoothTo(hdrAbsY - NAV - PAD); }, 20);
+}
 
 /* Company toggle */
 function openCo(name){
